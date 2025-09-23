@@ -1,0 +1,248 @@
+﻿@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = "Quản lý di sản văn hoá vật thể";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">@ViewData["Title"]</h2>
+    </div>
+
+    <ul class="nav nav-tabs" id="diTichTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="di-tich-tab" data-toggle="tab" href="#di-tich" role="tab" aria-controls="di-tich" aria-selected="true">
+                Di tích
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="hien-vat-tab" data-toggle="tab" href="#hien-vat" role="tab" aria-controls="hien-vat" aria-selected="false">
+                Hiện vật
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="diTichTabContent">
+        <!-- Tab Di tích -->
+        <div class="tab-pane fade show active" id="di-tich" role="tabpanel" aria-labelledby="di-tich-tab">
+            <div class="">
+                <div class="TieuDe">
+                    <h2>Quản lý di sản văn hoá vật thể</h2>
+                </div>
+
+                <div class="content-body">
+                    <div class="group-filter">
+                        <div class="row">
+                            <div class="col-md-3 form-group">
+                                <label>Tìm kiếm</label>
+                                <input type="text" class="form-control search-icon" id="tu-khoa-search" placeholder="Nhập từ khóa tìm kiếm..." maxlength="1000" />
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Loại hình di tích</label>
+                                <select class="form-control" id="loai-hinh-di-tich-search">
+                                    <option value="-1">Tất cả</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Đơn vị quản lý</label>
+                                <select class="form-control" id="don-vi-quan-ly-search">
+                                    <option value="-1">Tất cả</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Cấp xếp hạng</label>
+                                <select class="form-control" id="cap-xep-hang-search">
+                                    <option value="-1">Tất cả</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Tình trạng</label>
+                                <select class="form-control" id="tinh-trang-search">
+                                    <option value="-1">Tất cả</option>
+                                    <option value="1">Tốt</option>
+                                    <option value="2">Trung bình</option>
+                                    <option value="3">Xuống cấp</option>
+                                    <option value="4">Đã trùng tu</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Trạng thái</label>
+                                <select class="form-control" id="trang-thai-search">
+                                    <option value="-1">Tất cả</option>
+                                    <option value="0">Không sử dụng</option>
+                                    <option value="1">Sử dụng</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Ngôn ngữ</label>
+                                <select class="form-control" id="ngon-ngu-search"></select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>&nbsp;</label>
+                                <div class="group-button flex-end">
+                                    <button type="button" class="btn btn-primary" id="tim-kiem">Lọc</button>
+                                    <button type="button" class="btn btn-outline-primary" id="tat-ca">Tất cả</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="New_Table table-responsive">
+                        <div class="group-corner-button">
+                            @if (Model.PermitedCreate > 0)
+                            {
+                                <a class="btn btn-success" asp-controller="DiTich" asp-action="ThemMoi">Thêm mới</a>
+                            }
+                        </div>
+
+                        <table class="table row-border" id="dataGrid" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Stt</th>
+                                    <th>Tên di tích</th>
+                                    <th>Cấp xếp hạng</th>
+                                    <th>Đơn vị quản lý</th>
+                                    <th>Loại hình</th>
+                                    <th>Tình trạng</th>
+                                    <th>Trạng thái</th>
+                                    @if (Model.PermitedEdit > 0 || Model.PermitedDelete > 0)
+                                    {
+                                        <th>Chức năng</th>
+                                    }
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Hiện vật -->
+        <div class="tab-pane fade" id="hien-vat" role="tabpanel" aria-labelledby="hien-vat-tab">
+            <div class="">
+                <div class="TieuDe">
+                    <h2>Quản lý hiện vật bảo tàng</h2>
+                </div>
+
+                <div class="content-body">
+                    <div class="group-filter">
+                        <div class="row">
+                            <div class="col-md-3 form-group">
+                                <label>Tìm kiếm</label>
+                                <input type="text" class="form-control search-icon" id="tu-khoa-hien-vat-search" placeholder="Nhập từ khóa tìm kiếm..." maxlength="1000" />
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Chất liệu</label>
+                                <select class="form-control" id="chat-lieu-hien-vat-search">
+                                    <option value="-1">Tất cả</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Bảo tàng</label>
+                                <select class="form-control" id="bao-tang-hien-vat-search">
+                                    <option value="-1">Tất cả</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Phương thức tặng/mua</label>
+                                <select class="form-control" id="phuong-thuc-hien-vat-search">
+                                    <option value="-1">Tất cả</option>
+                                    <option value="1">Mua</option>
+                                    <option value="2">Hiến tặng</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Loại hiện vật</label>
+                                <select class="form-control" id="loai-hien-vat-search">
+                                    <option value="-1">Tất cả</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Tình trạng</label>
+                                <select class="form-control" id="tinh-trang-hien-vat-search">
+                                    <option value="-1">Tất cả</option>
+                                    <option value="1">Tốt</option>
+                                    <option value="2">Trung bình</option>
+                                    <option value="3">Xuống cấp</option>
+                                    <option value="4">Đã trùng tu</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Trạng thái</label>
+                                <select class="form-control" id="trang-thai-hien-vat-search">
+                                    <option value="-1">Tất cả</option>
+                                    <option value="0">Không sử dụng</option>
+                                    <option value="1">Sử dụng</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>Ngôn ngữ</label>
+                                <select class="form-control" id="ngon-ngu-hien-vat-search"></select>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="group-button flex-end">
+                                    <button type="button" class="btn btn-primary" id="tim-kiem-hien-vat">Lọc</button>
+                                    <button type="button" class="btn btn-outline-primary" id="tat-ca-hien-vat">Tất cả</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="New_Table table-responsive">
+                            <div class="group-corner-button">
+                                @if (Model.PermitedCreate > 0)
+                                {
+                                    <a class="btn btn-success" asp-controller="HienVat" asp-action="ThemMoi">Thêm mới</a>
+                                }
+                            </div>
+
+                        <table class="table row-border" id="dataGridHienVat" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Stt</th>
+                                    <th>Tên hiện vật</th>
+                                    <th>Loại hiện vật</th>
+                                    <th>Chất liệu</th>
+                                    <th>Mua/Hiến tặng</th>
+                                    <th>Nơi lưu giữ</th>
+                                    <th>Số lượng</th>
+                                    <th>Trạng thái</th>
+                                    @if (Model.PermitedEdit > 0 || Model.PermitedDelete > 0)
+                                    {
+                                        <th>Chức năng</th>
+                                    }
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal delete -->
+@await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+
+@section Scripts {
+    <script>
+        const permitedEdit = @Model.PermitedEdit
+        const permitedDelete = @Model.PermitedDelete
+    </script>
+    <script src="~/PageScripts/admin/VanHoa/DiSanVanHoaVatThe.js" asp-append-version="true"></script>
+}

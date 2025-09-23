@@ -1,0 +1,12 @@
+﻿@model System.Security.Claims.ClaimsIdentity
+
+<a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown" aria-expanded="false">
+    <span class="avatar avatar-online"><img src="~/app-assets/images/portrait/small/avatar.png" alt="avatar" /><i></i></span>
+    <div class="user-info">
+        <span class="user-name">@Model.Name</span>
+        <span class="role-user">@Model.FindFirst("DisplayName").Value</span>
+    </div>
+</a>
+<div class="dropdown-menu dropdown-menu-right">
+    <a asp-action="Logout" asp-controller="Home" asp-area="">Đăng xuất</a>
+</div>

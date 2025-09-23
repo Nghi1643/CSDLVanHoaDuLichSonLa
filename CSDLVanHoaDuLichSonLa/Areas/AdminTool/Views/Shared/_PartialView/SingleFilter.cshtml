@@ -1,0 +1,9 @@
+<div class="group-button space-between" style="margin-bottom:10px;">
+    <input type="text" class="form-control search-icon" id="tu-khoa-search" placeholder="Nhập từ khóa..." maxlength="1000" style="width: 350px;"/>
+    <div class="group-corner-button">
+        @if (Model.PermitedCreate == 1)
+        {
+            <button type="submit" class="btn btn-success" id="openModalAdd">Thêm mới</button>
+        }
+    </div>
+</div>

@@ -1,0 +1,233 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = "Chỉnh sửa vi phạm và xử lý vi phạm";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">Chỉnh sửa vi phạm và xử lý vi phạm</h2>
+    </div>
+    <div class="content-body">
+        <form id="formViPham">
+            <input type="hidden" id="viPhamId" value="@ViewBag.ViPhamId" />
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="ngayPhatHien">Ngày phát hiện <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control datepicker" placeholder="dd/mm/yyyy" id="ngayPhatHien" />
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12">
+                    <div class="form-group">
+                        <label for="hinhThucXuLy">Hình thức xử lý <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="hinhThucXuLy" maxlength="255" placeholder="Nhập hình thức xử lý" />
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="loaiDonVi">Loại đơn vị <span class="text-danger">*</span></label>
+                        <select class="form-control" id="loaiDonVi">
+                            <option value="">Chọn</option>
+                            <option value="1">Cá nhân</option>
+                            <option value="2">Tổ chức</option>
+                            <option value="3">Cá nhân và tổ chức</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="thuTu">Thứ tự</label>
+                        <input type="number" class="form-control" id="thuTu" min="1" placeholder="Nhập thứ tự" />
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label>Trạng thái <span class="text-danger">*</span></label>
+                        <div class="form-check-container">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="trangThai" id="trangThaiDuyet" value="1" checked>
+                                <label class="form-check-label" for="trangThaiDuyet">Duyệt</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="trangThai" id="trangThaiChuaDuyet" value="0">
+                                <label class="form-check-label" for="trangThaiChuaDuyet">Chưa duyệt</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phần đa ngữ -->
+            <div class="DaNgu">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="ngonNguDich">Ngôn ngữ dịch</label>
+                            <select class="form-control" id="ngonNguDich">
+                                <option value="">Chọn ngôn ngữ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="noiDungViPham">Nội dung vi phạm <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="noiDungViPham" maxlength="500" placeholder="Nhập nội dung vi phạm" />
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="moTa">Mô tả</label>
+                            <textarea class="form-control" id="moTa" rows="4" maxlength="1000" placeholder="Nhập mô tả"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phần nội dung phụ -->
+            <div class="NoiDungPhu">
+                <!-- Bảng tổ chức vi phạm -->
+                <div class="New_Table table-responsive" id="toChucViPhamSection" style="display: none;">
+                    <div class="group-corner-button with-title">
+                        <h4>Danh sách tổ chức vi phạm</h4>
+                    </div>
+                    <table class="table row-border" id="tableToChuc" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Stt</th>
+                                <th>Tên tổ chức</th>
+                                <th>Mã tổ chức</th>
+                                <th>Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Bảng cá nhân vi phạm -->
+                <div class="New_Table table-responsive" id="caNhanViPhamSection" style="display: none;">
+                    <div class="group-corner-button with-title">
+                        <h4>Danh sách cá nhân vi phạm</h4>
+                    </div>
+                    <table class="table row-border" id="tableCaNhan" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Stt</th>
+                                <th>Tên cá nhân</th>
+                                <th>Mã định danh</th>
+                                <th>Chức vụ</th>
+                                <th>Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Bảng văn bản xử lý -->
+            <div class="New_Table table-responsive">
+                <div class="group-corner-button with-title">
+                    <h4>Danh sách văn bản</h4>
+                    <div class="group-button flex-end">
+                        <button type="button" class="btn btn-success" id="btnThemVanBan">Thêm mới</button>
+                    </div>
+                </div>
+                <table class="table row-border" id="tableVanBan" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Số ký hiệu</th>
+                            <th>Trích yếu</th>
+                            <th>Loại đối tượng</th>
+                            <th>Cơ quan ban hành</th>
+                            <th>Ngày ban hành</th>
+                            <th>Ngày hiệu lực</th>
+                            <th>Tệp đính kèm</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Nút hành động -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="group-button flex-end">
+                            <a href="@Url.Action("ViPham", "ViPham")" class="btn btn-outline-primary">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-primary">
+                                @(ViewBag.IsEdit ? "Cập nhật" : "Lưu")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal Thêm/Sửa văn bản -->
+    <div class="modal side-modal fade" id="modalAdd" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalAddTitle">Thêm mới văn bản</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form role="form" id="formAdd">
+                    <div class="modal-body">
+                        <input type="hidden" id="idVanBanAdd" />
+                        <div class="form-group">
+                            <label for="soKyHieuAdd" class="form-label">Số ký hiệu<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control" id="soKyHieuAdd" placeholder="Nhập số ký hiệu..." autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label for="trichYeuAdd" class="form-label">Trích yếu<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control" id="trichYeuAdd" placeholder="Nhập trích yếu..." autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label for="loaiDoiTuongAdd" class="form-label">Loại đối tượng<span class="text-red"> *</span></label>
+                            <select class="form-control" id="loaiDoiTuongAdd">
+                                <option value="">Chọn loại đối tượng</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="coQuanBanHanhAdd" class="form-label">Cơ quan ban hành<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control" id="coQuanBanHanhAdd" placeholder="Nhập cơ quan ban hành..." autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ngayBanHanhAdd" class="form-label">Ngày ban hành<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control datepicker" placeholder="dd/mm/yyyy" id="ngayBanHanhAdd" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ngayHieuLucAdd" class="form-label">Ngày hiệu lực<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control datepicker" placeholder="dd/mm/yyyy" id="ngayHieuLucAdd" />
+                        </div>
+                        <div class="form-group">
+                            <label for="nguoiKyAdd" class="form-label">Người ký<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control" id="nguoiKyAdd" placeholder="Nhập tên người ký..." autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label for="noiDungAdd" class="form-label">Nội dung<span class="text-red"> *</span></label>
+                            <textarea class="form-control" id="noiDungAdd" rows="3" placeholder="Nhập nội dung..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tepDinhKemAdd" class="form-label">Tệp đính kèm</label>
+                            <input type="file" class="form-control" id="tepDinhKemAdd" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Huỷ bỏ</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    @await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+</div>
+
+@section Scripts {
+    <script>
+        const isEdit = @Html.Raw(ViewBag.IsEdit ? "true" : "false");
+        const viPhamId = '@ViewBag.ViPhamId';
+    </script>
+    <script src="~/PageScripts/admin/ViPham/Edit.js" asp-append-version="true"></script>
+}

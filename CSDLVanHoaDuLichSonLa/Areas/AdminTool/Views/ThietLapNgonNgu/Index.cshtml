@@ -1,0 +1,146 @@
+﻿@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2>Quản lý thiết lập ngôn ngữ</h2>
+    </div>
+    <div class="content-body">
+        <div class="group-filter">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <input type="text" class="form-control search-icon" id="tu-khoa-search" placeholder="Tìm kiếm..." maxlength="1000" />
+                </div>
+
+                <!-- Select ngôn ngữ -->
+                <div class="col-md-3 form-group">
+                    <select class="form-control" id="ngon-ngu-search" placeholder="Ngôn ngữ">
+                        <option></option>
+                    </select>
+                </div>
+
+                <!-- Các nút chức năng -->
+                <div class="col-md-6 d-flex flex-column align-items-end">
+                    <div class="mb-2">
+                        <button type="button" class="btn btn-secondary" id="tim-kiem">Lọc</button>
+                        <button type="button" class="btn btn-outline-primary" id="tat-ca">Tất cả</button>
+                    </div>
+                    @if (Model.PermitedCreate == 1)
+                    {
+                        <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Thêm mới</button>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="New_Table table-responsive">
+            <table class="table row-border" id="dataGrid" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Từ khoá</th>
+                        <th>Giá trị dịch</th>
+                        <th>Mã ngôn ngữ</th>
+                        @if (Model.PermitedEdit > 0 || Model.PermitedDelete > 0)
+                        {
+                            <th>Chức năng</th>
+                        }
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal add-->
+    <div class="modal side-modal fade" id="modalAdd" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm mới</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" id="formAdd">
+                        <input hidden id="idThietLap"/>
+                        <div class="form-group">
+                            <label for="tuKhoaAdd" class="form-label">Từ khoá<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control field-input" id="tuKhoaAdd" placeholder="Nhập từ khoá" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="giaTriDichAdd" class="form-label">Giá trị dịch<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control field-input" id="giaTriDichAdd" placeholder="Nhập khoá" autocomplete="off">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="selectNgonNguAdd" class="form-label">Ngôn ngữ<span class="text-red"> *</span></label>
+                            <select id="selectNgonNguAdd" class="form-control" data-placeholder="Chọn ngôn ngữ">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="moTaAdd" class="form-label">Mô tả</label>
+                            <input type="text" class="form-control field-input" id="moTaAdd" placeholder="Nhập mô tả" row autocomplete="off" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Hủy bỏ</button>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+              
+
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+
+    <!-- Modal edit-->
+    <div class="modal side-modal fade" id="modalEdit" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Cập nhật người dùng <span id="ttcEdit"></span></h4>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" id="formEdit">
+                        <div class="form-group">
+                            <label for="tenTruyCapEdit" class="form-label">Tên truy cập</label>
+                            <input type="text" class="form-control field-input" id="tenTruyCapEdit" disabled />
+                        </div>
+                        <div class="form-group">
+                            <label for="hoTenEdit" class="form-label">Họ và tên<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control field-input" id="hoTenEdit" placeholder="Nhập họ tên" autocomplete="off" />
+                            <span id="notifi_hoTenEdit" class="validation-msg d-none">Vui lòng nhập thông tin!</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="hopThuEdit" class="form-label">Hộp thư<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control field-input" id="hopThuEdit" placeholder="Nhập hộp thư" autocomplete="off" />
+                            <span id="notifi_hopThuEdit" class="validation-msg d-none">Vui lòng nhập thông tin!</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="select_toChucEdit" class="form-label">Tổ chức</label>
+                            <select id="select_toChucEdit" class="form-control" data-placeholder="Chọn tổ chức">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select_vaiTroEdit" class="form-label">Vai trò</label>
+                            <select id="select_vaiTroEdit" class="form-control" data-placeholder="Chọn vai trò" multiple>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    <!-- Modal delete-->
+    @await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+</div>
+
+@section Scripts {
+    <script>
+        const permitedEdit = @Model.PermitedEdit
+        const permitedDelete = @Model.PermitedDelete
+    </script>
+    <script src="~/PageScripts/admin/ThietLapNgonNgu.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,144 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+	ViewBag.Title = ViewBag.IsEdit ? "Chỉnh sửa vi phạm và xử lý vi phạm" : "Thêm mới vi phạm và xử lý vi phạm";
+}
+
+<div class="box_content">
+	<div class="TieuDe">
+		<h2 id="pageTitle">Thêm mới giải thưởng</h2>
+	</div>
+	<div class="content-body">
+		<form id="formGiaiThuong">
+			<div class="row">
+				<div class="col-lg-3 col-md-6">
+					<div class="form-group">
+						<label for="tacPham">Tác phẩm <span class="text-danger">*</span></label>
+						<select class="form-control" id="tacPham">
+							<option value="">Chọn tác phẩm</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="form-group">
+						<label for="namTraoGiai">Năm trao giải <span class="text-danger">*</span></label>
+						<input type="number" class="form-control" id="namTraoGiai" min="1900" max="2100" placeholder="Nhập năm trao giải" />
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="form-group">
+						<label for="thuTu">Thứ tự</label>
+						<input type="number" class="form-control" id="thuTu" min="1" placeholder="Nhập thứ tự" />
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="form-group">
+						<label>Trạng thái <span class="text-danger">*</span></label>
+						<div class="form-check-container">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="trangThai" id="trangThaiDuyet" value="1" checked>
+								<label class="form-check-label" for="trangThaiDuyet">Duyệt</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="trangThai" id="trangThaiChuaDuyet" value="0">
+								<label class="form-check-label" for="trangThaiChuaDuyet">Chưa duyệt</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Phần đa ngữ -->
+			<div class="DaNgu">
+				<div class="row">
+					<div class="col-12 col-md-12">
+						<div class="form-group">
+							<label for="ngonNguDich">Ngôn ngữ dịch</label>
+							<select class="form-control" id="ngonNguDich">
+								<option value="">Chọn ngôn ngữ</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-12 col-md-12">
+						<div class="form-group">
+							<label for="tenGiaiThuong">Tên giải thưởng <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" id="tenGiaiThuong" maxlength="255" placeholder="Nhập tên giải thưởng" />
+						</div>
+					</div>
+					<div class="col-12 col-md-12">
+						<div class="form-group">
+							<label for="hangMucGiaiThuong">Hạng mục giải thưởng <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" id="hangMucGiaiThuong" maxlength="255" placeholder="Nhập hạng mục giải thưởng" />
+						</div>
+					</div>
+					<div class="col-12 col-md-12">
+						<div class="form-group">
+							<label for="moTa">Mô tả</label>
+							<textarea class="form-control" id="moTa" rows="3" maxlength="1000" placeholder="Nhập mô tả"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Bảng tổ chức đạt giải -->
+			<div class="New_Table table-responsive mt-4">
+				<div class="group-corner-button with-title">
+					<h4>Danh sách tổ chức đạt giải</h4>
+					<div class="group-button flex-end">
+						<button type="button" class="btn btn-success" id="btnThemToChuc">Thêm mới</button>
+					</div>
+				</div>
+				<table class="table row-border" id="tableToChuc" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th>Stt</th>
+							<th>Tên tổ chức</th>
+							<th>Mã tổ chức</th>
+							<th>Chức năng</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<!-- Bảng cá nhân đạt giải -->
+			<div class="New_Table table-responsive mt-4">
+				<div class="group-corner-button with-title">
+					<h4>Danh sách cá nhân đạt giải</h4>
+					<div class="group-button flex-end">
+						<button type="button" class="btn btn-success" id="btnThemCaNhan">Thêm mới</button>
+					</div>
+				</div>
+				<table class="table row-border" id="tableCaNhan" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th>Stt</th>
+							<th>Tên cá nhân</th>
+							<th>Mã định danh</th>
+							<th>Chức vụ</th>
+							<th>Chức năng</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<!-- Nút hành động -->
+			<div class="row mt-4">
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="group-button flex-end">
+							<a href="@Url.Action("GiaiThuong", "GiaiThuong")" class="btn btn-outline-primary">Hủy bỏ</a>
+							<button type="submit" class="btn btn-primary">Lưu</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+    <script>
+        const isEdit = @Html.Raw(ViewBag.IsEdit ? "true" : "false");
+        const giaiThuongId = '@ViewBag.GiaiThuongId';
+    </script>
+    <script src="~/PageScripts/admin/GiaiThuong/Add.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,35 @@
+﻿<header class="header bg-header site-navbar">
+    @await Html.PartialAsync("_Navbar.cshtml")
+
+	<div class="headersearch" id="headerSearch">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+						<div class="input-group form-search md-form" role="form">
+							<input id="Keyword" class="form-control input-search ui-autocomplete-input" autocomplete="off" placeholder="Nhập dữ liệu bạn muốn tìm...">
+							<i class="icon-fluent icon_fluent_dismiss_filled keyword-delete d-none" data-toggle="tooltip" title="Xóa"></i>
+							<div class="input-group-append">
+								<a id="search-link" class="btn-search"><i class="icon-fluent icon_fluent_search_filled text-white"></i></a>
+							</div>
+						</div>
+						<ul class="ulist__search list-unstyled">
+							<li>
+								<i class="icon-fluent icon_fluent_checkmark_circle_regular"></i>Cung cấp dữ liệu mở trong cơ quan nhà nước trên địa bàn tỉnh Thừa Thiên Huế.
+							</li>
+							<li>
+								<i class="icon-fluent icon_fluent_checkmark_circle_regular"></i>Thu thập dữ liệu mở từ các tổ chức, doanh nghiệp, cộng đồng.
+							</li>
+							<li>
+								<i class="icon-fluent icon_fluent_checkmark_circle_regular"></i>Khuyến khích người dân, doanh nghiệp khai thác dữ liệu mở phục vụ phát triển kinh tế số, xã hội số.
+							</li>
+						</ul>
+				</div>
+				<div class="col-md-6">
+					<div class="div-img">
+						<img class="img-fluid" src="~/assets/images/vector/frame-header.png" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>

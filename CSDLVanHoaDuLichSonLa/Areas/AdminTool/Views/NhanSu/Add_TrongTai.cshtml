@@ -1,0 +1,197 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = ViewBag.IsEdit ? $"Chỉnh sửa trọng tài" : "Thêm mới trọng tài";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2>Quản lý trọng tài</h2>
+    </div>
+    <div class="content-body">
+        <form id="formNhanSuAdd">
+            <div class="row">
+                <div class="col-lg-auto col-md-6" id="fileAnhDaiDien">
+                    <label for="AnhDaiDienAdd" class="form-label">Ảnh đại diện <span class="text-danger">*</span></label>
+                    <div class="group_image_input">
+                        <input id="showAnhDaiDienDetail" type="hidden">
+                        <input id="fileAnhDaiDienPrev" type="file" accept=".jpg,.jpeg,.png,.gif,.webp,.bmp">
+                        <label for="fileAnhDaiDienPrev">
+                            <img id="showAnhDaiDienAdd" width="125" height="125" src="/assets/images/vector/addImage.png">
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg col-md-12">
+                    <div class="row">
+                        <div class="form-group col-lg-3 col-md-6">
+                            <label for="maDinhDanhAdd">Mã định danh (CCCD/Hộ chiếu) <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="maDinhDanhAdd" placeholder="Nhập mã định danh (CCCD/Hộ chiếu)" />
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6">
+                            <label>Giới tính<span class="text-danger">*</span></label>
+                            <select class="form-control" id="gioiTinhAdd">
+                                <option value="">Chọn</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6">
+                            <label for="ngaySinhAdd">Ngày sinh</label>
+                            <input type="text" class="form-control datepicker" id="ngaySinhAdd" placeholder="dd/mm/yyyy" />
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6">
+                            <label for="danTocAdd">Dân tộc</label>
+                            <select class="form-control" id="danTocAdd">
+                                <option value="">Chọn</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6">
+                            <label for="soDienThoaiAdd">Số điện thoại</label>
+                            <input type="text" class="form-control" id="soDienThoaiAdd" placeholder="Nhập số điện thoại..." />
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6">
+                            <label for="hopThuAdd">Hộp thư</label>
+                            <input type="text" class="form-control" id="hopThuAdd" placeholder="Nhập hộp thư..." />
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6">
+                            <label for="tinhThanhPhoAdd">Tỉnh/Thành phố</label>
+                            <select class="form-control" id="tinhThanhPhoAdd">
+                                <option value="">Chọn</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6">
+                            <label for="phuongXaAdd">Phường/Xã/Đặc khu</label>
+                            <select class="form-control" id="phuongXaAdd">
+                                <option value="">Chọn</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- <div class="form-group col-lg-3 col-md-6">
+                    <label for="soTheAdd">Số thẻ</label>
+                    <input type="text" class="form-control" id="soTheAdd" placeholder="Nhập số thẻ..." />
+                </div> 
+                <div class="form-group col-lg-6 col-md-12">
+                    <label for="coQuanCapAdd">Cơ quan cấp</label>
+                    <input type="text" class="form-control" id="coQuanCapAdd" placeholder="Nhập cơ quan cấp..." />
+                </div>
+                <div class="form-group col-lg-3 col-md-6">
+                    <label for="ngayCapAdd">Ngày cấp</label>
+                    <input type="text" class="form-control datepicker" id="ngayCapAdd" placeholder="dd/mm/yyyy" />
+                </div> -->
+                <div class="form-group col-lg-3 col-md-6">
+                    <label for="thuTuAdd">Thứ tự</label>
+                    <input type="text" class="form-control" id="thuTuAdd" placeholder="Nhập thứ tự..." />
+                </div>
+                <div class="form-group col-lg-3 col-md-6">
+                    <label>Trạng thái <span class="text-danger">*</span></label>
+                    <div class="form-check-container">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trangThai" id="trangThaiDuyetAdd" value="1" checked>
+                            <label class="form-check-label" for="trangThaiDuyetAdd">Duyệt</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="trangThai" id="trangThaiChuaDuyetAdd" value="0">
+                            <label class="form-check-label" for="trangThaiChuaDuyetAdd">Chưa duyệt</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Đa ngữ -->
+            <div class="DaNgu">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            <label for="ngonNguDichAdd">Ngôn ngữ dịch</label>
+                            <select class="form-control" id="ngonNguDichAdd">
+                                <option value="">Chọn ngôn ngữ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            <label for="hoVaTenAdd">Họ và tên <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="hoVaTenAdd" placeholder="Nhập họ và tên" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            <label for="diaChiAdd">Địa chỉ</label>
+                            <input type="text" class="form-control" id="diaChiAdd" placeholder="Nhập địa chỉ" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            <label for="noiLamViecAdd">Nơi làm việc</label>
+                            <input type="text" class="form-control" id="noiLamViecAdd" placeholder="Nhập địa chỉ" />
+                        </div>
+                    </div>
+                    <!-- <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            <label for="theChatDichAdd">Thể chất</label>
+                            <input type="text" class="form-control" id="theChatDichAdd" placeholder="Nhập thể chất" />
+                        </div>
+                    </div> -->
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="moTaDichAdd">Mô tả</label>
+                            <textarea class="form-control" id="moTaDichAdd" rows="3" placeholder="Nhập mô tả"></textarea>
+                        </div>
+                    </div>
+                    <!-- <div class="col-12">
+                        <div class="form-group">
+                            <label for="thanhTichDichAdd">Thành tích</label>
+                            <textarea class="form-control" id="thanhTichDichAdd" rows="3" placeholder="Nhập thành tích"></textarea>
+                        </div>
+                    </div> -->
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="ghiChuDichAdd">Ghi chú</label>
+                            <textarea class="form-control" id="ghiChuDichAdd" rows="3" placeholder="Nhập ghi chú"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="New_Table table-responsive">
+                <div class="group-corner-button with-title">
+                    <h4>Danh sách môn thể thao</h4>
+                </div>
+                <table class="table row-border have-footer" id="tableTheThao" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Môn thể thao</th>
+                            <th>Là môn chính</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4"><button type="button" style="float:right;" class="hgi-icon hgi-add" id="btnAddRow"></button></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="group-button flex-end">
+                            <a href="@Url.Action("TrongTai", "NhanSu")" class="btn btn-outline-primary">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-primary" id="btnSaveAdd">Lưu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        const isEdit = @Html.Raw(ViewBag.IsEdit ? "true" : "false");
+        const NhanSuId = '@ViewBag.NhanSuId';
+    </script>
+    <script src="~/PageScripts/admin/NhanSu/TrongTai/Add.js" asp-append-version="true"></script>
+}

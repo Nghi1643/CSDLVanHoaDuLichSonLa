@@ -1,0 +1,58 @@
+﻿<!-- Modal add-->
+<div class="modal side-modal fade" id="modalAdd" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalAddTitle"></h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form role="form" id="formAdd">
+                <div class="modal-body">
+                    <input type="text" hidden id="idDanhMucAdd" />
+                    <input type="text" hidden id="idDanhMuc_NoiDungAdd" />
+                    <div class="form-group d-none" id="maSoHide">
+                        <label for="maSoAdd" class="form-label">Mã số</label>
+                        <input type="text" class="form-control field-input" id="maSoAdd" placeholder="Nhập mã số..." autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label id="labelThuTu" for="thuTuAdd" class="form-label">Thứ tự</label>
+                        <input type="number" class="form-control field-input" id="thuTuAdd" placeholder="Thứ tự..." autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label for="trangThaiAdd" class="form-label">Trạng thái</label>
+                        <div class="div_radiobox">
+                            <div class="groupradiobox">
+                                <input type="radio" id="html" name="trangThaiAdd" value="1" checked />
+                                <label for="html">Sử dụng</label>
+                            </div>
+                            <div class="groupradiobox">
+                                <input type="radio" id="css" name="trangThaiAdd" value="0" />
+                                <label for="css">Không sử dụng</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="DaNgu">
+                        <div class="form-group">
+                            <label id="labelNgonNgu" for="ngonNguAdd" class="form-label">Ngôn ngữ<span class="text-red"> *</span></label>
+                            <select id="ngonNguAdd" class="form-control" placeholder="Chọn ngôn ngữ"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label id="labelTenDanhMuc" for="tenDanhMucAdd" class="form-label"><span class="text-red"> *</span></label>
+                            <input type="text" class="form-control field-input" id="tenDanhMucAdd" placeholder="" autocomplete="off">
+                        </div>
+
+                        <div class="form-group">
+                            <label id="labelMoTa" for="moTaAdd" class="form-label">Mô tả</label>
+                            <textarea type="text" class="form-control field-input" id="moTaAdd" placeholder="Nhập mô tả" autocomplete="off"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Huỷ bỏ</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->

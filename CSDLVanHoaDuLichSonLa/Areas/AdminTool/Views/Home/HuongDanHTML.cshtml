@@ -1,0 +1,914 @@
+﻿<style>
+    pre {
+        padding: 0
+    }
+
+    p {
+        margin-bottom: 8px;
+    }
+
+    .Flex_icon {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .MauIcon {
+        cursor: pointer;
+    }
+</style>
+
+<div class="box_content" style="margin-bottom:16px">
+    <div class="TieuDe">
+        <h2>Lưu ý cơ bản</h2>
+    </div>
+    <p><strong>Lưu ý quan trọng: Muốn có viền trắng bọc xung quanh view thì phải sử dụng class này để bọc toàn bộ html của view đó lại</strong></p>
+    <pre><code>
+        &lt;div class="box_content"&gt;
+            &lt;div class="TieuDe"&gt;
+                &lt;h2&gt;[Tên tiêu đề]&lt;/h2&gt;
+            &lt;/div&gt;
+            // Các đoạn HTML Content, kể cả Modal cũng bọc trong class tổng này
+        &lt;/div&gt;
+    </code></pre>
+    <p><strong>Nếu có bất kỳ view nào mới hoặc đã có trong thiết kế nhưng không có trong phần hướng dẫn, hoặc có thắc mắc gì về phần trình diễn thì liên hệ hoặc thông báo cho FE để bổ sung kịp thời hoặc giải đáp thắc mắc/chỉnh sửa lỗi view</strong></p>
+</div>
+
+<div class="box_content" style="margin-bottom:16px">
+    <div class="TieuDe">
+        <h2 class="Toggle_Cautruc1 can_toggle">Mẫu 1: Cấu trúc các field nhập (Input/Textarea/Select/...)</h2>
+        <div class="MauCauTruc1" id="MauCauTruc1">
+            <p>Sử dụng cấu trúc input dưới đây để hiển thị các Field nhập</p>
+            <pre><code>
+&lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;Tiêu đề của input&lt;/label&gt;
+            &lt;input type="text" class="" id=""&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Nó sẽ hiển thị như sau</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tiêu đề của input <span class="red-text">*</span></label>
+                        <input type="text" class="" id="TieuDe1">
+                    </div>
+                </div>
+            </div>
+            <p>Nếu muốn chia cột hoặc đặt trên một hàng gồm nhiều cột, có thể sử dụng cách chia 1 hàng thành 12 cột tương ứng <code>&lt;div class="col-md-[1 đến 12]"&gt;</code></p>
+            <p>Ví dụ muốn chia 1 hàng 3 cột tương ứng 3 input thì có thể sử dụng như sau</p>
+            <pre><code>
+&lt;div class="col-md-4"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Tiêu đề của input 1&lt;/label&gt;
+        &lt;input type="text" class="" id=""&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="col-md-4"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Tiêu đề của input 2&lt;/label&gt;
+        &lt;input type="text" class="" id=""&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="col-md-4"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Tiêu đề của input 3&lt;/label&gt;
+        &lt;input type="text" class="" id=""&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Nó sẽ hiển thị như sau</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Tiêu đề của input</label>
+                        <input type="text" class="" id="">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Tiêu đề của input</label>
+                        <input type="text" class="" id="">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Tiêu đề của input</label>
+                        <input type="text" class="" id="">
+                    </div>
+                </div>
+            </div>
+            <p>Tương ứng có thể sử dụng <code>&lt;div class="col-md-3"&gt;</code> để chia 4 cột hoặc <code>&lt;div class="col-md-6"&gt;</code> để chia 2 cột</p>
+            <p><strong>Lưu ý: Chỉ cần bọc 1 lần <code>&lt;div class="row"&gt;</code>, sau đó liên tiếp chèn các đoạn input vào, các đoạn input sẽ tự xuống hàng nếu như khoảng trống cột còn lại không đủ chiều dài. Không nhất thiết phải sử dụng <code>&lt;div class="row"&gt;</code> cho từng hàng, chỉ cần sử dụng 1 lần sau đó chèn liên tục các input vào</strong></p>
+            <p>Nó sẽ hiển thị như sau</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Tiêu đề của input 1</label>
+                        <input type="text" class="" id="" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Tiêu đề của input 2</label>
+                        <input type="text" class="" id="">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Tiêu đề của input 3</label>
+                        <input type="text" class="" id="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tiêu đề của input tự động xuống hàng 1</label>
+                        <input type="text" class="" id="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tiêu đề của input tự động xuống hàng 2</label>
+                        <input type="text" class="" id="">
+                    </div>
+                </div>
+            </div>
+            <p><i>Nếu lười quá thì cứ chia <code>&lt;div class="col-md-12"&gt;</code> cho nhanh, FE sẽ tự điều chỉnh tương ứng</i></p>
+            <p><strong>Các cấu trúc đặc biệt</strong></p>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>DatePicker - Ta sử dụng mẫu hiển thị ví dụ dưới đây</p>
+                    <pre><code>
+&lt;div class="col-md-3"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Từ ngày&lt;/label&gt;
+        &lt;input type="text" class="" id="tuNgay"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="col-md-3"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Đến ngày&lt;/label&gt;
+        &lt;input type="text" class="" id="denNgay"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                    </code></pre>
+                </div>
+                <div class="col-md-6">
+                    <p>Và chèn vào đoạn js init như sau</p>
+                    <pre><code>
+$("#tuNgay, #denNgay").datepicker(
+{
+    dateFormat: 'dd/mm/yy',
+    showOtherMonths: true,
+    selectOtherMonths: true,
+    prevText: '',
+    nextText: ''
+})
+CheckDateMinMax("#tuNgay", "#denNgay")
+                    </code></pre>
+                    <p><strong>Sử dụng thêm hàm CheckDateMinMax để giới hạn lại ngày đã chọn</strong></p>
+                </div>
+            </div>
+            <p>Và nó sẽ hiển thị như thế này</p>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Từ ngày</label>
+                        <input type="text" class="" id="tuNgay">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Đến ngày</label>
+                        <input type="text" class="" id="denNgay">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Select2 - Ta sử dụng mẫu hiển thị ví dụ dưới đây</p>
+                    <pre><code>
+&lt;div class="col-md-3"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Select input single&lt;/label&gt;
+        &lt;select class="select2" id=""&gt;
+            &lt;option value="-1"&gt;--Tất cả--&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="col-md-3"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Select input multiple&lt;/label&gt;
+        &lt;select class="select2" id="" multiple="multiple"&gt;
+            &lt;option value="-1"&gt;--Tất cả--&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                    </code></pre>
+                </div>
+                <div class="col-md-6">
+                    <p>Và chèn vào đoạn js init như sau</p>
+                    <pre><code>
+$(document).ready(function() {
+    $(".select2").select2({
+        width: "100%"
+    })
+});
+                    </code></pre>
+                </div>
+            </div>
+            <p>Và nó sẽ hiển thị như thế này</p>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Select input single</label>
+                        <select class="select2" id="">
+                            <option value="-1">--Tất cả--</option>
+                            <option value="0">Lựa chọn 1</option>
+                            <option value="1">Lựa chọn 2</option>
+                            <option value="2">Lựa chọn 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Select input multiple</label>
+                        <select class="select2" id="" multiple="multiple">
+                            <option value="-1">--Tất cả--</option>
+                            <option value="0">Lựa chọn 1</option>
+                            <option value="1">Lựa chọn 2</option>
+                            <option value="2">Lựa chọn 3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <p>Nhóm Checkbox và RadioBox</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Checkbox - Ta sử dụng mẫu hiển thị ví dụ dưới đây</p>
+                    <pre><code>
+&lt;div class="col-md-12"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;div class="div_checkbox"&gt;
+            &lt;div class="groupcheckbox"&gt;
+                &lt;input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"&gt;
+                &lt;label for="vehicle1"&gt;I have a bike&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="groupcheckbox"&gt;
+                &lt;input type="checkbox" id="vehicle2" name="vehicle2" value="Car"&gt;
+                &lt;label for="vehicle2"&gt;I have a car&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="groupcheckbox"&gt;
+                &lt;input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"&gt;
+                &lt;label for="vehicle3"&gt;I have a boat&lt;/label&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                    </code></pre>
+                    <p>Và nó sẽ hiển thị như thế này</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="div_checkbox">
+                                    <div class="groupcheckbox">
+                                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                        <label for="vehicle1"> I have a bike</label>
+                                    </div>
+                                    <div class="groupcheckbox">
+                                        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                                        <label for="vehicle2"> I have a car</label>
+                                    </div>
+                                    <div class="groupcheckbox">
+                                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                        <label for="vehicle3"> I have a boat</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p><strong>Tùy vào số lượng checkbox hoặc combobox cần dùng thì sẽ thêm vào tương ứng bao nhiêu <code>&lt;div class="groupcheckbox"&gt;</code></strong></p>
+                </div>
+                <div class="col-md-6">
+                    <p>RadioBox - Ta sử dụng mẫu hiển thị ví dụ dưới đây</p>
+                    <pre><code>
+&lt;div class="col-md-12"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;div class="div_radiobox"&gt;
+            &lt;div class="groupradiobox"&gt;
+                &lt;input type="radio" id="html" name="fav_language" value="HTML"&gt;
+                &lt;label for="html"&gt;HTML&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="groupradiobox"&gt;
+                &lt;input type="radio" id="css" name="fav_language" value="CSS"&gt;
+                &lt;label for="css"&gt;CSS&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="groupradiobox"&gt;
+                &lt;input type="radio" id="javascript" name="fav_language" value="JavaScript"&gt;
+                &lt;label for="javascript"&gt;JavaScript&lt;/label&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                    </code></pre>
+                    <p>Và nó sẽ hiển thị như thế này</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="div_radiobox">
+                                    <div class="groupradiobox">
+                                        <input type="radio" id="html" name="fav_language" value="HTML">
+                                        <label for="html">HTML</label>
+                                    </div>
+                                    <div class="groupradiobox">
+                                        <input type="radio" id="css" name="fav_language" value="CSS">
+                                        <label for="css">CSS</label>
+                                    </div>
+                                    <div class="groupradiobox">
+                                        <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+                                        <label for="javascript">JavaScript</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p><strong>Tùy vào số lượng radiobox cần dùng thì sẽ thêm vào tương ứng bao nhiêu <code>&lt;div class="groupradiobox"&gt;</code></strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box_content" style="margin-bottom:16px">
+    <div class="TieuDe">
+        <h2 class="Toggle_Cautruc2 can_toggle">Mẫu 2: Các cấu trúc button</h2>
+        <div class="MauCauTruc2" id="MauCauTruc2">
+            <p>Trong Website sẽ sử dụng các nút như sau, tương ứng với các class như sau</p>
+            <p><strong>Nút nền xanh đậm - Button Primary </strong><button class="btn btn-primary" style="margin:0 20px">Lưu</button><code>&lt;button class="btn btn-primary"&gt;Lưu&lt;/button&gt;</code></p>
+            <p><strong>Nút nền xanh lá - Button Success</strong><button class="btn btn-success" style="margin:0 20px">Thêm mới</button><code>&lt;button class="btn btn-success"&gt;Thêm mới&lt;/button&gt;</code></p>
+            <p><strong>Nút nền đỏ - Button Danger</strong><button class="btn btn-danger" style="margin:0 20px">Xóa</button><code>&lt;button class="btn btn-danger"&gt;Xóa&lt;/button&gt;</code></p>
+            <p><strong>Nút nền trắng viền đen - Button Outline Primary</strong><button class="btn btn-outline-primary" style="margin:0 20px">Hủy bỏ</button><code>&lt;button class="btn btn-outline-primary"&gt;Hủy bỏ&lt;/button&gt;</code></p>
+            <p><strong>Nút nền trắng viền xanh lá - Button Outline Green</strong><button class="btn btn-outline-green" style="margin:0 20px">Đồng bộ</button><code>&lt;button class="btn btn-outline-green"&gt;Đồng bộ&lt;/button&gt;</code></p>
+            <p><strong>Nút nền trắng viền xanh dương - Button Outline Blue</strong><button class="btn btn-outline-blue" style="margin:0 20px">Thay đổi trạng thái</button><code>&lt;button class="btn btn-outline-blue"&gt;Thay đổi trạng thái&lt;/button&gt;</code></p>
+            <p>Để đặt các nhóm nút ta sử dụng ví dụ sau</p>
+            <pre><code>
+            &lt;div class="col-md-12"&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;div class="group-button flex-end"&gt;
+                        &lt;button class="btn btn-outline-primary"&gt;Hủy bỏ&lt;/button&gt;
+                        &lt;button class="btn btn-primary"&gt;Lưu&lt;/button&gt;
+                        &lt;button class="btn btn-danger"&gt;Xóa&lt;/button&gt;
+                        &lt;button class="btn btn-success"&gt;Thêm mới&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            </code></pre>
+            <p>Với nút có khả năng mở rộng (Extend) với các option trong nút thì sử dụng dạng nút như sau</p>
+            <div style="display:flex;align-items:center;margin-bottom:8px;"><strong>Nút nền xanh lá - Button Success</strong>
+                <div class="button-extend" style="margin:0 20px">
+                    <button class="btn btn-success btn-extend" data-toggle="collapse" data-target="#collapseThemMoi" aria-expanded="false" aria-controls="collapseThemMoi">Thêm mới</button>
+                    <div class="collapse collapse_card" id="collapseThemMoi">
+                        <ul class="card card-body">
+                            <li class="option">Thêm mới 1</li>
+                            <li class="option">Thêm mới 2</li>
+                            <li class="option">Thêm mới 3</li>
+                            <li class="option">Thêm mới 4</li>
+                        </ul>
+                    </div>
+                </div><code>&lt;button class="btn btn-success btn-extend"&gt;Thêm mới&lt;/button&gt;</code>
+            </div>
+            <p><strong>Nút nền trắng viền xanh lá - Button Outline Green</strong><button class="btn btn-outline-green btn-extend" style="margin:0 20px">Đồng bộ</button><code>&lt;button class="btn btn-outline-green btn-extend"&gt;Đồng bộ&lt;/button&gt;</code></p>
+            <p><strong>Nút nền trắng viền xanh dương - Button Outline Blue</strong><button class="btn btn-outline-blue btn-extend" style="margin:0 20px">Thay đổi trạng thái</button><code>&lt;button class="btn btn-outline-blue btn-extend"&gt;Thay đổi trạng thái&lt;/button&gt;</code></p>
+            <p>Với nút có khả năng mở rộng (Extend) với các option trong nút thì sử dụng ví dụ sau</p>
+            <pre><code>
+            &lt;div class="button-extend"&gt;
+                &lt;button class="btn btn-success btn-extend" data-toggle="collapse" data-target="#collapseThemMoi" aria-expanded="false" aria-controls="collapseThemMoi"&gt;Thêm mới&lt;/button&gt;
+                &lt;div class="collapse collapse_card" id="collapseThemMoi"&gt;
+                    &lt;ul class="card card-body"&gt;
+                        &lt;li class="option"&gt;Thêm mới 1&lt;/li&gt;
+                        &lt;li class="option"&gt;Thêm mới 2&lt;/li&gt;
+                        &lt;li class="option"&gt;Thêm mới 3&lt;/li&gt;
+                        &lt;li class="option"&gt;Thêm mới 4&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            </code></pre>
+            <p><strong>Class Flex-end dùng để căn phải nhóm nút, nếu không cần căn phải thì có thể bỏ class trên. Thẻ link (Thẻ <code>&lt;a class="btn btn-primary"&gt;Lưu&lt;/a&gt;</code> vẫn có thể dùng được style các nút trên) </strong></p>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="group-button flex-end">
+                            <button class="btn btn-primary">Lưu</button>
+                            <button class="btn btn-danger">Xóa</button>
+                            <button class="btn btn-success">Thêm mới</button>
+                            <button class="btn btn-outline-primary">Hủy bỏ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box_content" style="margin-bottom:16px">
+    <div class="TieuDe">
+        <h2 class="Toggle_Cautruc3 can_toggle">Mẫu 3: Các cấu trúc DataTable</h2>
+        <div class="MauCauTruc3" id="MauCauTruc3">
+            <p>Một mẫu ví dụ hiển thị của DataTable</p>
+            <div class="New_Table table-responsive">
+                <table id="tableMau" class="table" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Cột thứ nhất</th>
+                            <th>Trạng thái</th>
+                            <th>Sử dụng</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Hệ 1</td>
+                            <td><span class="TrangThai green-text">Đã duyệt</span></td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.6905 5.77665C20.09 6.15799 20.1047 6.79098 19.7234 7.19048L9.22336 18.1905C9.03745 18.3852 8.78086 18.4968 8.51163 18.4999C8.2424 18.5031 7.98328 18.3975 7.79289 18.2071L4.29289 14.7071C3.90237 14.3166 3.90237 13.6834 4.29289 13.2929C4.68342 12.9024 5.31658 12.9024 5.70711 13.2929L8.48336 16.0692L18.2766 5.80953C18.658 5.41003 19.291 5.39531 19.6905 5.77665Z" fill="#009966"/>
+                                </svg>
+                            </td>
+                            <td>
+                                <i class="blue-text edit-form" title="Sửa" data-toggle="tooltip" id=n-${meta.row} data-placement="bottom" title="Sửa">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path opacity="0.4" d="M3.26538 21.9613L3.54536 21.9686C5.6032 22.0224 6.63212 22.0493 7.56806 21.6837C8.504 21.3182 9.25287 20.5969 10.7506 19.1543L19.655 10.5779L13.5 4.5L4.78943 13.9445C3.57944 15.2555 2.97444 15.9109 2.62371 16.7182C2.27297 17.5255 2.20301 18.4235 2.06308 20.2197L2.03608 20.5662C1.98636 21.2043 1.9615 21.5234 2.14359 21.73C2.32567 21.9367 2.63891 21.9449 3.26538 21.9613Z" fill="#FFB900"/>
+                                        <path d="M14.0737 3.88545C14.8189 3.07808 15.1915 2.6744 15.5874 2.43893C16.5427 1.87076 17.7191 1.85309 18.6904 2.39232C19.0929 2.6158 19.4769 3.00812 20.245 3.79276C21.0131 4.5774 21.3972 4.96972 21.6159 5.38093C22.1438 6.37312 22.1265 7.57479 21.5703 8.5507C21.3398 8.95516 20.9446 9.33578 20.1543 10.097L10.7506 19.1543C9.25288 20.5969 8.504 21.3182 7.56806 21.6837C6.63212 22.0493 5.6032 22.0224 3.54536 21.9686L3.26538 21.9613C2.63891 21.9449 2.32567 21.9367 2.14359 21.73C1.9615 21.5234 1.98636 21.2043 2.03608 20.5662L2.06308 20.2197C2.20301 18.4235 2.27297 17.5255 2.62371 16.7182C2.97444 15.9109 3.57944 15.2555 4.78943 13.9445L14.0737 3.88545Z" stroke="#FFB900" stroke-width="1.5" stroke-linejoin="round"/>
+                                        <path d="M13 4L20 11" stroke="#FFB900" stroke-width="1.5" stroke-linejoin="round"/>
+                                        <path d="M14 22H22" stroke="#FFB900" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>                                
+                                </i>
+                                <i class="red-text delete-command-btn delete-form" title="Xóa" id=n-${meta.row} data-toggle="tooltip" data-placement="bottom" title="Xóa">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path opacity="0.4" d="M19.5 5.5L18.8803 15.5251C18.7219 18.0864 18.6428 19.3671 18.0008 20.2879C17.6833 20.7431 17.2747 21.1273 16.8007 21.416C15.8421 22 14.559 22 11.9927 22C9.42312 22 8.1383 22 7.17905 21.4149C6.7048 21.1257 6.296 20.7408 5.97868 20.2848C5.33688 19.3626 5.25945 18.0801 5.10461 15.5152L4.5 5.5H19.5Z" fill="#E31400"/>
+                                        <path d="M19.5 5.5L18.8803 15.5251C18.7219 18.0864 18.6428 19.3671 18.0008 20.2879C17.6833 20.7431 17.2747 21.1273 16.8007 21.416C15.8421 22 14.559 22 11.9927 22C9.42312 22 8.1383 22 7.17905 21.4149C6.7048 21.1257 6.296 20.7408 5.97868 20.2848C5.33688 19.3626 5.25945 18.0801 5.10461 15.5152L4.5 5.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M21 5.5H3" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M16.0575 5.5L15.3748 4.09173C14.9213 3.15626 14.6946 2.68852 14.3035 2.39681C14.2167 2.3321 14.1249 2.27454 14.0288 2.2247C13.5957 2 13.0759 2 12.0363 2C10.9706 2 10.4377 2 9.99745 2.23412C9.89986 2.28601 9.80675 2.3459 9.71906 2.41317C9.3234 2.7167 9.10239 3.20155 8.66037 4.17126L8.05469 5.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M9.5 16.5V10.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M14.5 16.5V10.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>                                
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Hệ 2</td>
+                            <td><span class="TrangThai red-text">Hủy duyệt</span></td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.8842 4.11611C20.3723 4.60427 20.3723 5.39573 19.8842 5.88388L5.88413 19.8839C5.39597 20.372 4.60451 20.372 4.11636 19.8839C3.6282 19.3957 3.6282 18.6042 4.11636 18.1161L18.1164 4.11611C18.6046 3.62796 19.396 3.62796 19.8842 4.11611Z" fill="#E31400"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11636 4.11611C4.60451 3.62796 5.39597 3.62796 5.88413 4.11611L19.8842 18.1161C20.3723 18.6042 20.3723 19.3957 19.8842 19.8839C19.396 20.372 18.6046 20.372 18.1164 19.8839L4.11636 5.88388C3.6282 5.39573 3.6282 4.60427 4.11636 4.11611Z" fill="#E31400"/>
+                                </svg>
+                            </td>
+                            <td>
+                                <i class="blue-text edit-form" title="Sửa" data-toggle="tooltip" id=n-${meta.row} data-placement="bottom" title="Sửa">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path opacity="0.4" d="M3.26538 21.9613L3.54536 21.9686C5.6032 22.0224 6.63212 22.0493 7.56806 21.6837C8.504 21.3182 9.25287 20.5969 10.7506 19.1543L19.655 10.5779L13.5 4.5L4.78943 13.9445C3.57944 15.2555 2.97444 15.9109 2.62371 16.7182C2.27297 17.5255 2.20301 18.4235 2.06308 20.2197L2.03608 20.5662C1.98636 21.2043 1.9615 21.5234 2.14359 21.73C2.32567 21.9367 2.63891 21.9449 3.26538 21.9613Z" fill="#FFB900"/>
+                                        <path d="M14.0737 3.88545C14.8189 3.07808 15.1915 2.6744 15.5874 2.43893C16.5427 1.87076 17.7191 1.85309 18.6904 2.39232C19.0929 2.6158 19.4769 3.00812 20.245 3.79276C21.0131 4.5774 21.3972 4.96972 21.6159 5.38093C22.1438 6.37312 22.1265 7.57479 21.5703 8.5507C21.3398 8.95516 20.9446 9.33578 20.1543 10.097L10.7506 19.1543C9.25288 20.5969 8.504 21.3182 7.56806 21.6837C6.63212 22.0493 5.6032 22.0224 3.54536 21.9686L3.26538 21.9613C2.63891 21.9449 2.32567 21.9367 2.14359 21.73C1.9615 21.5234 1.98636 21.2043 2.03608 20.5662L2.06308 20.2197C2.20301 18.4235 2.27297 17.5255 2.62371 16.7182C2.97444 15.9109 3.57944 15.2555 4.78943 13.9445L14.0737 3.88545Z" stroke="#FFB900" stroke-width="1.5" stroke-linejoin="round"/>
+                                        <path d="M13 4L20 11" stroke="#FFB900" stroke-width="1.5" stroke-linejoin="round"/>
+                                        <path d="M14 22H22" stroke="#FFB900" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>                                
+                                </i>
+                                <i class="red-text delete-command-btn delete-form" title="Xóa" id=n-${meta.row} data-toggle="tooltip" data-placement="bottom" title="Xóa">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path opacity="0.4" d="M19.5 5.5L18.8803 15.5251C18.7219 18.0864 18.6428 19.3671 18.0008 20.2879C17.6833 20.7431 17.2747 21.1273 16.8007 21.416C15.8421 22 14.559 22 11.9927 22C9.42312 22 8.1383 22 7.17905 21.4149C6.7048 21.1257 6.296 20.7408 5.97868 20.2848C5.33688 19.3626 5.25945 18.0801 5.10461 15.5152L4.5 5.5H19.5Z" fill="#E31400"/>
+                                        <path d="M19.5 5.5L18.8803 15.5251C18.7219 18.0864 18.6428 19.3671 18.0008 20.2879C17.6833 20.7431 17.2747 21.1273 16.8007 21.416C15.8421 22 14.559 22 11.9927 22C9.42312 22 8.1383 22 7.17905 21.4149C6.7048 21.1257 6.296 20.7408 5.97868 20.2848C5.33688 19.3626 5.25945 18.0801 5.10461 15.5152L4.5 5.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M21 5.5H3" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M16.0575 5.5L15.3748 4.09173C14.9213 3.15626 14.6946 2.68852 14.3035 2.39681C14.2167 2.3321 14.1249 2.27454 14.0288 2.2247C13.5957 2 13.0759 2 12.0363 2C10.9706 2 10.4377 2 9.99745 2.23412C9.89986 2.28601 9.80675 2.3459 9.71906 2.41317C9.3234 2.7167 9.10239 3.20155 8.66037 4.17126L8.05469 5.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M9.5 16.5V10.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M14.5 16.5V10.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>                                
+                                </i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Để tạo một bảng DataTable, bọc phần table muốn tạo ra trong class New_Table, hoặc làm như ví dụ dưới đây</p>
+            <pre><code>
+&lt;div class="New_Table table-responsive"&gt;
+    &lt;table id="tableMau" class="table" width="100%" cellspacing="0"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;STT&lt;/th&gt;
+                &lt;th&gt;Cột thứ nhất&lt;/th&gt;
+                &lt;th&gt;Trạng thái&lt;/th&gt;
+                &lt;th&gt;Sử dụng&lt;/th&gt;
+                &lt;th&gt;Chức năng&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Sau khi đã đặt nhóm Table vào <code>&lt;div class="New_Table table-responsive"&gt;</code>, có thể Init bảng Table như bình thường</p>
+            <p><strong>Một số lưu ý khi Init bảng Table, phần Column</strong></p>
+            <pre><code>
+"columns": [
+    {"width": "40px", "class": "STT-text text-center" },
+    {"width": "auto", "class": "text-left" },
+    {"width": "200px", "class": "text-center" },
+    {"width": "120px", "class": "text-center" },
+    {"class": "text-center", "width": "120px" }
+]
+            </code></pre>
+            <p>Phần Class muốn canh giữa thì sử dụng "text-center", muốn canh trái thì sử dụng "text-left". Có thể tự điều chỉnh hoặc mặc định toàn bộ là "text-center", có gì sau này FE tự canh chỉnh</p>
+            <p>Phần width luôn phải có 1 cột sử dụng "width": "auto" (nên là cột có phần dài nhất). Và cột chứa STT luôn là "width": "40px" (có thể là cột đầu tiên), cột chứa các chức năng luôn là "width": "120px" (có thể là cột cuối cùng)</p>
+            <p>Phần các nút chức năng sẽ sử dụng các icon đặc biệt, sẽ được đề cập đến ở phần <a href="#MauCauTruc4">Các Icon đặc biệt</a></p>
+            <p><strong>Hoặc các BE có thể copy mẫu cũng được, sau này phần FE sẽ vào và tự canh chỉnh lại sau</strong></p>
+            <p>Bổ sung thêm các mẫu chữ màu đặc biệt và các mẫu chữ biểu hiện trạng thái ở trong khung DataTable</p>
+            <p>Ta sử dụng cấu trúc như sau:</p>
+            <span class="TrangThai red-text">
+                Trạng thái đỏ
+            </span>
+            <pre><code>
+&lt;span class="TrangThai red-text"&gt;
+    Trạng thái đỏ
+&lt;/span&gt;
+            </code></pre>
+            <span class="TrangThai green-text">
+                Trạng thái xanh lá
+            </span>
+            <pre><code>
+&lt;span class="TrangThai green-text"&gt;
+    Trạng thái xanh lá
+&lt;/span&gt;
+            </code></pre>
+            <span class="TrangThai blue-text">
+                Trạng thái xanh dương
+            </span>
+            <pre><code>
+&lt;span class="TrangThai blue-text"&gt;
+    Trạng thái xanh dương
+&lt;/span&gt;
+            </code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="box_content" style="margin-bottom:16px">
+    <div class="TieuDe">
+        <h2 class="Toggle_Cautruc4 can_toggle">Mẫu 4: Các icon sử dụng</h2>
+        <div class="MauCauTruc4" id="MauCauTruc4">
+            <p>Phần này sẽ chuyên dùng để truy cập vào các icon thường được sử dụng nhiều nhất trong view, các icon khác FE sẽ tự bổ sung trong view hoặc tiếp tục bổ sung trong phần này</p>
+            <p><strong>Bấm vào icon để tự động copy mã icon</strong></p>
+            <p><strong>Nhóm icon thường dùng</strong></p>
+            <div class="Flex_icon">
+                <div class="MauIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path opacity="0.4" d="M3.26538 21.9613L3.54536 21.9686C5.6032 22.0224 6.63212 22.0493 7.56806 21.6837C8.504 21.3182 9.25287 20.5969 10.7506 19.1543L19.655 10.5779L13.5 4.5L4.78943 13.9445C3.57944 15.2555 2.97444 15.9109 2.62371 16.7182C2.27297 17.5255 2.20301 18.4235 2.06308 20.2197L2.03608 20.5662C1.98636 21.2043 1.9615 21.5234 2.14359 21.73C2.32567 21.9367 2.63891 21.9449 3.26538 21.9613Z" fill="#FFB900"/>
+                        <path d="M14.0737 3.88545C14.8189 3.07808 15.1915 2.6744 15.5874 2.43893C16.5427 1.87076 17.7191 1.85309 18.6904 2.39232C19.0929 2.6158 19.4769 3.00812 20.245 3.79276C21.0131 4.5774 21.3972 4.96972 21.6159 5.38093C22.1438 6.37312 22.1265 7.57479 21.5703 8.5507C21.3398 8.95516 20.9446 9.33578 20.1543 10.097L10.7506 19.1543C9.25288 20.5969 8.504 21.3182 7.56806 21.6837C6.63212 22.0493 5.6032 22.0224 3.54536 21.9686L3.26538 21.9613C2.63891 21.9449 2.32567 21.9367 2.14359 21.73C1.9615 21.5234 1.98636 21.2043 2.03608 20.5662L2.06308 20.2197C2.20301 18.4235 2.27297 17.5255 2.62371 16.7182C2.97444 15.9109 3.57944 15.2555 4.78943 13.9445L14.0737 3.88545Z" stroke="#FFB900" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M13 4L20 11" stroke="#FFB900" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M14 22H22" stroke="#FFB900" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                Icon Chỉnh sửa
+            </div>
+            <div class="Flex_icon">
+                <div class="MauIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path opacity="0.4" d="M19.5 5.5L18.8803 15.5251C18.7219 18.0864 18.6428 19.3671 18.0008 20.2879C17.6833 20.7431 17.2747 21.1273 16.8007 21.416C15.8421 22 14.559 22 11.9927 22C9.42312 22 8.1383 22 7.17905 21.4149C6.7048 21.1257 6.296 20.7408 5.97868 20.2848C5.33688 19.3626 5.25945 18.0801 5.10461 15.5152L4.5 5.5H19.5Z" fill="#E31400"/>
+                        <path d="M19.5 5.5L18.8803 15.5251C18.7219 18.0864 18.6428 19.3671 18.0008 20.2879C17.6833 20.7431 17.2747 21.1273 16.8007 21.416C15.8421 22 14.559 22 11.9927 22C9.42312 22 8.1383 22 7.17905 21.4149C6.7048 21.1257 6.296 20.7408 5.97868 20.2848C5.33688 19.3626 5.25945 18.0801 5.10461 15.5152L4.5 5.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M21 5.5H3" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M16.0575 5.5L15.3748 4.09173C14.9213 3.15626 14.6946 2.68852 14.3035 2.39681C14.2167 2.3321 14.1249 2.27454 14.0288 2.2247C13.5957 2 13.0759 2 12.0363 2C10.9706 2 10.4377 2 9.99745 2.23412C9.89986 2.28601 9.80675 2.3459 9.71906 2.41317C9.3234 2.7167 9.10239 3.20155 8.66037 4.17126L8.05469 5.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M9.5 16.5V10.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M14.5 16.5V10.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                Icon Xóa
+            </div>
+            <div class="Flex_icon">
+                <div class="MauIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M19.6905 5.77665C20.09 6.15799 20.1047 6.79098 19.7234 7.19048L9.22336 18.1905C9.03745 18.3852 8.78086 18.4968 8.51163 18.4999C8.2424 18.5031 7.98328 18.3975 7.79289 18.2071L4.29289 14.7071C3.90237 14.3166 3.90237 13.6834 4.29289 13.2929C4.68342 12.9024 5.31658 12.9024 5.70711 13.2929L8.48336 16.0692L18.2766 5.80953C18.658 5.41003 19.291 5.39531 19.6905 5.77665Z" fill="#009966"/>
+                    </svg>
+                </div>
+                Icon Sử dụng
+            </div>
+            <div class="Flex_icon">
+                <div class="MauIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M19.8842 4.11611C20.3723 4.60427 20.3723 5.39573 19.8842 5.88388L5.88413 19.8839C5.39597 20.372 4.60451 20.372 4.11636 19.8839C3.6282 19.3957 3.6282 18.6042 4.11636 18.1161L18.1164 4.11611C18.6046 3.62796 19.396 3.62796 19.8842 4.11611Z" fill="#E31400"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11636 4.11611C4.60451 3.62796 5.39597 3.62796 5.88413 4.11611L19.8842 18.1161C20.3723 18.6042 20.3723 19.3957 19.8842 19.8839C19.396 20.372 18.6046 20.372 18.1164 19.8839L4.11636 5.88388C3.6282 5.39573 3.6282 4.60427 4.11636 4.11611Z" fill="#E31400"/>
+                    </svg>
+                </div>
+                Icon Hủy bỏ
+            </div>
+            <div class="Flex_icon">
+                <div class="MauIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path opacity="0.4" d="M12.75 16.5H11.25C10.0772 16.5 9.49082 16.5 9.08686 16.19C8.98286 16.1102 8.88977 16.0171 8.80997 15.9131C8.5 15.5092 8.5 14.9228 8.5 13.75C8.5 12.5772 8.5 11.9908 8.80997 11.5869C8.88977 11.4829 8.98286 11.3898 9.08686 11.31C9.49082 11 10.0772 11 11.25 11H12.75C13.9228 11 14.5092 11 14.9131 11.31C15.0171 11.3898 15.1102 11.4829 15.19 11.5869C15.5 11.9908 15.5 12.5772 15.5 13.75C15.5 14.9228 15.5 15.5092 15.19 15.9131C15.1102 16.0171 15.0171 16.1102 14.9131 16.19C14.5092 16.5 13.9228 16.5 12.75 16.5Z" fill="#1447E6"/>
+                        <path d="M21.5 12C21.5 17.2467 17.2467 21.5 12 21.5C6.75334 21.5 2.5 17.2467 2.5 12C2.5 6.75329 6.75334 2.5 12 2.5C15.8956 2.5 19.2436 4.84478 20.7095 8.2M21.5 5.5L21.025 8.675L18 8" stroke="#1447E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 11V9.5C10 8.39543 10.8954 7.5 12 7.5C13.1046 7.5 14 8.39543 14 9.5V11M11.25 16.5H12.75C13.9228 16.5 14.5092 16.5 14.9131 16.19C15.0171 16.1102 15.1102 16.0171 15.19 15.9131C15.5 15.5092 15.5 14.9228 15.5 13.75C15.5 12.5772 15.5 11.9908 15.19 11.5869C15.1102 11.4829 15.0171 11.3898 14.9131 11.31C14.5092 11 13.9228 11 12.75 11H11.25C10.0772 11 9.49082 11 9.08686 11.31C8.98286 11.3898 8.88977 11.4829 8.80997 11.5869C8.5 11.9908 8.5 12.5772 8.5 13.75C8.5 14.9228 8.5 15.5092 8.80997 15.9131C8.88977 16.0171 8.98286 16.1102 9.08686 16.19C9.49082 16.5 10.0772 16.5 11.25 16.5Z" stroke="#1447E6" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                Icon đổi mật khẩu
+            </div>
+            <div class="Flex_icon">
+                <div class="MauIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path opacity="0.4" d="M4.26782 18.8447C4.4927 20.515 5.87613 21.8235 7.55966 21.9009C8.97628 21.966 10.4153 22 12 22C13.5847 22 15.0237 21.966 16.4403 21.9009C18.1239 21.8235 19.5073 20.515 19.7322 18.8447C19.879 17.7547 20 16.6376 20 15.5C20 14.3624 19.8789 13.2453 19.7322 12.1553C19.5073 10.485 18.1239 9.17649 16.4403 9.09909C15.0237 9.03397 13.5847 9 12 9C10.4153 9 8.97628 9.03397 7.55966 9.09909C5.87613 9.17649 4.49269 10.485 4.26782 12.1553C4.12105 13.2453 4 14.3624 4 15.5C4 16.6376 4.12105 17.7547 4.26782 18.8447Z" fill="#E31400"/>
+                        <path d="M12 16.5V14.5" stroke="#E31400" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M4.26781 18.8447C4.49269 20.515 5.87613 21.8235 7.55966 21.9009C8.97628 21.966 10.4153 22 12 22C13.5847 22 15.0237 21.966 16.4403 21.9009C18.1239 21.8235 19.5073 20.515 19.7322 18.8447C19.8789 17.7547 20 16.6376 20 15.5C20 14.3624 19.8789 13.2453 19.7322 12.1553C19.5073 10.485 18.1239 9.17649 16.4403 9.09909C15.0237 9.03397 13.5847 9 12 9C10.4153 9 8.97628 9.03397 7.55966 9.09909C5.87613 9.17649 4.49269 10.485 4.26781 12.1553C4.12105 13.2453 4 14.3624 4 15.5C4 16.6376 4.12105 17.7547 4.26781 18.8447Z" stroke="#E31400" stroke-width="1.5"/>
+                        <path d="M7.5 9V6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5V9" stroke="#E31400" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                Icon khóa tài khoản
+            </div>
+            <p><strong>Nhóm icon đặc biệt trong các Modal</strong></p>
+            <div class="Flex_icon">
+                <div class="MauIcon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="80" rx="16" fill="#FCE7E5"/>
+                        <path d="M60 22.667L58.3475 49.4006C57.9251 56.2307 57.7141 59.6459 56.0021 62.1014C55.1555 63.3153 54.0659 64.3398 52.8019 65.1097C50.2456 66.667 46.824 66.667 39.9805 66.667C33.1283 66.667 29.7021 66.667 27.1441 65.1067C25.8795 64.3355 24.7893 63.3091 23.9431 62.0931C22.2317 59.6339 22.0252 56.2139 21.6123 49.3742L20 22.667" stroke="#E31400" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M16 22.6663H64M50.8152 22.6663L48.9949 18.911C47.7856 16.4164 47.1808 15.1691 46.1379 14.3912C45.9067 14.2186 45.6616 14.0651 45.4053 13.9322C44.2504 13.333 42.8643 13.333 40.092 13.333C37.2501 13.333 35.8293 13.333 34.6551 13.9573C34.3949 14.0957 34.1466 14.2554 33.9128 14.4348C32.8577 15.2442 32.2683 16.5371 31.0896 19.123L29.4745 22.6663" stroke="#E31400" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M33.3335 52V36" stroke="#E31400" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M46.6665 52V36" stroke="#E31400" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                Icon xóa của Modal
+            </div>
+            <p><strong>Sau khi đã copy mã SVG của các icon, có thể Paste vào các vị trí trong thiết kế để sử dụng (đa số đều sử dụng trong DataTable, do đó có thể Paste vào như mẫu dưới đây)</strong></p>
+            <pre><code>
+"columnDefs": [
+    {
+        targets: [],
+        render: function (data, type, row, meta) {
+            return (`&lt;i class="blue-text edit-form" id=n-${meta.row} title="Sửa" data-toggle="tooltip" data-placement="bottom" title="Sửa"&gt;
+                        [Mã icon/svg]
+                    &lt;/i&gt;
+                    &lt;i class="red-text delete-command-btn delete-form" title="Xóa" id=n-${meta.row} data-toggle="tooltip" data-placement="bottom" title="Xóa"&gt;
+                        [Mã icon/svg]                    
+                    &lt;/i&gt;`)
+        }
+    },
+],
+            </code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="box_content" style="margin-bottom:16px">
+    <div class="TieuDe">
+        <h2 class="Toggle_Cautruc5 can_toggle">Mẫu 5: Dựng Modal thêm mới/chỉnh sửa và Modal Xóa</h2>
+        <div class="MauCauTruc5" id="MauCauTruc5">
+            <p>Ta dựng phần modal thêm mới và chỉnh sửa đầy đủ 3 phần như sau</p>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdd" style="margin-bottom:16px"><span>Thêm mới</span></button>
+            <div class="modal fade side-modal" id="modalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm mới chức năng</h5>
+                            <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal" onclick="ClearData()"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div role="form" id="formAdd">
+                                [Tham khảo phần <a href="#MauCauTruc1">Mẫu cấu trúc 1</a> để thêm phần input]
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="group-button flex-end">
+                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal" onclick="ClearData()">Hủy bỏ</button>
+                                <button type="button" id="btn-add" class="btn btn-primary">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>Trong đó code có thể sao chép như dưới đây cho phần Modal thêm mới và chỉnh sửa</p>
+            <pre><code>
+                &lt;div class="modal fade side-modal" id="modalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"&gt;
+                    &lt;div class="modal-dialog modal-lg"&gt;
+                        &lt;div class="modal-content"&gt;
+                            &lt;div class="modal-header"&gt;
+                                &lt;h5 class="modal-title" id="exampleModalLabel"&gt;Thêm mới chức năng&lt;/h5&gt;
+                                &lt;button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"&gt;&lt;/button&gt;
+                            &lt;/div&gt;
+                            &lt;div class="modal-body"&gt;
+                                &lt;div role="form" id="formAdd"&gt;
+                                    &lt;div class="row"&gt;
+                                        [Tham khảo phần <a href="#MauCauTruc1">Mẫu cấu trúc 1</a> để thêm phần input] 
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class="modal-footer"&gt;
+                                &lt;div class="group-button flex-end"&gt;
+                                    &lt;button type="button" class="btn btn-outline-primary" data-dismiss="modal" onclick="ClearData()"&gt;Hủy bỏ&lt;/button&gt;
+                                    &lt;button type="button" id="btn-add" class="btn btn-primary"&gt;Lưu&lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            </code></pre>
+            <p>Đặc biệt với modal xóa thì ta sẽ dựng theo cấu trúc như sau</p>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete" style="margin-bottom:16px"><span>Xóa</span></button>
+            <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalLabelDelete" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <form role="form" id="formDelete">
+                                <input type="hidden" id="idDelete" />
+                                <div class="Delete_info">
+                                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="80" height="80" rx="16" fill="#FDEDF0" />
+                                        <path d="M34.6666 21.3333H45.3333C45.3333 19.9188 44.7713 18.5623 43.7712 17.5621C42.771 16.5619 41.4144 16 39.9999 16C38.5854 16 37.2289 16.5619 36.2287 17.5621C35.2285 18.5623 34.6666 19.9188 34.6666 21.3333ZM30.6666 21.3333C30.6666 20.1077 30.908 18.894 31.377 17.7616C31.8461 16.6293 32.5336 15.6004 33.4003 14.7337C34.2669 13.867 35.2958 13.1795 36.4282 12.7105C37.5606 12.2414 38.7742 12 39.9999 12C41.2256 12 42.4393 12.2414 43.5716 12.7105C44.704 13.1795 45.7329 13.867 46.5996 14.7337C47.4663 15.6004 48.1538 16.6293 48.6228 17.7616C49.0918 18.894 49.3333 20.1077 49.3333 21.3333H64.6666C65.197 21.3333 65.7057 21.544 66.0808 21.9191C66.4559 22.2942 66.6666 22.8029 66.6666 23.3333C66.6666 23.8638 66.4559 24.3725 66.0808 24.7475C65.7057 25.1226 65.197 25.3333 64.6666 25.3333H61.1466L58.0266 57.6267C57.7881 60.0999 56.6373 62.3958 54.7985 64.067C52.9597 65.7381 50.5647 66.6649 48.0799 66.6667H31.9199C29.4352 66.6649 27.0401 65.7381 25.2013 64.067C23.3625 62.3958 22.2118 60.0999 21.9733 57.6267L18.8533 25.3333H15.3333C14.8028 25.3333 14.2941 25.1226 13.919 24.7475C13.544 24.3725 13.3333 23.8638 13.3333 23.3333C13.3333 22.8029 13.544 22.2942 13.919 21.9191C14.2941 21.544 14.8028 21.3333 15.3333 21.3333H30.6666ZM35.9999 34C35.9999 33.4696 35.7892 32.9609 35.4141 32.5858C35.0391 32.2107 34.5304 32 33.9999 32C33.4695 32 32.9608 32.2107 32.5857 32.5858C32.2106 32.9609 31.9999 33.4696 31.9999 34V54C31.9999 54.5304 32.2106 55.0391 32.5857 55.4142C32.9608 55.7893 33.4695 56 33.9999 56C34.5304 56 35.0391 55.7893 35.4141 55.4142C35.7892 55.0391 35.9999 54.5304 35.9999 54V34ZM45.9999 32C47.0933 32 47.9999 32.9067 47.9999 34V54C47.9999 54.5304 47.7892 55.0391 47.4141 55.4142C47.0391 55.7893 46.5304 56 45.9999 56C45.4695 56 44.9608 55.7893 44.5857 55.4142C44.2106 55.0391 43.9999 54.5304 43.9999 54V34C43.9999 32.9067 44.9066 32 45.9999 32ZM25.9466 57.2533C26.0923 58.7363 26.7846 60.112 27.8887 61.1126C28.9929 62.1132 30.4298 62.6672 31.9199 62.6667H48.0799C51.1466 62.6667 53.7333 60.32 54.0533 57.2533L57.1199 25.3333H22.8799L25.9466 57.2533Z" fill="#DF1C41" />
+                                    </svg>
+                                    <div class="warning">
+                                        <span>Bạn có chắc chắn muốn xóa [tên danh mục] </span><span id="tenMonHocDelete" class="red-text">[Tên mục muốn xóa, sử dụng ajax để truyền vào]</span></span>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="group-button-center">
+                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-warning" id="buttonDelete">Đồng ý</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>Có thể sao chép như dưới đây cho phần Modal Xóa (và các modal đặc biệt ở phần Quản lý đăng ký lái xe)</p>
+            <pre><code>
+                &lt;div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalLabelDelete" aria-hidden="true"&gt;
+                    &lt;div class="modal-dialog" role="document"&gt;
+                        &lt;div class="modal-content"&gt;
+                            &lt;div class="modal-body"&gt;
+                                &lt;form role="form" id="formDelete"&gt;
+                                    &lt;input type="hidden" id="idDelete" /&gt;
+                                    &lt;div class="Delete_info"&gt;
+                                        [Icon xóa, sẽ đặt phần icon đó ở mục <a href="#MauCauTruc4">Mẫu cấu trúc 4</a> ]
+                                        &lt;div class="warning"&gt;
+                                            &lt;span&gt;Bạn có chắc chắn muốn xóa [tên danh mục] &lt;/span&gt;&lt;span id="tenMonHocDelete" class="red-text"&gt;[Tên mục muốn xóa, sử dụng ajax để truyền vào]&lt;/span&gt;&lt;/span&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/form&gt;
+                                &lt;div class="group-button-center"&gt;
+                                    &lt;button type="button" class="btn btn-outline-primary" data-dismiss="modal"&gt;Hủy&lt;/button&gt;
+                                    &lt;button type="button" class="btn btn-warning" id="buttonDelete"&gt;Đồng ý&lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            </code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 class="Toggle_Cautruc6 can_toggle">Mẫu 6: Các Tab và Navbar Tab</h2>
+        <div class="MauCauTruc6" id="MauCauTruc6">
+            <p>Một Navtab sẽ được hiển thị như sau</p>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.
+                </div>
+            </div>
+            <p>Code mẫu cho Navtab có thể sao chép như dưới đây</p>
+            <pre><code>
+                &lt;ul class="nav nav-tabs" id="Tab[Tên Tab]" role="tablist"&gt;
+                    &lt;li class="nav-item"&gt;
+                        &lt;a class="nav-link active" id="[Tên ID Tab 1]-tab" data-toggle="tab" href="#[Tên ID Tab 1]" role="tab" aria-controls="[Tên ID Tab 1]" aria-selected="true"&gt;[Tên Tab 1]&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li class="nav-item"&gt;
+                        &lt;a class="nav-link" id="[Tên ID Tab 2]-tab" data-toggle="tab" href="#[Tên ID Tab 2]" role="tab" aria-controls="[Tên ID Tab 2]" aria-selected="false"&gt;[Tên Tab 2]&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li class="nav-item"&gt;
+                        &lt;a class="nav-link" id="[Tên ID Tab 3]-tab" data-toggle="tab" href="#[Tên ID Tab 3]" role="tab" aria-controls="[Tên ID Tab 3]" aria-selected="false"&gt;[Tên Tab 3]&lt;/a&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;div class="tab-content" id="TabContent"&gt;
+                    &lt;div class="tab-pane fade show active" id="[Tên ID Tab 1]" role="tabpanel" aria-labelledby="[Tên ID Tab 1]-tab"&gt;
+                        [Content NavTab 1]
+                    &lt;/div&gt;
+                    &lt;div class="tab-pane fade" id="[Tên ID Tab 2]" role="tabpanel" aria-labelledby="[Tên ID Tab 2]-tab"&gt;
+                        [Content NavTab 2]
+                    &lt;/div&gt;
+                    &lt;div class="tab-pane fade" id="[Tên ID Tab 3]" role="tabpanel" aria-labelledby="[Tên ID Tab 3]-tab"&gt;
+                        [Content NavTab 3]                    
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            </pre></code>
+        </div>
+    </div>
+</div>
+
+@* @section VendorScripts {
+    
+    <script src="~/assets/vendors/highcharts/highcharts.js"></script>
+    <script src="~/assets/vendors/highcharts/exporting.js"></script>
+    <script src="~/assets/vendors/highcharts/export-data.js"></script>
+    <script src="~/assets/vendors/highcharts/accessibility.js"></script>
+}
+ *@
+@section Scripts {
+    <script src="~/PageScripts/admin/Dashboard.js" type="text/javascript"></script>
+    <script>
+        $("#tuNgay, #denNgay").datepicker(
+            {
+                dateFormat: 'dd/mm/yy',
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                prevText: '',
+                nextText: ''
+            })
+
+        $(".Toggle_Cautruc1").on("click", function () {
+            $("#MauCauTruc1").slideToggle();
+        });
+        $(".Toggle_Cautruc2").on("click", function () {
+            $("#MauCauTruc2").slideToggle();
+        });
+        $(".Toggle_Cautruc3").on("click", function () {
+            $("#MauCauTruc3").slideToggle();
+        });
+        $(".Toggle_Cautruc4").on("click", function () {
+            $("#MauCauTruc4").slideToggle();
+        });
+
+        CheckDateMinMax("#tuNgay", "#denNgay")
+
+        $(document).ready(function () {
+            $(".select2").select2({
+                width: "100%"
+            })
+        });
+
+        CheckLengthEach("#TieuDe1", "required")
+
+        var table = $('#tableMau').dataTable({
+            "autoWidth": false,
+            "ordering": false,
+            "bInfo": false,
+            "bLengthChange": false,
+            "filter": false,
+            "paging": false,
+            "language": {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Hiện: _MENU_",
+                "sZeroRecords": "Không có dữ liệu",
+                "sEmptyTable": "Bảng trống",
+                "sInfo": "Hiện dòng _START_ đến _END_ trong tổng _TOTAL_ dòng",
+                "sInfoEmpty": "Hiện dòng 0 đến 0 trong tổng 0 dòng",
+                "sSearch": "Tìm kiếm",
+                "sLoadingRecords": "Đang tải...",
+                paginate: {
+                    next: '<i class="fas fa-chevron-right paging-chevron">',
+                    previous: '<i class="fas fa-chevron-left paging-chevron">'
+                }
+            },
+            "columns": [
+                { "width": "40px", "class": "STT-text text-center" },
+                { "width": "auto", "class": "text-left" },
+                { "width": "200px", "class": "text-center" },
+                { "width": "160px", "class": "text-center" },
+                { "class": "text-center", "width": "150px" }
+            ]
+        });
+
+        $('.MauIcon').on('click', function () {
+            // Lấy mã HTML SVG bên trong phần tử hiện tại
+            var svgHTML = $(this).html();
+            // Tạo một phần tử textarea để sao chép nội dung vào clipboard
+            var $textarea = $('<textarea></textarea>').val(svgHTML);
+            // Thêm textarea vào document
+            $('body').append($textarea);
+            // Chọn nội dung của textarea
+            $textarea.select();
+            // Sao chép nội dung đã chọn vào clipboard
+            document.execCommand('copy');
+            // Xóa phần tử textarea sau khi sao chép
+            $textarea.remove();
+            // Thông báo đã sao chép thành công
+            ThongBao('Mã icon đã được sao chép vào clipboard!', "success");
+        });
+    </script>
+}

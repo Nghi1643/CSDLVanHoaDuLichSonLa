@@ -1,0 +1,390 @@
+﻿
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">@ViewData["Title"]</h2>
+    </div>
+    <ul class="nav nav-tabs" id="hienVatTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="thong-tin-chung-tab" data-toggle="tab" href="#thong-tin-chung" role="tab" aria-controls="thong-tin-chung" aria-selected="true">
+                Thông tin chung
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="thong-tin-da-phuong-tien-tab" data-toggle="tab" href="#thong-tin-da-phuong-tien" role="tab" aria-controls="thong-tin-da-phuong-tien" aria-selected="false">
+                Thông tin đa phương tiện
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="hienVatTabContent">
+        <div class="tab-pane fade show active" id="thong-tin-chung" role="tabpanel" aria-labelledby="thong-tin-chung-tab">
+            <form id="form">
+                <input type="hidden" id="" />
+                <!-- Thông tin cơ bản -->
+                <div class="row">
+                    <!-- Ảnh đại diện -->
+                    <div class="col-lg-auto col-md-6" id="fileAnhDaiDien">
+                        <label for="anhDaiDien" class="form-label">Ảnh đại diện <span class="text-danger">*</span></label>
+                        <div class="group_image_input custom-file">
+                            <input id="urlAnhDaiDien" type="hidden">
+                            <input id="anhDaiDien" type="file" accept="image/*">
+                            <label for="anhDaiDien">
+                                <img id="previewAnhDaiDien" width="125" height="125" src="/assets/images/vector/addImage.png">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg col-md-12">
+                        <div class="row">
+                            <!-- Loại hiện vật -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label for="loaiHienVatID">Loại hiện vật <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="loaiHienVatID">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Mã hiện vật -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label for="maHienVat">Mã hiện vật <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="maHienVat" maxlength="30" placeholder="Nhập mã hiện vật">
+                                </div>
+                            </div>
+
+                            <!-- Chất liệu -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label for="chatLieuID">Chất liệu <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="chatLieuID">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Phương thức tặng/mua -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label for="phuongThucTangMuaID">Phương thức tặng/mua</label>
+                                    <select class="form-control" id="phuongThucTangMuaID">
+                                        <option value="">Chọn</option>
+                                        <option value="1">Mua</option>
+                                        <option value="2">Hiến tặng</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Bảo tàng -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label for="baoTangID">Bảo tàng</label>
+                                    <select class="form-control" id="baoTangID">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Trạng thái -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label for="trangThaiID">Trạng thái</label>
+                                    <select class="form-control" id="trangThaiID">
+                                        <option value="">Chọn</option>
+                                        <option value="1">Tốt</option>
+                                        <option value="2">Trung bình</option>
+                                        <option value="3">Xuống cấp</option>
+                                        <option value="4">Đã trùng tu</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label for="thuTu">Thứ tự</label>
+                                    <input type="number" class="form-control" id="thuTu" min="1" value="1">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <label>Trạng thái <span class="text-danger">*</span></label>
+                                    <div class="form-check-container">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="trangThai" id="trangThaiDuyet" value="1" checked>
+                                            <label class="form-check-label" for="trangThaiDuyet">Sử dụng</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="trangThai" id="trangThaiChuaDuyet" value="0">
+                                            <label class="form-check-label" for="trangThaiChuaDuyet">Không sử dụng</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <input hidden type="text" id="urlAnhDaiDien" />
+                            <label for="anhDaiDien">Ảnh đại diện <span class="text-danger">*</span></label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="anhDaiDien" accept="image/*">
+                                <label class="custom-file-label" for="anhDaiDien">Chọn ảnh...</label>
+                            </div>
+                            
+                            <div class="mt-2">
+                                <img id="previewAnhDaiDien" src="/images/no-image.png" alt="Ảnh đại diện" class="img-thumbnail" style="max-width: 150px;">
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- Phần đa ngữ -->
+                <div class="DaNgu">
+                    <div class="row">
+                        <!-- Ngôn ngữ dịch -->
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="ngonNgu">Ngôn ngữ dịch</label>
+                                <select class="form-control" id="ngonNgu">
+                                    <option value="">Chọn ngôn ngữ</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Tên hiện vật -->
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label for="tenHienVat">Tên hiện vật <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="tenHienVat" placeholder="Nhập tên hiện vật"/>
+                            </div>
+                        </div>
+
+                        <!-- Tên gọi khác -->
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label for="tenGoiKhac">Tên gọi khác</label>
+                                <input type="text" class="form-control" id="tenGoiKhac" placeholder="Nhập tên gọi khác" />
+                            </div>
+                        </div>
+
+                        <!-- Số lượng -->
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label for="soLuong">Số lượng</label>
+                                <input type="text" class="form-control" id="soLuong" placeholder="Nhập số lượng" />
+                            </div>
+                        </div>
+
+                        <!-- Màu sắc -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="mauSac">Màu sắc</label>
+                                <textarea class="form-control" id="mauSac" maxlength="50" rows="1" placeholder="Nhập màu sắc"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Kích thước -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="kichThuoc">Kích thước</label>
+                                <textarea class="form-control" id="kichThuoc" maxlength="300" rows="2" placeholder="Nhập kích thước"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Niên đại -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="nienDai">Niên đại</label>
+                                <textarea class="form-control" id="nienDai" maxlength="100" rows="1" placeholder="Nhập niên đại"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Nguồn gốc -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="nguonGoc">Nguồn gốc</label>
+                                <textarea class="form-control" id="nguonGoc" maxlength="4000" rows="3" placeholder="Nhập nguồn gốc"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Khảo tả -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="khaoTa">Khảo tả</label>
+                                <textarea class="form-control" id="khaoTa" maxlength="4000" rows="3" placeholder="Nhập khảo tả"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Tình trạng sưu tầm -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="tinhTrangSuuTam">Tình trạng sưu tầm</label>
+                                <textarea class="form-control" id="tinhTrangSuuTam" maxlength="500" rows="2" placeholder="Nhập tình trạng sưu tầm"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Hoàn cảnh sưu tầm -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="hoanCanhSuuTam">Hoàn cảnh sưu tầm</label>
+                                <textarea class="form-control" id="hoanCanhSuuTam" maxlength="100" rows="2" placeholder="Nhập hoàn cảnh sưu tầm"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Chủ hiện vật -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="chuHienVat">Chủ hiện vật</label>
+                                <textarea class="form-control" id="chuHienVat" maxlength="500" rows="2" placeholder="Nhập chủ hiện vật"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Người sưu tầm -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="nguoiSuuTam">Người sưu tầm</label>
+                                <textarea class="form-control" id="nguoiSuuTam" maxlength="500" rows="2" placeholder="Nhập người sưu tầm"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="thong-tin-da-phuong-tien" role="tabpanel" aria-labelledby="thong-tin-da-phuong-tien-tab">
+            <!-- Nội dung Thông tin đa phương tiện -->
+            <div class="New_Table table-responsive">
+                <div class="group-corner-button">
+                    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalAddDaPhuongTien">Thêm mới</button>
+                </div>
+                <table class="table row-border" id="dataGridDaPhuongTien" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Stt</th>
+                            <th>Tên file</th>
+                            <th>Tiêu đề</th>
+                            <th>Mô tả</th>
+                            <th>Tác giả</th>
+                            <th>Loại file</th>
+                            <th>Sử dụng</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nút hành động -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="group-button flex-end">
+                    <a asp-controller="DiSanVanHoaVatThe" asp-action="Index" class="btn btn-outline-primary">Huỷ</a>
+                    <button type="button" class="btn btn-primary" id="btn-save">
+                        Lưu
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btn-save-and-close">
+                        Lưu và đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Thêm/Sửa Đa Phương Tiện -->
+    <div class="modal side-modal fade" id="modalAddDaPhuongTien" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalAddTitle">Thêm mới đa phương tiện</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form role="form" id="formAdd">
+                    <div class="modal-body">
+                        <input hidden type="text" id="idDPT" />
+                        <input hidden type="text" id="duongDanFileDPT" />
+
+                        <div class="form-group">
+                            <label class="form-label">Loại media</label>
+                            <div class="div_radiobox">
+                                <div class="groupradiobox">
+                                    <input type="radio" id="loaiMediaAnh" name="loaiMediaDPT" value="1" checked />
+                                    <label for="loaiMediaAnh">Ảnh</label>
+                                </div>
+                                <div class="groupradiobox">
+                                    <input type="radio" id="loaiMediaVideo" name="loaiMediaDPT" value="2" />
+                                    <label for="loaiMediaVideo">Video</label>
+                                </div>
+                                <div class="groupradiobox">
+                                    <input type="radio" id="loaiMediaAudio" name="loaiMediaDPT" value="3" />
+                                    <label for="loaiMediaAudio">Audio</label>
+                                </div>
+                                <div class="groupradiobox">
+                                    <input type="radio" id="loaiMediaFile" name="loaiMediaDPT" value="4" />
+                                    <label for="loaiMediaFile">File</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input id="fileDPT" type="file" />
+                        <label id="showFileEdit"></label>
+                        <span id="deleteFileDPT">Xoá file</span>
+                        <div class="form-group">
+                            <label for="tacGiaDPT" class="form-label">Tác giả</label>
+                            <input type='text' id="tacGiaDPT" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="thuTuDPT" class="form-label">Thứ tự</label>
+                            <input type="number" class="form-control field-input" id="thuTuDPT" placeholder="" autocomplete="off" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Trạng thái</label>
+                            <div class="div_radiobox">
+                                <div class="groupradiobox">
+                                    <input type="radio" id="trangThaiDPT" name="trangThaiDPT" value="1" checked />
+                                    <label for="trangThaiSuDungAdd">Sử dụng</label>
+                                </div>
+                                <div class="groupradiobox">
+                                    <input type="radio" id="trangThaiKhongSuDungAdd" name="trangThaiDPT" value="0" />
+                                    <label for="trangThaiKhongSuDungAdd">Không sử dụng</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="DaNgu">
+                            <div class="form-group">
+                                <label for="ngonNguDPT" class="form-label">Ngôn ngữ<span class="text-red"> *</span></label>
+                                <select id="ngonNguDPT" class="form-control" placeholder="Chọn ngôn ngữ"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tieuDeDPT" class="form-label">Tiêu đề<span class="text-red"> *</span></label>
+                                <input type="text" class="form-control field-input" id="tieuDeDPT" placeholder="Nhập tên ấn phẩm..." autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="moTaDPT" class="form-label">Mô tả</label>
+                                <input type="text" class="form-control field-input" id="moTaDPT" placeholder="Nhập đối tượng..." autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Huỷ bỏ</button>
+                        <span class="btn btn-primary" id="btnSaveDPT">Lưu</span>
+                    </div>
+                </form>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    
+    @await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+</div>
+
+@section Scripts {
+    <script>
+        let hienVatId = '@ViewData["HienVatId"]' || '';
+    </script>
+    <script src="~/PageScripts/admin/VanHoa/ThemMoiChinhSuaHienVatBaoTang.js" asp-append-version="true"></script>
+}

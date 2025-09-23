@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Hệ thống dữ liệu mở tỉnh Thừa Thiên Huế">
+    <meta name="keywords" content="Hệ thống dữ liệu mở tỉnh Thừa Thiên Huế">
+    <title>@ViewData["Title"]</title>
+    <link rel="apple-touch-icon" href="~/assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/ico/favicon.ico">
+    <!-- BEGIN VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="~/assets/vendors/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/vendors/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/selects/select2.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/selects/select2-bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/vendors/FluentSystemIcons/css/FluentSystemIcons.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/vendors/owl-carousel/css/owl.carousel.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/vendors/owl-carousel/css/owl.theme.default.min.css" />
+
+    @RenderSection("VendorCss", required: false)
+    <!-- END VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/_base.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/assets/css/stylebase.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/assets/css/modulestyle.css" asp-append-version="true" />
+</head>
+<body class="page-loading">
+    <div class="page-loaders">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+            </div>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("Common/_HeaderHome.cshtml")
+
+    <main role="main" class="">
+        @RenderBody()
+    </main>
+
+    <a href="#" class="back-to-top"><i class="icon-fluent icon_fluent_chevron_up_filled"></i></a>
+
+    @await Html.PartialAsync("Common/_Footer")
+
+    <script src="~/assets/vendors/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/vendors/popper/popper.min.js" type="text/javascript"></script>
+    <script src="~/assets/vendors/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/datatables.min.js" type="text/javascript"></script>
+    <script src="~/app-assets/vendors/js/select/select2.full.min.js" type="text/javascript"></script>
+    <script src="~/app-assets/vendors/js/select/i18n/vi.js" type="text/javascript"></script>
+    <script src="~/assets/vendors/notify/bootstrap-notify.min.js" type="text/javascript"></script>
+    <script src="~/assets/vendors/owl-carousel/js/owl.carousel.min.js" type="text/javascript"></script>
+    <script src="~/PageScripts/Layout.js" type="text/javascript"></script>
+    <script src="~/app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js" type="text/javascript"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="~/assets/js/app.js" type="text/javascript" asp-append-version="true"></script>
+</body>
+</html>

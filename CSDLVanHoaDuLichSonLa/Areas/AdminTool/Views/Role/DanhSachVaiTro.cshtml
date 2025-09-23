@@ -1,0 +1,232 @@
+﻿@section VendorCss {
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/23.1.6/css/dx.material.blue.light.css" />
+}
+
+@section Css {
+    <style>
+        div.custom-treeview-item{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+}
+
+<div class="box_content">
+    <div class="TieuDe group-button group-title-button">
+        <h2>Quản lý vai trò</h2>
+        @if (ViewBag.PermitedCreate > 0)
+        {
+            <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalAddRole">Thêm mới</button>
+        }
+    </div>
+    <div class="content-body">
+        <section class="checkbox-input-group" id="input-group-checkbox">
+            <div class="New_Table table-responsive">
+                <table class="table row-border" id="dataGrid" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Stt</th>
+                            <th>Vai trò</th>
+                            <th>Mô tả</th>
+                            <th>Lĩnh vực</th>
+                            @if (ViewBag.PermitedEdit > 0 || ViewBag.PermitedDelete > 0)
+                            {
+                                <th>Chức năng</th>
+                            }
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="row match-height d-none">
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Danh sách role</h4>
+                        </div>
+                        <div class="card-content">
+    
+                            <div class="card-body">
+                                <div class="card-body">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Phân quyền <span id="tenRole"></span></h4>
+                        </div>
+    
+                        <div class="card-content row">
+                            <div class="col-md-12" id="show_ThemMoi">
+                            </div>
+                            <div id="simple-treeview" class="col-md-4"></div>
+                            <div id="data-details" class="col-md-8 hidden">
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <input hidden id="menuidEdit" />
+                                        <input hidden id="permissionIdEdit" />
+                                        <label for="permitedEdit" class="form-label">PermitedEdit<span class="text-red"> *</span></label>
+                                        <select type="text" class="form-control" id="permitedEdit">
+                                            <option value="1">True</option>
+                                            <option value="0">False</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label for="permitedDelete" class="form-label">PermitedDelete<span class="text-red"> *</span></label>
+                                        <select type="text" class="form-control" id="permitedDelete">
+                                            <option value="1">True</option>
+                                            <option value="0">False</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label for="permitedApprove" class="form-label">PermitedApprove<span class="text-red"> *</span></label>
+                                        <select type="text" class="form-control" id="permitedApprove">
+                                            <option value="1">True</option>
+                                            <option value="0">False</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="btn-huy" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
+                                    <button type="button" id="btn-sua" class="btn btn-primary">Lưu chỉnh sửa</button>
+                                    <button type="button" id="btn-xoa" class="btn btn-danger">Xóa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="modal side-modal fade" id="modalEdit" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Danh sách phân quyền<span id="tttEdit"></span></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form role="form" id="formEdit">
+                    <div class="modal-body">
+                        <input hidden type="text" id="idEdit" />
+                        <div id="treeViewPermission"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Thêm mới</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    
+    <!-- Modal add Role-->
+    <div class="modal side-modal fade" id="modalAddRole" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span id="titleModalRole"></span></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form role="form" id="formAddVaiTro">
+                    <div class="modal-body">
+                        <input type="hidden" id="vaiTroID" />
+                        <div class="form-group">
+                            <label for="txtTenVaiTro" class="form-label">Tên vai trò<span class="text-red"> *</span></label>
+                            <input type="text" id="txtTenVaiTro" class="form-control field-input" placeholder="Nhập tên vai trò" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtMoTa" class="form-label">Mô tả<span class="text-red"> *</span></label>
+                            <input type="text" id="txtMoTa" class="form-control field-input" placeholder="Nhập mô tả vai trò" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="select_LinhVuc" class="form-label">Lĩnh vực</label>
+                            <select type="text" class="form-control" id="select_LinhVuc">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
+                        <button type="button" class="btn btn-primary" id="btn-save-role">Lưu</button>
+                    </div>
+                </form>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div>
+    
+    <!-- Modal add-->
+    <div class="modal side-modal fade" id="modalAdd" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm mới phân quyền</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form role="form" id="formAdd">
+                    <div class="modal-body">
+                        <input type="hidden" id="menuID" />
+                        <div class="form-group">
+                            <label for="select_Menu_Add" class="form-label">Menu<span class="text-red"> *</span></label>
+                            @* <select id="select_Menu_Add" class="form-control" data-placeholder="Chọn menu">
+                            </select> *@
+                            <div id="dropdownBox"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select_choPhepTao_Add" class="form-label">Cho phép thêm mới<span class="text-red"> *</span></label>
+                            <select id="select_choPhepTao_Add" class="form-control">
+                                <option value="true">True</option>
+                                <option selected value="false">False</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select_choPhepSua_Add" class="form-label">Cho phép sửa<span class="text-red"> *</span></label>
+                            <select id="select_choPhepSua_Add" class="form-control">
+                                <option value="true">True</option>
+                                <option selected value="false">False</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select_choPhepXoa_Add" class="form-label">Cho phép xóa<span class="text-red"> *</span></label>
+                            <select id="select_choPhepXoa_Add" class="form-control">
+                                <option value="true">True</option>
+                                <option selected value="false">False</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select_choPhepDuyet_Add" class="form-label">Cho phép duyệt<span class="text-red"> *</span></label>
+                            <select id="select_choPhepDuyet_Add" class="form-control">
+                                <option value="true">True</option>
+                                <option selected value="false">False</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    <!-- Modal Delete-->
+</div>
+
+
+@await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+@section VendorScripts {
+    <script src="https://cdn3.devexpress.com/jslib/23.1.6/js/dx.all.js"></script>
+}
+
+@section Scripts {
+    <script>
+        const permitedEdit = @ViewBag.PermitedEdit
+        const permitedDelete = @ViewBag.PermitedDelete
+    </script>
+    <script src="~/PageScripts/admin/DanhSachVaiTro.js" asp-append-version="true"></script>
+}

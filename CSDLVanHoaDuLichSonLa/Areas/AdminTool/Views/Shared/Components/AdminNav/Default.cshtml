@@ -1,0 +1,63 @@
+﻿@model CSDLVanHoaDuLichSonLa.Models.AdminNavModel;
+
+<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+    @foreach (var navItem in Model.Items)
+    {
+        @if (navItem.IsAuthorize)
+        {
+            @if (!navItem.ListChilds.Any())
+            {
+                <a asp-area="@navItem.AreaName"
+                    asp-controller="@navItem.ControllerName"
+                    asp-action="@navItem.ActionName">
+                    <i class="@navItem.Icon"></i>
+                    <span class="menu-title">@navItem.Title</span>
+                </a>
+            }
+            else
+            {
+                <li class="navigation-header has-sub"><span class="menu-title">@navItem.Title</span><i class="ft-droplet ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="@navItem.Title"></i></li>
+                @foreach (var subNavItem in navItem.ListChilds)
+                {
+                    @if (subNavItem.IsAuthorize)
+                    {
+                        <li class="nav-item">
+                            @if (!subNavItem.ListChilds.Any())
+                            {
+                                <a asp-area="@subNavItem.AreaName"
+                                    asp-controller="@subNavItem.ControllerName"
+                                    asp-action="@subNavItem.ActionName"
+                                    class="menu-item"
+                                    title="@subNavItem.Title">
+                                    <i class="@subNavItem.Icon"></i>
+                                    <span class="menu-title" title="@subNavItem.Title">@subNavItem.Title</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="menu-item" title="@subNavItem.Title">
+                                    <i class="@subNavItem.Icon"></i>
+                                    <span class="menu-title" title="@subNavItem.Title">@subNavItem.Title</span>
+                                </a>
+                                <ul class="menu-content">
+                                    @foreach (var childNav in subNavItem.ListChilds)
+                                    {
+                                        <li>
+                                            <a asp-area="@childNav.AreaName"
+                                                asp-controller="@childNav.ControllerName"
+                                                asp-action="@childNav.ActionName"
+                                                class="menu-item"
+                                                title="@childNav.Title">
+                                                @childNav.Title
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                }
+            }
+        }
+    }
+</ul>

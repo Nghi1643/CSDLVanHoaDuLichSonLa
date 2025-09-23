@@ -1,0 +1,20 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = ViewBag.IsEdit ? $"Chỉnh sửa sự kiện thể thao" : "Thêm mới sự kiện thể thao";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2>Quản lý sự kiện thể thao</h2>
+    </div>
+    @await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ViewSuKien.cshtml")
+    @await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+</div>
+
+@section Scripts {
+    <script>
+        const isEdit = @Html.Raw(ViewBag.IsEdit ? "true" : "false");
+        const SuKienId = '@ViewBag.SuKienId';
+    </script>
+    <script src="~/PageScripts/admin/SuKienTheThao/Edit.js" asp-append-version="true"></script>
+}

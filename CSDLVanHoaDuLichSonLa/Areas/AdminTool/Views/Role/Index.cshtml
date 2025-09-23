@@ -1,0 +1,148 @@
+﻿@section VendorCss {
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/23.1.6/css/dx.material.blue.light.css" />
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-md-12">
+        <h3 class="content-header-title mb-0">Quản lý vai trò</h3>
+    </div>
+</div>
+
+<div class="content-body">
+    <section class="checkbox-input-group" id="input-group-checkbox">
+        <div class="row match-height">
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Danh sách role</h4>
+                    </div>
+                    <div class="card-content">
+
+                        <div class="card-body">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="table-wrapper">
+                                        <table class="table row-border compact" id="dataGrid">
+                                            <thead>
+                                                <tr>
+                                                    <th>Stt</th>
+                                                    <th>Vai trò</th>
+                                                    <th>Mô tả</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Phân quyền <span id="tenRole"></span></h4>
+                    </div>
+
+                    <div class="card-content row">
+                        <div class="col-md-12" id="show_ThemMoi">
+
+                        </div>
+                        <div id="simple-treeview" class="col-md-4"></div>
+                        <div id="data-details" class="col-md-8 hidden">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <input hidden id="menuidEdit" />
+                                    <input hidden id="permissionIdEdit" />
+                                    <label for="permitedEdit" class="form-label">PermitedEdit<span class="text-red"> *</span></label>
+                                    <select type="text" class="form-control" id="permitedEdit">
+                                        <option value="1">True</option>
+                                        <option value="0">False</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="permitedDelete" class="form-label">PermitedDelete<span class="text-red"> *</span></label>
+                                    <select type="text" class="form-control" id="permitedDelete">
+                                        <option value="1">True</option>
+                                        <option value="0">False</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="permitedApprove" class="form-label">PermitedApprove<span class="text-red"> *</span></label>
+                                    <select type="text" class="form-control" id="permitedApprove">
+                                        <option value="1">True</option>
+                                        <option value="0">False</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btn-huy" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
+                                <button type="button" id="btn-sua" class="btn btn-secondary">Lưu chỉnh sửa</button>
+                                <button type="button" id="btn-xoa" class="btn btn-danger">Xóa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Modal add-->
+<div class="modal fade" id="modalAdd" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm mới phân quyền</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <form role="form" id="formAdd">
+                <div class="modal-body">
+                    <input type="hidden" id="menuID" />
+                    <div class="form-group">
+                        <label for="select_Menu_Add" class="form-label">Menu<span class="text-red"> *</span></label>
+                        <select id="select_Menu_Add" class="form-control" data-placeholder="Chọn menu">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_choPhepSua_Add" class="form-label">Cho phép sửa<span class="text-red"> *</span></label>
+                        <select id="select_choPhepSua_Add" class="form-control">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="select_choPhepXoa_Add" class="form-label">Cho phép xóa<span class="text-red"> *</span></label>
+                        <select id="select_choPhepXoa_Add" class="form-control">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="select_choPhepDuyet_Add" class="form-label">Cho phép duyệt<span class="text-red"> *</span></label>
+                        <select id="select_choPhepDuyet_Add" class="form-control">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-secondary">Lưu</button>
+                </div>
+            </form>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<!-- Modal Delete-->
+@await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+@section VendorScripts {
+    <script src="https://cdn3.devexpress.com/jslib/23.1.6/js/dx.all.js"></script>
+}
+
+@section Scripts {
+    <script src="~/PageScripts/admin/Role.js" asp-append-version="true"></script>
+}

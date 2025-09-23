@@ -1,0 +1,50 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                @{
+                    var line1 = Configuration.GetSection("FooterInfo")["Line1"];
+                    var line2 = Configuration.GetSection("FooterInfo")["Line2"];
+                    var line3 = Configuration.GetSection("FooterInfo")["Line3"];
+                    var line4 = Configuration.GetSection("FooterInfo")["Line4"];
+                    var line5 = Configuration.GetSection("FooterInfo")["Line5"];
+                    var line6 = Configuration.GetSection("FooterInfo")["Line6"];
+                    var line7 = Configuration.GetSection("FooterInfo")["Line7"];
+                }
+                <h4>@Html.Raw(line1)</h4>
+                <p>@Html.Raw(line2)</p>
+                <p>@Html.Raw(line3)</p>
+                <p>@Html.Raw(line4)</p>
+                <p>@Html.Raw(line5)</p>
+                <p>@Html.Raw(line6)</p>
+                <p>@Html.Raw(line7)</p>
+            </div>
+            <div class="col-md-2">
+                <ul>
+                    <li>
+                        <a asp-area="" asp-controller="search" asp-action="Index">Tìm kiếm dữ liệu mở</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="ThongKe" asp-action="Index">Thống kê dữ liệu mở</a>
+                    </li>
+                    @*<li>
+                        <a asp-area="" asp-controller="News" asp-action="DanhSachTinHoatDong">Tin tức</a>
+                    </li>*@
+                    <li>
+                        <a asp-area="" asp-controller="News" asp-action="DanhSachVanBan">Văn bản</a>
+                    </li>
+                    <li>
+                        @*<a asp-area="" asp-controller="News" asp-action="HuongDanSuDung">Hướng dẫn sử dụng</a>*@
+                        <a href="/HDSD/index.html">Hướng dẫn sử dụng</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="News" asp-action="LienHe">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,197 @@
+﻿@section VendorCss {
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/23.1.6/css/dx.material.blue.light.css" />
+}
+<style>
+    div.custom-treeview-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .btn-close {
+        border: none;
+        background-color: transparent;
+        width: 24px;
+        height: 24px;
+        outline: none;
+        padding: 0;
+        margin: 0;
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19.0005 5L5.00049 19M5.00049 5L19.0005 19" stroke="%2399A1AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12 col-md-12 menu-list" id="menu_list">
+        <div class="box_content matching-height">
+            <div class="TieuDe group-button group-title-button">
+                <h2>Quản lý menu</h2>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Thêm mới</button>
+            </div>
+            <div id="simple-treeview" class="menu-treeview"></div>
+            <!-- Modal add-->
+            <div class="modal side-modal fade" id="modalAdd" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Thêm mới menu</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form role="form" id="formAdd">
+                            <div class="modal-body">
+                            @*  <div class="form-group">
+                                    <label for="nhomAdd" class="form-label">Nhóm menu</label>
+                                    <select class="form-control" data-placeholder="Chọn nhóm" id="nhomAdd">
+                                        <option></option>
+                                    </select>
+                                </div> *@
+                                <div class="form-group">
+                                    <label for="parentIdAdd" class="form-label">Menu cấp cha</label>
+                                    <div id="parentIdAdd">
+                                    </div>
+                                @*  <label for="parentIdAdd" class="form-label">Menu cấp cha</label>
+                                    <select class="form-control" data-placeholder="Chọn menu cấp cha" id="parentIdAdd">
+                                    <option></option>
+                                    </select> *@
+                                </div>
+                                <div class="form-group">
+                                    <label for="titleAdd" class="form-label">Tiêu đề<span class="text-red"> *</span></label>
+                                    <input type="text" class="form-control field-input" id="titleAdd" placeholder="Nhập tiêu đề" autocomplete="off" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="areaNameAdd" class="form-label">AreaName</label>
+                                    <input type="text" class="form-control field-input" id="areaNameAdd" placeholder="Nhập AreaName" autocomplete="off" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="controllerNameAdd" class="form-label">ControllerName</label>
+                                    <input type="text" class="form-control field-input" id="controllerNameAdd" placeholder="Nhập ControllerName" autocomplete="off" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="actionNameAdd" class="form-label">ActionName</label>
+                                    <input type="text" class="form-control field-input" id="actionNameAdd" placeholder="Nhập ActionName" autocomplete="off" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtIconAdd" class="form-label">Icon</label>
+                                    <input type="text" class="form-control field-input" id="txtIconAdd" placeholder="Nhập class icon đại diện" autocomplete="off" />
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="form-check-container">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="chkShowAdd" id="chkShowAdd" checked>
+                                            <label class="form-check-label" for="chkShowAdd">Hiển thị</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtDisplayOrderAdd" class="form-label">Thứ tự hiển thị</label>
+                                    <input type="number" class="form-control field-input" id="txtDisplayOrderAdd" placeholder="Nhập ActionName" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                            </div>
+                        </form>
+                    </div><!-- modal-content -->
+                </div><!-- modal-dialog -->
+            </div><!-- modal -->
+            
+            <!-- Modal Delete-->
+            @await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-12 d-none menu-detail" id="menu_detail">
+        <div class="box_content matching-height">
+            <div class="TieuDe group-button group-title-button">
+                <h2 class="card-title" id="tenMenu"></h2>
+                <div class="btn-close"></div>
+            </div>
+            <div id="content_phanquyen"></div>
+        </div>
+    </div>
+</div>
+
+@section VendorScripts {
+    <script src="https://cdn3.devexpress.com/jslib/23.1.6/js/dx.all.js"></script>
+}
+
+@section Scripts {
+    <script>
+        /*
+        $(document).ready(function () {
+            let menu = {}
+            const treeView = $('#simple-treeview').dxTreeView({
+                createChildren(parent) {
+                    const parentId = parent ? parent.itemData.id : '';
+                    return $.ajax({
+                        url: `/api/adminmenuapi/getmenu/${parentId}`,
+                        dataType: 'json',
+                    });
+                },
+                expandNodesRecursive: false,
+                rootValue: '',
+                dataStructure: 'plain',
+                height: 500,
+                keyExpr: "id",
+                displayExpr: "title",
+                parentIdExpr: "parentId",
+                hasItemsExpr: "hasChildren",
+                onItemClick: function (evt) {
+                    const itemDt = evt.itemData;
+                    menu = evt.itemData
+                    console.log(menu)
+                }
+            }).dxTreeView('instance');
+
+            treeView.on("contentReady", evt => {
+                console.log(evt);
+                treeView.expandAll();
+            });
+
+            document.getElementById('abc').addEventListener('click', evt => {
+                treeView.option("dataSource", []);
+            })
+
+            const treeView = $('#simple-treeview').dxTreeView({
+                dataSource: new DevExpress.data.CustomStore({
+                    key: 'id',
+                    load(loadOptions) {
+                        const deferred = $.Deferred();
+                        $.ajax({
+                            url: '/api/adminmenuapi/danhsachmenu',
+                            dataType: 'json',
+                            success(result) {
+                                deferred.resolve(result)
+                            },
+                            error() {
+                                deferred.reject('Data Loading Error');
+                            },
+                            timeout: 5000,
+                        });
+
+                        return deferred.promise();
+                    },
+                }),
+                expandNodesRecursive: false,
+                rootValue: '',
+                dataStructure: 'plain',
+                height: 500,
+                keyExpr: "id",
+                displayExpr: "title",
+                parentIdExpr: "parentId",
+                hasItemsExpr: "hasChildren",
+                onItemClick: function (evt) {
+                    const itemDt = evt.itemData;
+                    menu = evt.itemData
+                    console.log(menu)
+                }
+            }).dxTreeView('instance');
+
+            treeView.on("contentReady", evt => {
+                console.log(evt);
+                treeView.expandAll();
+            });
+            */
+    </script>
+    <script src="~/PageScripts/admin/DanhSachMenu.js" asp-append-version="true"></script>
+}

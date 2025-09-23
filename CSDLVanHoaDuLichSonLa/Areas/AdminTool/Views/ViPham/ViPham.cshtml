@@ -1,0 +1,113 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+	ViewBag.Title = "Quản lý vi phạm và xử lý vi phạm";
+}
+
+<div class="box_content">
+	<div class="TieuDe">
+		<h2>Quản lý vi phạm và xử lý vi phạm</h2>
+	</div>
+	<div class="content-body">
+		<div class="group-filter" style="margin-bottom:10px;">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Tìm kiếm</label>
+						<input type="text" class="form-control search-icon" id="tu-khoa-search" placeholder="Nhập từ khóa..." maxlength="1000" />
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Loại đơn vị</label>
+						<select class="form-control" id="loai-don-vi-search">
+							<option value="-1">Tất cả</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Đơn vị vi phạm</label>
+						<select class="form-control" id="don-vi-vi-pham-search">
+							<option value="-1">Tất cả</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Trạng thái xử lý</label>
+						<select class="form-control" id="trang-thai-xu-ly-search">
+							<option value="-1">Tất cả</option>
+							<option value="true">Duyệt</option>
+							<option value="false">Chưa duyệt</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Thời gian từ ngày</label>
+						<input type="text" class="form-control datepicker" placeholder="dd/mm/yyyy" id="tu-ngay-search" />
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Đến ngày</label>
+						<input type="text" class="form-control datepicker" placeholder="dd/mm/yyyy" id="den-ngay-search" />
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Ngôn ngữ</label>
+						<select class="form-control" id="ngon-ngu-search">
+							<option value="-1">Tất cả</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>&nbsp;</label>
+						<div class="group-button flex-end">
+							<button type="button" class="btn btn-primary" id="tim-kiem">Lọc</button>
+							<button type="button" class="btn btn-outline-primary" id="tat-ca">Tất cả</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="New_Table table-responsive">
+			<div class="group-corner-button">
+				@if (Model.PermitedCreate == 1)
+				{
+					<a href="@Url.Action("Add", "ViPham")" class="btn btn-success">Thêm mới</a>
+				}
+			</div>
+			<table class="table row-border" id="dataGrid" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>STT</th>
+						<th>Nội dung vi phạm</th>
+						<th>Ngày phát hiện</th>
+						<th>Loại đơn vị</th>
+						<th>Hình thức xử lý</th>
+						<th>Văn bản xử lý</th>
+						<th>Trạng thái xử lý</th>
+						@if (Model.PermitedEdit > 0 || Model.PermitedDelete > 0)
+						{
+							<th>Chức năng</th>
+						}
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+
+	<!-- Modal delete-->
+	@await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+</div>
+
+@section Scripts {
+	<script>
+		const permitedEdit = @Model.PermitedEdit;
+		const permitedDelete = @Model.PermitedDelete;
+	</script>
+	<script src="~/PageScripts/admin/ViPham/ViPham.js" asp-append-version="true"></script>
+}

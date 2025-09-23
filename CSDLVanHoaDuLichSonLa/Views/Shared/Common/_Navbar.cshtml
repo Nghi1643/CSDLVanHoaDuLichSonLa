@@ -1,0 +1,82 @@
+﻿<nav class="navbar">
+    <div class="container">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+            <img class="brand-logo" alt="Hệ thống dữ liệu mở tỉnh Thừa Thiên Huế" src="~/assets/images/logo/logo-large.png">
+            <div class="group-brand-text">
+                <h2 class="brand-text">Hệ thống dữ liệu mở</h2>
+                <h3 class="brand-text-second">Tỉnh Thừa Thiên Huế</h3>
+            </div>
+        </a>
+        <div class="site-navigation position-relative text-right d-none d-xl-block">
+            <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                </li>
+                <li class="nav-item has-children">
+                    <a class="nav-link">Dữ liệu mở</a>
+                    <ul class="dropdown arrow-top">
+                        <li>
+							<a asp-area="" asp-controller="ThongKe" asp-action="Index">Thống kê dữ liệu mở</a>
+                        </li>
+                        <li>
+                            <a href="/search">Tìm kiếm dữ liệu</a>
+                            @* <a asp-area="" asp-controller="Search" asp-action="Index">Tìm kiếm dữ liệu</a> *@
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" asp-area="" asp-controller="News" asp-action="DanhSachVanBan">Văn bản</a>
+                   
+                </li>
+              <!--<li class="nav-item has-children">
+                    <a class="nav-link">Tin tức</a>
+                    <ul class="dropdown arrow-top">
+                        <li>
+                            <a asp-area="" asp-controller="News" asp-action="DanhSachTinHoatDong">Tin hoạt động</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="News" asp-action="DanhSachVanBan">Văn bản</a>
+                        </li>
+                    </ul>
+                  </li>-->
+                <li class="nav-item has-children">
+                    <a class="nav-link">Tiện ích</a>
+                    <ul class="dropdown arrow-top">
+                        <li>
+                            <a asp-area="" asp-controller="Feedback" asp-action="YKienPhanHoi">Ý kiến phản hồi</a>
+                        </li>
+                        <li>
+                            @*<a asp-area="" asp-controller="News" asp-action="HuongDanSuDung">Hướng dẫn sử dụng</a>*@
+                            <a href="/HDSD/index.html">Hướng dẫn sử dụng</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="News" asp-action="LienHe">Liên hệ</a>
+                        </li>
+                    </ul>
+                </li>
+                @if (User.Identity.IsAuthenticated == true) {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="AdminTool" asp-action="Index">Quản trị</a>
+                    </li>
+                } else {
+                    <li class="nav-item nav-item-login">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Login">Đăng nhập</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="site-mobile-menu">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close js-menu-toggle ">
+                    <i class="icon-fluent icon_fluent_dismiss_filled"></i>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div>
+        <div class="d-inline-block d-xl-none ml-md-0 ml-auto py-1">
+            <span class="site-menu-toggle js-menu-toggle text-white active">
+                <i class="icon-fluent icon_fluent_line_horizontal_3_filled"></i>
+            </span>
+        </div>
+    </div>
+</nav>

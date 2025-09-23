@@ -1,0 +1,140 @@
+﻿<div class="modal right fade" id="modalDatasetDetail" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 100%;width: 100%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="titleModal"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <form role="form" class="formDetail">
+                <div class="modal-body">
+                    <div class="form-wrapper">
+                        <input type="hidden" id="idData" value=""/>
+                        <div class="form-group">
+                            <label class="form-label">Tiêu đề:</label>
+                            <div class="form-group">
+                                <span id="titleDataset" class="text-blue-light text-medium"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Chủ đề:</label>
+                                <div class="form-group">
+                                    <span id="catalogDataset" class="left-align text-medium"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Tổ chức cung cấp:</label>
+                                <div class="form-group">
+                                    <span id="publisherDataset" class="left-align text-medium"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Giấy phép:</label>
+                                <div class="form-group">
+                                    <span id="licenseDataset" class="left-align text-medium"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Mã định danh:</label>
+                                <div class="form-group">
+                                    <span id="idDataset" class="left-align text-medium"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Mô tả:</label>
+                            <div class="form-group">
+                                <span id="descDataset" class="left-align text-medium"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Không gian địa lý:</label>
+                            <div id="geoDataset" class="form-group"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Từ khóa:</label>
+                            <div id="keyWordDataset" class="form-group"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Tần suất cập nhật:</label>
+                                <div class="form-group">
+                                    <span id="frequencyDataset" class="left-align text-medium"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Mức độ truy cập:</label>
+                                <div id="accessLevelDataset" class="form-group"></div>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Đánh giá hạng sao:</label>
+                                <div class="form-group text-medium">
+                                    <span id="rateDataset" class="text-green">0</span> <i class="icon-fluent icon_fluent_star_filled text-green"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">URL:</label>
+                            <div id="urlDataset" class="form-group"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Ngày phát hành:</label>
+                                <div class="form-group">
+                                    <span id="issuedDataset" class="left-align text-medium"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Ngày tạo lập:</label>
+                                <div class="form-group">
+                                    <span id="createdDataset" class="left-align text-medium"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Người tạo lập:</label>
+                                <div class="form-group">
+                                    <span id="createdUserDataset" class="left-align text-medium"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="form-label">Ngày cập nhật:</label>
+                                <div class="form-group">
+                                    <span id="modifiedDataset" class="left-align text-medium"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="distributionContain" class="form-group">
+                            <div class="content-header row pl-0">
+                                <div class="content-header-left col-md-6">
+                                    <h3 class="content-header-title mb-0">Danh sách các bản phân phối</h3>
+                                </div>
+                                <div class="text-right col-md-6">
+                                    <span class="mb-0">Tổng: <span id="totalDistribution" class="content-header-title mb-0"></span> bản phân phối</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="table-wrapper">
+                                        <table class="table row-border compact" id="dataDistributionGrid">
+                                            <thead>
+                                                <tr>
+                                                    <th>Stt</th>
+                                                    <th>Tiêu đề</th>
+                                                    @*<th>Giấy phép</th>
+                                                    <th>Mô tả</th>*@
+                                                    <th>Ngày phát hành</th>
+                                                    <th>Loại tệp</th>
+                                                    <th>Tải về</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

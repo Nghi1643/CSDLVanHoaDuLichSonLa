@@ -1,0 +1,123 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = "Chi tiết sự kiện thể thao";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">Chi tiết sự kiện thể thao</h2>
+    </div>
+    
+    <div class="content-body">
+        <input type="hidden" id="suKienId" value="@ViewBag.suKienId" />
+        
+        <!-- Thông tin cơ bản -->
+        <div class="row">
+            <div class="col-lg-auto col-md-6">
+                <div class="form-group">
+                    <label>Ảnh đại diện:</label>
+                    <img src="" alt="" id="anhDaiDien" class="img-fluid img-thumbnail" width="150" height="150"/> 
+                </div>
+            </div>
+            <div class="col-lg col-md-12">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group form-info">
+                            <label>Tên sự kiện:</label>
+                            <span id="tensuKien" class="text-bold">Báo Nhân Dân</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Ngày bắt đầu</label>
+                            <span id="ngayBatDau">01/01/2023</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Ngày kết thúc</label>
+                            <span id="ngayKetThuc">31/12/2023</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Trạng thái</label>
+                            <span id="trangThai">Đã duyệt</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group form-info">
+                            <label>Cấp độ sự kiện</label>
+                            <span id="capDoSuKien">Cấp Quốc gia</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Trạng thái sự kiện</label>
+                            <span id="trangThaiSuKien">Đang diễn ra</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Thứ tự</label>
+                            <span id="thuTu">1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group form-info">
+                    <label>Kết quả sự kiện</label>
+                    <span id="ketQuaSuKien"></span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Mô tả sự kiện</label>
+                    <span id="moTaSuKien"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin người tạo/cập nhật -->
+        <div class="sub-text">
+            <ul class="list-updater">
+                <li>Người tạo: <span id="nguoiTao">-</span></li>
+                <li>Ngày tạo: <span id="ngayTao">-</span></li>
+                <li>Người cập nhật: <span id="nguoiCapNhat">-</span></li>
+                <li>Ngày cập nhật:<span id="ngayCapNhat">-</span></li>
+            </ul>
+        </div>
+
+        <!-- Bảng địa điểm -->
+        <div class="New_Table table-responsive">
+            <div class="group-corner-button with-title">
+                <h4>Danh sách địa điểm</h4>
+            </div>
+            <table class="table row-border" id="dataGridDiaDiem" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên địa điểm</th>
+                        <th>Địa chỉ</th>
+                        <th>Tọa độ</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <!-- Bảng đa phương tiện -->
+        <div class="New_Table table-responsive">
+            <div class="group-corner-button with-title">
+                <h4>Danh sách đa phương tiện</h4>
+            </div>
+            <table class="table row-border" id="dataGridDaPhuongTien" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tiêu đề</th>
+                        <th>Loại Media</th>
+                        <th>Tác giả</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const suKienId = '@ViewBag.suKienId';
+    </script>
+    <script src="~/PageScripts/admin/SuKienTheThao/Details.js" asp-append-version="true"></script>
+}

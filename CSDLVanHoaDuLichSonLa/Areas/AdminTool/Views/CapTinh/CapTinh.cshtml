@@ -1,0 +1,155 @@
+﻿@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2>Quản lý danh mục cấp tỉnh</h2>
+    </div>
+    <div class="content-body">
+        <div class="New_Table table-reponsive">
+            @if (Model.PermitedCreate == 1)
+            {
+                <div class="group-button space-between">
+                    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Thêm mới</button>
+                </div>
+            }
+            <table class="table row-border" id="dataGrid" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã số</th>
+                        <th>Đơn vị hành chính cấp tỉnh</th>
+                        <th>Thứ tự</th>
+                        <th>Sử dụng</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal Add -->
+    <div class="modal side-modal fade" id="modalAdd" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm mới đơn vị hành chính cấp tỉnh</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form role="form" id="formAdd">
+                    <div class="modal-body">
+                        <!-- Nhóm 1: Mã số, Thứ tự, Trạng thái -->
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="maSoAdd" class="form-label">Mã số<span class="text-red"> *</span></label>
+                                <input type="text" class="form-control field-input" id="maSoAdd" placeholder="Nhập mã số" autocomplete="off">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="thuTuAdd" class="form-label">Thứ tự</label>
+                                <input type="number" class="form-control field-input" id="thuTuAdd" placeholder="Nhập thứ tự" autocomplete="off" min="1" value="1">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label class="form-label">Trạng thái<span class="text-red"> *</span></label>
+                                <div class="div_radiobox">
+                                    <div class="groupradiobox">
+                                        <input type="radio" id="trangThaiActive" name="trangThaiAdd" value="1" checked>
+                                        <label for="trangThaiActive">Sử dụng</label>
+                                    </div>
+                                    <div class="groupradiobox">
+                                        <input type="radio" id="trangThaiInactive" name="trangThaiAdd" value="0">
+                                        <label for="trangThaiInactive">Không sử dụng</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nhóm 2: Đa ngữ -->
+                        <div class="DaNgu">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label for="ngonNguAdd" class="form-label">Ngôn ngữ dịch</label>
+                                    <select class="form-control" id="ngonNguAdd" name="ngonNguAdd" placeholder="Chọn ngôn ngữ..."></select>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label for="tenDonViAdd" class="form-label">Tên đơn vị hành chính cấp tỉnh<span class="text-red"> *</span></label>
+                                    <input type="text" class="form-control field-input" id="tenDonViAdd" placeholder="Nhập tên đơn vị hành chính cấp tỉnh" autocomplete="off" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Hủy bỏ</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div>
+
+    <!-- Modal Edit -->
+    <div class="modal side-modal fade" id="modalEdit" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Chỉnh sửa đơn vị hành chính cấp tỉnh</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form role="form" id="formEdit">
+                    <input type="hidden" id="idCapTinhEdit" value="" />
+                    <div class="modal-body">
+                        <!-- Nhóm 1: Mã số, Thứ tự, Trạng thái -->
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="maSoEdit" class="form-label">Mã số<span class="text-red"> *</span></label>
+                                <input type="text" class="form-control field-input" id="maSoEdit" placeholder="Nhập mã số" autocomplete="off">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="thuTuEdit" class="form-label">Thứ tự</label>
+                                <input type="number" class="form-control field-input" id="thuTuEdit" placeholder="Nhập thứ tự" autocomplete="off" min="1" value="1">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label class="form-label">Trạng thái<span class="text-red"> *</span></label>
+                                <div class="div_radiobox">
+                                    <div class="groupradiobox">
+                                        <input type="radio" id="trangThaiActiveEdit" name="trangThaiEdit" value="1" checked>
+                                        <label for="trangThaiActiveEdit">Sử dụng</label>
+                                    </div>
+                                    <div class="groupradiobox">
+                                        <input type="radio" id="trangThaiInactiveEdit" name="trangThaiEdit" value="0">
+                                        <label for="trangThaiInactiveEdit">Không sử dụng</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nhóm 2: Đa ngữ -->
+                        <div class="DaNgu">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label for="ngonNguEdit" class="form-label">Ngôn ngữ dịch</label>
+                                    <select class="form-control" id="ngonNguEdit" name="ngonNguEdit">
+                                        <option value="">Chọn ngôn ngữ...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label for="tenDonViEdit" class="form-label">Tên đơn vị hành chính cấp tỉnh<span class="text-red"> *</span></label>
+                                    <input type="text" class="form-control field-input" id="tenDonViEdit" placeholder="Nhập tên đơn vị hành chính cấp tỉnh" autocomplete="off" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Hủy bỏ</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </div>
+                </form>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div>
+    @await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+</div>
+
+@section Scripts {
+    <script>
+        const permitedEdit = @Model.PermitedEdit
+        const permitedDelete = @Model.PermitedDelete
+    </script>
+    <script src="~/PageScripts/admin/DanhMuc/CapTinh.js" asp-append-version="true"></script>
+}

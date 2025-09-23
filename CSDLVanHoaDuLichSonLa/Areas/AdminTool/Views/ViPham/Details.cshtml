@@ -1,0 +1,90 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = "Xử lý vi phạm";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">Xử lý vi phạm</h2>
+    </div>
+    <div class="content-body">
+        <input type="hidden" id="viPhamId" value="@ViewBag.ViPhamId" />
+        <!-- Thông tin cơ bản -->
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Hình thức xử lý:</label>
+                    <span id="hinhThucXuLy" class="text-bold">Cảnh cáo</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Đơn vị vi phạm:</label>
+                    <span id="donViViPham" class="text-bold">Nhà xuất bản Kim Đồng</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Loại đơn vị:</label>
+                    <span id="loaiDonVi">Tổ chức</span>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Ngày phát hiện:</label>
+                    <span id="ngayPhatHien" class="text-bold">02/07/2025</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Thứ tự:</label>
+                    <span id="thuTu">1</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Trạng thái:</label>
+                    <span id="trangThai">-</span>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group form-info">
+                    <label>Mô tả:</label>
+                    <span id="moTa">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non porta mi, a cursus nisl. Donec nec nulla sem. Sed porttitor ipsum ac turpis consequat, quis volutpat orci luctus. Nam augue lorem, scelerisque nec porta ac, maximus eu justo. Duis faucibus facilisis nulla, et scelerisque arcu venenatis ac. Suspendisse interdum nisl auctor, iaculis odio eu, facilisis nunc. Duis efficitur neque quis elit venenatis, cursus pellentesque tellus auctor. Aenean nec aliquam sapien, eu malesuada nisi. Aliquam pellentesque ullamcorper mi, ac feugiat magna malesuada eu. Curabitur aliquet lacinia porttitor. Cras nisi erat, blandit vitae placerat a, porttitor eu sem. Donec sit amet nibh eget justo bibendum rutrum non non nunc. Quisque varius, mauris eu vehicula volutpat, felis diam condimentum odio, sed aliquet erat quam a diam. Donec nec felis non neque aliquam auctor a eu nulla.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin người tạo/cập nhật -->
+        <div class="sub-text">
+            <ul class="list-updater">
+                <li>Người tạo: <span id="nguoiTao">Nguyễn Văn A</span></li>
+                <li>Ngày tạo: <span id="ngayTao">12/06/2025 08:00:12</span></li>
+                <li>Người cập nhật: <span id="nguoiCapNhat">Nguyễn Văn A</span></li>
+                <li>Ngày cập nhật: <span id="ngayCapNhat">12/06/2025 08:00:12</span></li>
+            </ul>
+        </div>
+
+        <!-- Bảng văn bản xử lý -->
+        <div class="New_Table table-responsive">
+            <div class="group-corner-button with-title">
+                <h4>Danh sách văn bản</h4>
+            </div>
+            <table class="table row-border" id="tableVanBan" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Số ký hiệu</th>
+                        <th>Trích yếu</th>
+                        <th>Loại đối tượng</th>
+                        <th>Cơ quan ban hành</th>
+                        <th>Ngày ban hành</th>
+                        <th>Ngày hiệu lực</th>
+                        <th>Tệp đính kèm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const viPhamId = '@ViewBag.ViPhamId';
+    </script>
+    <script src="~/PageScripts/admin/ViPham/Details.js" asp-append-version="true"></script>
+}

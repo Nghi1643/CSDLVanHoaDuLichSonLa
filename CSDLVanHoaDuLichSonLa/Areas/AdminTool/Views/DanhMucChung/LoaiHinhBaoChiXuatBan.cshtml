@@ -1,0 +1,33 @@
+﻿@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    Layout = "_LayoutDanhMuc";
+    ViewBag.Title = "Quản lý loại hình báo chí xuất bản";
+}
+
+<div class="New_Table table-responsive">
+    <table class="table row-border" id="dataGrid" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã số</th>
+                <th>Tên loại hình báo chí xuất bản</th>
+                <th>Mô tả</th>
+                <th>Thứ tự</th>
+                <th>Sử dụng</th>
+                @if (Model.PermitedEdit > 0 || Model.PermitedDelete > 0)
+                {
+                    <th>Chức năng</th>
+                }
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        const permitedEdit = @Model.PermitedEdit
+        const permitedDelete = @Model.PermitedDelete
+        const loaiDanhMuc = '@ViewBag.LoaiDanhMuc'
+    </script>
+    <script src="/PageScripts/admin/DanhMuc/LoaiHinhBaoChiXuatBan.js" asp-append-version="true"></script>
+}

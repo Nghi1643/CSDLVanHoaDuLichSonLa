@@ -1,0 +1,29 @@
+﻿<!-- Modal Delete-->
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalLabelDelete" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form role="form" id="formDelete">
+                    <input type="hidden" id="idDelete" />
+                    <input type="hidden" id="idTypeDelete" />
+                    <div class="Delete_info">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="80" height="80" rx="16" fill="#FCE7E5"></rect>
+                            <path d="M60 22.667L58.3475 49.4006C57.9251 56.2307 57.7141 59.6459 56.0021 62.1014C55.1555 63.3153 54.0659 64.3398 52.8019 65.1097C50.2456 66.667 46.824 66.667 39.9805 66.667C33.1283 66.667 29.7021 66.667 27.1441 65.1067C25.8795 64.3355 24.7893 63.3091 23.9431 62.0931C22.2317 59.6339 22.0252 56.2139 21.6123 49.3742L20 22.667" stroke="#E31400" stroke-width="4" stroke-linecap="round"></path>
+                            <path d="M16 22.6663H64M50.8152 22.6663L48.9949 18.911C47.7856 16.4164 47.1808 15.1691 46.1379 14.3912C45.9067 14.2186 45.6616 14.0651 45.4053 13.9322C44.2504 13.333 42.8643 13.333 40.092 13.333C37.2501 13.333 35.8293 13.333 34.6551 13.9573C34.3949 14.0957 34.1466 14.2554 33.9128 14.4348C32.8577 15.2442 32.2683 16.5371 31.0896 19.123L29.4745 22.6663" stroke="#E31400" stroke-width="4" stroke-linecap="round"></path>
+                            <path d="M33.3335 52V36" stroke="#E31400" stroke-width="4" stroke-linecap="round"></path>
+                            <path d="M46.6665 52V36" stroke="#E31400" stroke-width="4" stroke-linecap="round"></path>
+                        </svg>
+                        <div class="warning">
+                            <span>Bạn có chắc chắn muốn xóa </span><span id="nameDelete" class="red-text"></span></span>
+                        </div>
+                    </div>
+                    <div class="group-button-center">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-warning" id="buttonDelete">Đồng ý</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

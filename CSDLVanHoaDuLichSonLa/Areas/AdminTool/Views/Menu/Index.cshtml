@@ -1,0 +1,164 @@
+﻿@section VendorCss {
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/23.1.6/css/dx.material.blue.light.css" />
+}
+<style>
+    div.custom-treeview-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .btn-close {
+        border: none;
+        background-color: transparent;
+        width: 24px;
+        height: 24px;
+        outline: none;
+        padding: 0;
+        margin: 0;
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19.0005 5L5.00049 19M5.00049 5L19.0005 19" stroke="%2399A1AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 menu-list" id="menu_list">
+        <div class="box_content matching-height">
+            <div class="TieuDe group-button group-title-button">
+                <h2>Phân quyền menu</h2>
+            </div>
+            <div id="simple-treeview" class="menu-treeview"></div>
+            <!-- Modal add-->
+            <div class="modal side-modal fade" id="modalAdd" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Thêm mới phân quyền</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <form role="form" id="formAdd">
+                            <div class="modal-body">
+                                <input type="hidden" id="menuID"/>
+                                <div class="form-group">
+                                    <label for="select_vaiTro_Add" class="form-label">Vai trò<span class="text-red"> *</span></label>
+                                    <select id="select_vaiTro_Add" class="form-control" data-placeholder="Chọn vai trò">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="select_choPhepTao_Add" class="form-label">Cho phép thêm mới<span class="text-red"> *</span></label>
+                                    <select id="select_choPhepTao_Add" class="form-control">
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="select_choPhepSua_Add" class="form-label">Cho phép sửa<span class="text-red"> *</span></label>
+                                    <select id="select_choPhepSua_Add" class="form-control">
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="select_choPhepXoa_Add" class="form-label">Cho phép xóa<span class="text-red"> *</span></label>
+                                    <select id="select_choPhepXoa_Add" class="form-control">
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="select_choPhepDuyet_Add" class="form-label">Cho phép duyệt<span class="text-red"> *</span></label>
+                                    <select id="select_choPhepDuyet_Add" class="form-control">
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                            </div>
+                        </form>
+                    </div><!-- modal-content -->
+                </div><!-- modal-dialog -->
+            </div><!-- modal -->
+
+            <!-- Modal edit-->
+            <div class="modal side-modal fade" id="modalEdit" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Cập nhật người dùng <span id="ttcEdit"></span></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <form role="form" id="formEdit">
+                            <div class="modal-body">
+                                <input type="hidden" id="menuIDEdit" />
+                                <input type="hidden" id="idEdit" />
+                                <div class="form-group">
+                                    <label for="select_vaiTro_Edit" class="form-label">Vai trò<span class="text-red"> *</span></label>
+                                    <select id="select_vaiTro_Edit" class="form-control" data-placeholder="Chọn vai trò">
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="select_choPhepTao_Edit" class="form-label">Cho phép thêm mới<span class="text-red"> *</span></label>
+                                    <select id="select_choPhepTao_Edit" class="form-control">
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="select_choPhepSua_Edit" class="form-label">Cho phép sửa<span class="text-red"> *</span></label>
+                                    <select id="select_choPhepSua_Edit" class="form-control">
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="select_choPhepXoa_Edit" class="form-label">Cho phép xóa<span class="text-red"> *</span></label>
+                                    <select id="select_choPhepXoa_Edit" class="form-control">
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="select_choPhepDuyet_Edit" class="form-label">Cho phép duyệt<span class="text-red"> *</span></label>
+                                    <select id="select_choPhepDuyet_Edit" class="form-control">
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Hủy bỏ</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                            </div>
+                        </form>
+                    </div><!-- modal-content -->
+                </div><!-- modal-dialog -->
+            </div><!-- modal -->
+
+            <!-- Modal Delete-->
+            @await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-12 d-none menu-detail" id="menu_detail">
+        <div class="box_content matching-height">
+            <div id="content_phanquyen"></div>
+        </div>
+    </div>
+</div>
+
+@section VendorScripts {
+    <script src="https://cdn3.devexpress.com/jslib/23.1.6/js/dx.all.js"></script>
+}
+
+@section Scripts {
+    <script src="~/PageScripts/admin/Menu.js" asp-append-version="true"></script>
+}

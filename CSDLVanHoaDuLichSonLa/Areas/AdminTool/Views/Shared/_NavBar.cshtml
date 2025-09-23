@@ -1,0 +1,32 @@
+﻿<nav class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-dark navbar-custom">
+    <div class="navbar-wrapper">
+        <div class="navbar-header">
+            <a class="navbar-brand" asp-area="AdminTool" asp-controller="Home" asp-action="Index">
+                <img class="brand-logo" alt="Phần mềm quản lý cơ sở dữ liệu Văn hóa, Thể thao và Du lịch tỉnh Sơn La" src="~/assets/images/logo/logo.png">
+            </a>
+        </div>
+        <div class="navbar-container content">
+            <div class="collapse navbar-collapse" id="navbar-mobile">
+                <ul class="nav navbar-nav mr-auto float-left">
+                    <li class="nav-item d-none d-md-block">
+                        <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a>
+                    </li>
+                    <li class="nav-item d-none d-md-block">
+                        <span class="nav-title">
+                            <span class="toplogocontent">Cơ sở dữ liệu Văn hóa, Thể thao và Du lịch</span>
+                            <span class="bottomlogocontent">Tỉnh Sơn La</span>
+                        </span>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav float-right have-border">
+                    <li class="nav-item">
+                        <input type="text" class="nav-search search-icon" id="navSearch" placeholder="Nhập từ khóa tìm kiếm...">
+                    </li>
+                    <li class="dropdown dropdown-user nav-item">
+                        @await Component.InvokeAsync("DropdownUser")
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

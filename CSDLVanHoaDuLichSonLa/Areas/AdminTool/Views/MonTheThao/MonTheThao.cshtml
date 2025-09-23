@@ -1,0 +1,232 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+	ViewBag.Title = "Quản lý môn thể thao";
+}
+
+<div class="box_content">
+	<div class="TieuDe">
+		<h2>Quản lý môn thể thao</h2>
+	</div>
+	<div class="content-body">
+		<div class="group-filter" style="margin-bottom:10px;">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Tìm kiếm</label>
+						<input type="text" class="form-control search-icon" id="tu-khoa-search" placeholder="Nhập từ khóa..." maxlength="1000" />
+					</div>
+				</div>
+                <div class="col-md-3">
+					<div class="form-group">
+						<label>Cách thi đấu</label>
+						<select class="form-control" id="cach-thi-dau-search">
+							<option value="-1">Tất cả</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Ngôn ngữ</label>
+						<select class="form-control" id="ngon-ngu-search">
+							<option value="-1">Tất cả</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>Trạng thái</label>
+						<select class="form-control" id="trang-thai-search">
+							<option value="-1">Tất cả</option>
+							<option value="1">Hoạt động</option>
+							<option value="0">Không hoạt động</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="group-button flex-end">
+							<button type="button" class="btn btn-primary" id="tim-kiem">Lọc</button>
+							<button type="button" class="btn btn-outline-primary" id="tat-ca">Tất cả</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="New_Table table-responsive">
+			<div class="group-corner-button">
+				@if (Model.PermitedCreate == 1)
+				{
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Thêm mới</button>
+				}
+			</div>
+			<table class="table row-border" id="dataGrid" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>STT</th>
+						<th>Mã định danh</th>
+                        <th>Tên môn thể thao</th>
+						<th>Cách thi đấu</th>
+						<th>Tệp kèm theo</th>
+						<th>Trạng thái</th>
+						@if (Model.PermitedEdit > 0 || Model.PermitedDelete > 0)
+						{
+							<th>Chức năng</th>
+						}
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+
+    <div class="modal side-modal fade" id="modalAdd" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalAddTitle">Thêm mới môn thể thao</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form role="form" id="formAdd">
+                    <div class="modal-body">
+                        <input type="hidden" id="monTheThaoIDAdd" />
+                        <div class="form-group">
+                            <label for="maDinhDanhAdd" class="form-label">Mã định danh<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control" id="maDinhDanhAdd" placeholder="Nhập mã định danh..." />
+                        </div>
+                        <div class="form-group">
+                            <label for="tenAdd" class="form-label">Tên môn thể thao<span class="text-red"> *</span></label>
+                            <input type="text" class="form-control" id="tenAdd" placeholder="Nhập tên môn thể thao..." />
+                        </div>
+                        <div class="form-group">
+                            <label for="cachThiDauIDAdd" class="form-label">Cách thi đấu<span class="text-red"> *</span></label>
+                            <select class="form-control" id="cachThiDauIDAdd">
+                                <option value="">Chọn cách thi đấu</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tepKemTheoAdd" class="form-label">Tệp kèm theo</label>
+                            <input type="file" id="tepKemTheoAdd" />
+                            <input type="hidden" id="tepKemTheoDetail" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Trạng thái</label>
+                            <div class="div_radiobox">
+                                <div class="groupradiobox">
+                                    <input type="radio" id="trangThaiSuDungAdd" name="trangThaiAdd" value="1" checked />
+                                    <label for="trangThaiSuDungAdd">Đã công bố</label>
+                                </div>
+                                <div class="groupradiobox">
+                                    <input type="radio" id="trangThaiKhongSuDungAdd" name="trangThaiAdd" value="0" />
+                                    <label for="trangThaiKhongSuDungAdd">Chưa công bố</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="DaNgu">
+                            <div class="form-group">
+                                <label for="maNgonNguAdd" class="form-label">Ngôn ngữ<span class="text-red"> *</span></label>
+                                <select id="maNgonNguAdd" class="form-control"></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tenMonAdd" class="form-label">Tên môn<span class="text-red"> *</span></label>
+                                <input type="text" class="form-control" id="tenMonAdd" placeholder="Nhập tên môn..." />
+                            </div>
+                            <div class="form-group">
+                                <label for="luatChoiAdd" class="form-label">Luật chơi</label>
+                                <textarea class="form-control" id="luatChoiAdd" rows="2" placeholder="Nhập luật chơi..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="moTaAdd" class="form-label">Mô tả</label>
+                                <textarea class="form-control" id="moTaAdd" rows="2" placeholder="Nhập mô tả..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Huỷ bỏ</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+    <!-- Modal delete-->
+    @await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+
+    <div class="modal side-modal fade" id="modalDetail" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalDetailTitle">Chi tiết môn thể thao</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Thông tin cơ bản -->
+                    <div class="row">
+                        <!-- Cột trái -->
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group form-info">
+                                <label>Mã định danh: </label>
+                                <span id="maDinhDanhDetail"></span>
+                            </div>
+                            <div class="form-group form-info">
+                                <label>Tên môn thể thao: </label>
+                                <span id="tenDetail"></span>
+                            </div>
+                            <div class="form-group form-info">
+                                <label>Cách thi đấu: </label>
+                                <span id="cachThiDauIDDetail"></span>
+                            </div>
+                        </div>
+                        <!-- Cột phải -->
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group form-info">
+                                <label>Ngôn ngữ: </label>
+                                <span id="maNgonNguDetail"></span>
+                            </div>
+                            <div class="form-group form-info">
+                                <label>Tên môn: </label>
+                                <span id="tenMonDetail"></span>
+                            </div>
+                            <div class="form-group form-info">
+                                <label>Trạng thái: </label>
+                                <span id="trangThaiIDDetail"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group form-info">
+                                <label>Luật chơi: </label>
+                                <span id="luatChoiDetail"></span>
+                            </div>
+                            <div class="form-group form-info">
+                                <label>Mô tả: </label>
+                                <span id="moTaDetail"></span>
+                            </div>
+                            <div class="form-group form-info">
+                                <label>Tệp kèm theo: </label>
+                                <span id="tepKemTheoDetail"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <!-- Thông tin người tạo/cập nhật -->
+                            <div class="sub-text">
+                                <ul class="list-updater">
+                                    <li>Người cập nhật: <span id="nguoiCapNhatDetail">-</span></li>
+                                    <li>Ngày cập nhật: <span id="ngayCapNhatDetail">-</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
+</div>
+
+@section Scripts {
+	<script>
+		const permitedEdit = @Model.PermitedEdit;
+		const permitedDelete = @Model.PermitedDelete;
+	</script>
+	<script src="~/PageScripts/admin/TheThao/MonTheThao/MonTheThao.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,126 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = "Chi tiết cơ quan báo chí";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">Chi tiết cơ quan báo chí</h2>
+    </div>
+    
+    <div class="content-body">
+        <input type="hidden" id="coQuanId" value="@ViewBag.CoQuanId" />
+        <!-- Thông tin cơ bản -->
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Lĩnh vực xuất bản:</label>
+                    <span id="loaiHinh">Báo Điện tử</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Cơ quan chủ quản:</label>
+                    <span id="coQuanChuQuan" class="text-bold">Bộ Văn hóa Thể thao</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Lĩnh vực xuất bản:</label>
+                    <span id="phamViHoatDong">Toàn quốc</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Ngày thành lập:</label>
+                    <span id="ngayThanhLap" class="text-bold">01/01/2015</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Số giấy phép:</label>
+                    <span id="soGiayPhep" class="text-bold">01/GP-BVHTT</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Tọa độ X:</label>
+                    <span id="toaDoX"></span>
+                </div>
+            </div>
+            
+            <!-- Cột phải -->
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Số điện thoại:</label>
+                    <span id="soDienThoai" class="text-bold">0912 616 432</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Hộp thư:</label>
+                    <span id="hopThu" class="blue-text">bdt.bvhtt@bvhtt.vn</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Website:</label>
+                    <span id="website" class="blue-text">baonhandan.vn</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Thứ tự:</label>
+                    <span id="thuTu">1</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Trạng thái:</label>
+                    <span id="trangThai" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Tọa độ Y:</label>
+                    <span id="toaDoY"></span>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group form-info">
+                    <label>Địa chỉ:</label>
+                    <span id="diaChiDich">Số 190-192, đường Tô Hiệu, thành phố Sơn La, tỉnh Sơn La</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Giới thiệu:</label>
+                    <span id="gioiThieuDich">Báo Nhân Dân là cơ quan ngôn luận của Đảng Cộng sản Việt Nam. Được xem là "Cơ quan trung ương, tiếng nói của Đảng, Nhà nước và nhân dân Việt Nam".</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Ghi chú:</label>
+                    <span id="ghiChuDich">Báo Nhân Dân là cơ quan ngôn luận của Đảng Cộng sản Việt Nam. Được xem là "Cơ quan trung ương, tiếng nói của Đảng, Nhà nước và nhân dân Việt Nam".</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin người tạo/cập nhật -->
+        <div class="sub-text">
+            <ul class="list-updater">
+                <li>Người tạo: <span id="nguoiTao">-</span></li>
+                <li>Ngày tạo: <span id="ngayTao">-</span></li>
+                <li>Người cập nhật: <span id="nguoiCapNhat">-</span></li>
+                <li>Ngày cập nhật:<span id="ngayCapNhat">-</span></li>
+            </ul>
+        </div>
+
+        <!-- Bảng ấn phẩm/xuất bản -->
+        <div class="New_Table table-responsive">
+            <div class="group-corner-button with-title">
+                <h4>Danh sách ấn phẩm/xuất bản</h4>
+            </div>
+            <table class="table row-border" id="tableAnPham" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên ấn phẩm</th>
+                        <th>Thể loại</th>
+                        <th>Năm xuất bản</th>
+                        <th>Ngày cập nhật</th>
+                        <th>Giá bìa</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const coQuanId = '@ViewBag.CoQuanId';
+    </script>
+    <script src="~/PageScripts/admin/XuatBan/NhaXuatBan/Details.js" asp-append-version="true"></script>
+}

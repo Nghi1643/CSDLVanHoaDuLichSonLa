@@ -1,0 +1,113 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = "Quản lý cơ quan báo chí";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2>Quản lý cơ quan báo chí</h2>
+    </div>
+    <div class="content-body">
+        <div class="group-filter" style="margin-bottom:10px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Tìm kiếm</label>
+                        <input type="text" class="form-control search-icon" id="tu-khoa-search" placeholder="Nhập từ khóa..." maxlength="1000" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Cơ quan chủ quản</label>
+                        <select class="form-control" id="co-quan-chu-quan-search">
+                            <option value="-1">Tất cả</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Loại hình</label>
+                        <select class="form-control" id="loai-hinh-search" data-placeholder="Chọn loại hình">
+                            <option value="-1">Tất cả</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Phạm vi hoạt động</label>
+                        <select class="form-control" id="pham-vi-hoat-dong-search" data-placeholder="Chọn phạm vi hoạt động">
+                            <option value="-1">Tất cả</option>
+                            <option value="1">Địa phương</option>
+                            <option value="2">Vùng</option>
+                            <option value="3">Toàn quốc</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Trạng thái</label>
+                        <select class="form-control" id="trang-thai-search" data-placeholder="Chọn trạng thái">
+                            <option value="-1">Tất cả</option>
+                            <option value="1">Duyệt</option>
+                            <option value="2">Chưa duyệt</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Ngôn ngữ</label>
+                        <select class="form-control" id="ngon-ngu-search" data-placeholder="Chọn ngôn ngữ">
+                            <option value="-1">Tất cả</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <div class="group-button flex-end">
+                            <button type="button" class="btn btn-primary" id="tim-kiem">Lọc</button>
+                            <button type="button" class="btn btn-outline-primary" id="tat-ca">Tất cả</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="New_Table table-responsive">
+            <div class="group-corner-button">
+                @if (Model.PermitedCreate == 1)
+                {
+                    <a href="@Url.Action("Add", "BaoChi")" class="btn btn-success">Thêm mới</a>
+                }
+            </div>
+            <table class="table row-border" id="dataGrid" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên cơ quan báo chí</th>
+                        <th>Cơ quan chủ quản</th>
+                        <th>Loại hình</th>
+                        <th>Phạm vi hoạt động</th>
+                        <th>Số lượng cán bộ</th>
+                        <th>Ấn phẩm/Kênh phát sóng</th>
+                        <th>Trạng thái</th>
+                        @if (Model.PermitedEdit > 0 || Model.PermitedDelete > 0)
+                        {
+                            <th>Chức năng</th>
+                        }
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal delete-->
+    @await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+</div>
+
+@section Scripts {
+    <script>
+        const permitedEdit = @Model.PermitedEdit;
+        const permitedDelete = @Model.PermitedDelete;
+    </script>
+    <script src="~/PageScripts/admin/BaoChi/CoQuanBaoChi/CoQuanBaoChi.js" asp-append-version="true"></script>
+}
