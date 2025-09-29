@@ -1,0 +1,209 @@
+﻿@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = "Quản lí ẩm thực";
+}
+<div class="box_content">
+    <div class="TieuDe">
+        <h2>Quản lý ẩm thực</h2>
+    </div>
+
+    <div class="content-body">
+        <div class="group-filter">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Tìm kiếm</label>
+                    <input type="text" class="form-control search-icon" id="tu-khoa-search" placeholder="Nhập từ khóa tìm kiếm..." maxlength="1000" />
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label>Kiểu món</label>
+                    <select class="form-control" id="kieu-mon-search">
+                    </select>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label>Chế độ ăn</label>
+                    <select class="form-control" id="che-do-an-search">
+                    </select>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label>Đặc sản</label>
+                    <select class="form-control" id="dac-san-search">
+                        <option value="-1">Tất cả</option>
+                        <option value="0">Món thông thường</option>
+                        <option value="1">Món đặc sản</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label>Trạng thái</label>
+                    <select class="form-control" id="su-dung-search">
+                        <option value="-1">Tất cả</option>
+                        <option value="0">Không sử dụng</option>
+                        <option value="1">Sử dụng</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label>Ngôn ngữ</label>
+                    <select class="form-control" id="ngon-ngu-search"></select>
+                </div>               
+
+                <div class="col-md-6">     
+                    <label>&nbsp;</label>
+                    <div class="group-button flex-end">
+                        <button type="button" class="btn btn-primary" id="tim-kiem">Lọc</button>
+                        <button type="button" class="btn btn-outline-primary" id="tat-ca">Tất cả</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="New_Table table-responsive">
+            <div class="group-corner-button">
+                @if (Model.PermitedCreate > 0)
+                {
+                    <a class="btn btn-success" asp-controller="AmThuc" asp-action="ThemMoi">Thêm mới</a>
+                }
+            </div>
+            <table class="table row-border" id="dataGrid" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Stt</th>
+                        <th>Tên món ăn</th>
+                        <th>Kiểu món</th>
+                        <th>Chế độ ăn</th>
+                        <th>Đặc sản</th>
+                        <th>Trạng thái</th>
+                        @if (Model.PermitedEdit > 0 || Model.PermitedDelete > 0)
+                        {
+                            <th>Chức năng</th>
+                        }
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Xem Chi Tiết -->
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chi tiết món ăn</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <!-- Ảnh đại diện -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <label>Ảnh đại diện</label>
+                            <div>
+                                <img id="anhDaiDienDetail" src="/images/no-image.png" alt="Ảnh đại diện" class="img-thumbnail" style="max-width: 150px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- kiểu món -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <label>Kiểu món</label>
+                            <p id="kieuMonIDDetail" class="form-control-plaintext"></p>
+                        </div>
+                    </div>
+
+                    <!-- chế độ ăn -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <label>Chế độ ăn</label>
+                            <p id="cheDoAnIDDetail" class="form-control-plaintext"></p>
+                        </div>
+                    </div>
+
+                    <!-- Đặc sản -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <label>Đặc sản</label>
+                            <p id="dacSanDetail" class="form-control-plaintext"></p>
+                        </div>
+                    </div>
+
+                    <!-- Thứ tự -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <label>Thứ tự</label>
+                            <p id="thuTuDetail" class="form-control-plaintext"></p>
+                        </div>
+                    </div>
+
+                    <!-- Trạng thái sử dụng -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group">
+                            <label>Trạng thái sử dụng</label>
+                            <p id="suDungDetail" class="form-control-plaintext"></p>
+                        </div>
+                    </div>
+
+                    <!-- Phần thông tin đa ngữ -->
+                    <div class="col-12">
+                        <hr />
+                        <h6>Thông tin chi tiết</h6>
+                    </div>
+
+                    <!-- Tên món -->
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Tên món ăn</label>
+                            <p id="tenMonDetail" class="form-control-plaintext"></p>
+                        </div>
+                    </div>
+
+                    <!-- nguyên liệu -->
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Nguyên liệu</label>
+                            <p id="nguyenLieuDetail" class="form-control-plaintext"></p>
+                        </div>
+                    </div>
+
+                    <!-- trải nghiệm -->
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Trải nghiệm</label>
+                            <p id="traiNghiemDetail" class="form-control-plaintext"></p>
+                        </div>
+                    </div>
+
+                    <!-- Mô tả -->
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <p id="moTaDetail" class="form-control-plaintext"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal delete -->
+@await Html.PartialAsync("~/Areas/AdminTool/Views/Shared/_PartialView/ModalDelete.cshtml")
+
+@section Scripts {
+    <script>
+        const permitedEdit = @Model.PermitedEdit
+                        const permitedDelete = @Model.PermitedDelete
+    </script>
+    <script src="~/PageScripts/admin/VanHoa/AmThuc.js" asp-append-version="true"></script>
+}

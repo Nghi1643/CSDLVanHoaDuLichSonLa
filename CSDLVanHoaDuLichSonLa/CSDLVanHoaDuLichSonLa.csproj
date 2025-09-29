@@ -4,7 +4,15 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\PageScripts\admin\VanHoa\ThemMoiChinhSuaAmThuc.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\PageScripts\admin\VanHoa\ThemMoiChinhSuaAmThuc.js" />
+  </ItemGroup>  
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
@@ -14,6 +22,10 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\PageScripts\app\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\PageScripts\admin\VanHoa\ThemMoiChinhSuaAmThuc.js" />
   </ItemGroup>
 
   <ItemGroup>

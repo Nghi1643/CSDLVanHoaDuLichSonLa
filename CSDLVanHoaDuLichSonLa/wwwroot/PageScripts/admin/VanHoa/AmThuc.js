@@ -7,8 +7,8 @@ $(document).ready(function () {
     (async function () {
         await Promise.all([
             initNgonNgu(),
-            initTinhTrangPhiVatThe(),
-            initLoaiHinhPhiVatThe()
+            initKieuMon(),
+            initCheDoAn()
         ]);
         initTable();
     })();
@@ -19,9 +19,10 @@ $(document).ready(function () {
 
     $('#tat-ca').on('click', async function () {
         $('#tu-khoa-search').val('');
-        $('#loai-hinh-phi-vat-the-search').val('-1').trigger('change');
+        $('#kieu-mon-search').val('-1').trigger('change');
+        $('#che-do-an-search').val('-1').trigger('change');
+        $('#dac-san-search').val('-1').trigger('change');
         $('#trang-thai-search').val('-1').trigger('change');
-        $('#tinh-trang-search').val('-1').trigger('change');
         $('#ngon-ngu-search').val('vi').trigger('change');
         initTable()
     });
@@ -29,22 +30,24 @@ $(document).ready(function () {
 
     $("#formDelete").on("submit", function (e) {
         e.preventDefault();
-        dataDeleteDiSanPhiVatThe();
+        dataDeleteAmThuc();
     });
     async function initTable() {
         const tableApi = {
-            url: `${baseUrl}/api/DiSanPhiVatTheApi/DanhSach`,
+            url: `${baseUrl}/api/AmThucApi/DanhSach`,
             type: "POST",
             data: function (d) {
+                var dacSan = $('#dac-san-search').val()
+                var kieuMon = $('#kieu-mon-search').val()
+                var cheDoAn = $('#che-do-an-search').val()
                 var suDung = $('#trang-thai-search').val()
-                var loaiHinh = $('#loai-hinh-phi-vat-the-search').val()
-                var tinhTrang = $('#tinh-trang-search').val()
                 return JSON.stringify({
                     tuKhoa: $('#tu-khoa-search').val() || null,
                     maNgonNgu: $('#ngon-ngu-search').val() || 'vi',
-                    loaiHinhID: loaiHinh == "-1" ? null : loaiHinh,
-                    suDung: suDung == "-1" ? null : (suDung === "1" ? true : false),
-                    tinhTrangID: tinhTrang == "-1" ? null : tinhTrang
+                    kieuMonID: kieuMon == "-1" ? null : kieuMon,
+                    dacSan: dacSan == "-1" ? null : (dacSan === "1" ? true : false),
+                    cheDoAnID: cheDoAn == "-1" ? null : cheDoAn,
+                    suDung: suDung == "-1" ? null : (suDung === "1" ? true : false)
                 });
             },
             contentType: 'application/json; charset=utf-8',
@@ -65,16 +68,16 @@ $(document).ready(function () {
                 render: function (data, type, row, meta) {
                     return `<div class="group-info have-image detail-command-btn" id=n-"${meta.row}">
                         <div class="have-image">
-                            <img src="${row.anhDaiDien || '/assets/images/vector/no-image.png'}" alt="${row.tenDiSan || ''}" onerror="this.onerror=null;this.src='/assets/images/vector/no-image.png';" />
+                            <img src="${row.anhDaiDien || '/assets/images/vector/no-image.png'}" alt="${row.tenMon || ''}" onerror="this.onerror=null;this.src='/assets/images/vector/no-image.png';" />
                         </div>
                         <div class="group-info">
-                        <div class="info-main"><div>${row.tenDiSan || ''}</div></div>
-                        <div class="info-sub">${row.maDinhDanh || ''}</div></div>
+                        <div class="info-main"><div>${row.tenMon || ''}</div></div>
+                        <div class="info-sub">${row.kieuMon || ''}</div></div>
                     </div>`;
                 }
             },
             {
-                targets: 4,
+                targets: [4,5],
                 render: function (data, type, row, meta) {
                     if (data) {
                         return `<i class="hgi-icon hgi-check"></i>`;
@@ -85,7 +88,7 @@ $(document).ready(function () {
                 }
             },
             {
-                targets: 5,
+                targets: 6,
                 render: function (data, type, row, meta) {
                     let html = ""
                     if (permitedEdit) {
@@ -105,9 +108,10 @@ $(document).ready(function () {
 
         const tableCols = [
             { "data": "stt", "width": "40px", "class": "center-align" },
-            { "data": "tenDiSan", "width": "", "class": "left-align" },
-            { "data": "tenLoaiHinh", "width": "220px", "class": "left-align" },
-            { "data": "tenTinhTrang", "width": "220px", "class": "center-align" },
+            { "data": "tenMon", "width": "", "class": "left-align" },
+            { "data": "tenKieuMon", "width": "220px", "class": "left-align" },
+            { "data": "tenCheDoAn", "width": "220px", "class": "center-align" },
+            { "data": "dacSan", "width": "120px", "class": "center-align" },
             { "data": "suDung", "width": "120px", "class": "center-align" },
             { "data": "", "width": "120px", "class": "center-align group-icon-action" },
         ];
@@ -123,19 +127,59 @@ $(document).ready(function () {
             var id = $(this).attr("ID").match(/\d+/)[0];
             var data = $('#dataGrid').DataTable().row(id).data();
 
-            let hef = `/ChinhSua?id=${data.diSanID}`;
+            let hef = `/ChinhSua?id=${data.monAnUongID}`;   
             window.location.href += hef;
         });
         $('#dataGrid tbody').on('click', '.delete-command-btn', function () {
             var id = $(this).attr("ID").match(/\d+/)[0];
             var data = $('#dataGrid').DataTable().row(id).data();
 
-            $('#idDelete').val(data.diSanID);
-            $('#nameDelete').text(`${data.tenDiSan}`);
+            $('#idDelete').val(data.monAnUongID);
+            $('#nameDelete').text(`${data.tenMon}`);
 
             $('#modalDelete').modal('show');
         });
 
+        //Lấy chi tiết
+        //$('#dataGrid tbody').on('click', '.detail-command-btn', function () {
+        //    var id = $(this).attr("ID").match(/\d+/)[0];
+        //    var data1 = $('#dataGrid').DataTable().row(id).data();
+        //    $.ajax({
+        //        url: `${baseUrl}/api/AmThucApi/ChiTiet/${data1.monAnUongID}`,
+        //        type: "GET",
+        //        success: function (res) {
+        //            if (res.isSuccess && res.value) {
+        //                var data = res.value;
+
+        //                // Lấy mã ngôn ngữ hiện tại từ select
+        //                var currentLang = $("#ngon-ngu-search").val();
+
+        //                // Thông tin cơ bản
+        //                $("#anhDaiDienDetail").attr("src", data1.anhDaiDien || "/images/no-image.png");
+        //                $("#kieuMonIDDetail").text(data1.tenKieuMon || "");
+        //                $("#cheDoAnIDDetail").text(data1.tenCheDoAn || "");
+        //                $("#dacSanDetail").text(data1.dacSan ? "Món đặc sản" : "Món thông thường");
+        //                $("#thuTuDetail").text(data1.thuTu || "");
+        //                $("#suDungDetail").text(data1.suDung ? "Sử dụng" : "Không sử dụng");
+
+        //                // Thông tin đa ngữ (theo mã ngôn ngữ đã chọn)
+        //                var banDich = data.banDich.find(x => x.maNgonNgu === currentLang);
+
+        //                $("#tenMon").text(banDich?.tenMon || data.tenMon || "");
+        //                $("#nguyenLieuDetail").text(banDich?.nguyenLieu || "");
+        //                $("#traiNghiemDetail").text(banDich?.traiNghiem || "");
+        //                $("#moTaDetail").text(banDich?.moTa || "");
+
+        //                $('#modalDetail').modal('show');
+        //            } else {
+        //                alert("Không lấy được dữ liệu chi tiết.");
+        //            }
+        //        },
+        //        error: function () {
+        //            alert("Có lỗi xảy ra khi gọi API.");
+        //        }
+        //    });
+        //});
         $('#dataGrid tbody').on('click', '.detail-command-btn', function () {
             var id = $(this).attr("ID").match(/\d+/)[0];
             var data = $('#dataGrid').DataTable().row(id).data();
@@ -144,28 +188,27 @@ $(document).ready(function () {
 
             // Thông tin cơ bản
             $("#anhDaiDienDetail").attr("src", data.anhDaiDien || "/images/no-image.png");
-            $("#maDinhDanhDetail").text(data.maDinhDanh || "");
-            $("#loaiHinhIDDetail").text(data.tenLoaiHinh || ""); // hiển thị tên loại hình
-            $("#tinhTrangIDDetail").text(data.tenTinhTrang || ""); // hiển thị tên tình trạng
+            $("#kieuMonIDDetail").text(data.tenKieuMon || "");
+            $("#cheDoAnIDDetail").text(data.tenCheDoAn || "");
             $("#thuTuDetail").text(data.thuTu || "");
             $("#suDungDetail").text(data.suDung ? "Sử dụng" : "Không sử dụng");
+            $("#dacSanDetail").text(data.dacSan ? "Món đặc sản" : "Món thông thường");
 
             // Thông tin đa ngữ (hiển thị theo ngôn ngữ hiện tại)
-            $("#tenDiSanDetail").text(data.tenDiSan || "");
-            $("#congDongDetail").text(data.congDong || "");
-            $("#tinhTrangDetail").text(data.tinhTrang || "");
+            $("#tenMonDetail").text(data.tenMon || "");
+            $("#nguyenLieuDetail").text(data.nguyenLieu || "");
+            $("#traiNghiemDetail").text(data.traiNghiem || "");
             $("#moTaDetail").text(data.moTa || "");
 
             $('#modalDetail').modal('show');
         });
-        
     }
 
-    async function dataDeleteDiSanPhiVatThe() {
+    async function dataDeleteAmThuc() {
         let id = $('#idDelete').val();
 
         try {
-            const res = await fetch(`/api/DiSanPhiVatTheApi/Xoa/${id}`, {
+            const res = await fetch(`/api/AmThucApi/Xoa/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -235,7 +278,7 @@ $(document).ready(function () {
         }
     };
 
-    async function initLoaiHinhPhiVatThe() {
+    async function initKieuMon() {
         try {
             const res = await fetch('/api/DanhMucChungApi/DanhSach', {
                 method: 'POST',
@@ -256,9 +299,9 @@ $(document).ready(function () {
 
             if (data && data.isSuccess && data.value) {
 
-                $("#loai-hinh-phi-vat-the-search").append(`<option value="-1">Tất cả</option>`);
+                $("#kieu-mon-search").append(`<option value="-1">Tất cả</option>`);
                 data.value.forEach(el => {
-                    $("#loai-hinh-phi-vat-the-search").append(`<option value="${el.danhMucID}">${el.tenDanhMuc}</option>`);
+                    $("#kieu-mon-search").append(`<option value="${el.danhMucID}">${el.tenDanhMuc}</option>`);
                 });
             } else {
                 showNotification(0, data.error)
@@ -269,7 +312,7 @@ $(document).ready(function () {
         }
     };
 
-    async function initTinhTrangPhiVatThe() {
+    async function initCheDoAn() {
         try {
             const res = await fetch('/api/DanhMucChungApi/DanhSach', {
                 method: 'POST',
@@ -277,7 +320,7 @@ $(document).ready(function () {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    loaiDanhMucID: 43,
+                    loaiDanhMucID: 16,
                     tuKhoa: null
                 })
             })
@@ -289,9 +332,9 @@ $(document).ready(function () {
             data = await res.json();
 
             if (data && data.isSuccess && data.value) {
-                $("#tinh-trang-search").append(`<option value="-1">Tất cả</option>`);
+                $("#che-do-an-search").append(`<option value="-1">Tất cả</option>`);
                 data.value.forEach(el => {
-                    $("#tinh-trang-search").append(`<option value="${el.danhMucID}">${el.tenDanhMuc}</option>`);
+                    $("#che-do-an-search").append(`<option value="${el.danhMucID}">${el.tenDanhMuc}</option>`);
                 });
             } else {
                 showNotification(0, data.error)
