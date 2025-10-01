@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CSDLVanHoaDuLichSonLa.Areas.AdminTool.Controllers
 {
+    [Area("AdminTool")]
     [Authorize]
     public class DiSanVanHoaPhiVatTheController : AdminControllerBase
     {

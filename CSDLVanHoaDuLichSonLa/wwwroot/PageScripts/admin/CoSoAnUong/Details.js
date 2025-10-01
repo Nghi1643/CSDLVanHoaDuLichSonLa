@@ -7,9 +7,11 @@ $(document).ready(function () {
 });
 
 function loadCoSoAnUongData(id) {
+    console.log('Loading cơ sở ăn uống data:', id);
 
     // Gọi API để lấy thông tin cơ sở ăn uống
     getDataWithApi('GET', `/api/CoSoAnUongApi/ChiTiet/${id}`).then(data => {
+        console.log('Dữ liệu cơ sở ăn uống:', data);
         if (data && data.isSuccess && data.value) {
             displayCoSoAnUongInfo(data.value);
             updatePageTitle(data.value);
@@ -17,14 +19,14 @@ function loadCoSoAnUongData(id) {
             showNotification(0, 'Không tìm thấy thông tin cơ sở ăn uống');
         }
     }).catch(error => {
-      
+        console.error('Lỗi khi tải dữ liệu:', error);
         showNotification(0, 'Có lỗi xảy ra khi tải dữ liệu');
     });
 }
 
 function displayCoSoAnUongInfo(data) {
     // Hiển thị thông tin cơ bản
-    $('#loaiHinhDichVu').text(data.tenLoaiDichVu || '-');
+    $('#tenLoaiDichVuAnUong').text(data.tenLoaiDichVuAnUong || '-');
     $('#tenDiaDiem').text(data.tenDiaDiem || '-');
     $('#sucChua').text(data.sucChua ? `${data.sucChua} người` : '-');
     $('#dienThoai').text(data.dienThoai || '-');
@@ -38,17 +40,16 @@ function displayCoSoAnUongInfo(data) {
     }
 
     // Hiển thị giờ hoạt động
-    $('#gioMoCua').text(data.gioMoCua || '-');
-    $('#gioDongCua').text(data.gioDongCua || '-');
+    $('#gioMoCua').text(formatTime(data.gioMoCua) || '-');
+    $('#gioDongCua').text(formatTime(data.gioDongCua) || '-');
     $('#ngayNghiHangTuan').text(data.ngayNghiHangTuan || '-');
 
     // Hiển thị đánh giá
     $('#soLuotDanhGia').text(data.soLuotDanhGia || '0');
     $('#diemDanhGia').text(data.diemDanhGia ? `${data.diemDanhGia}/5` : '-');
-    $('#thuTu').text(data.thuTu || '-');
 
     // Hiển thị trạng thái
-    if (data.trangThai == 1) {
+    if (data.trangThai === true) {
         $('#trangThai').html('<span class="TrangThai green-text">Duyệt</span>');
     } else {
         $('#trangThai').html('<span class="TrangThai red-text">Chưa duyệt</span>');
@@ -67,7 +68,7 @@ function displayCoSoAnUongInfo(data) {
     $('#diaChi').text(data.diaChi || '-');
     $('#moTa').text(data.moTa || '-');
 
-    // Hiển thị thông tin người tạo/cập nhật (nếu có)
+    // Hiển thị thông tin người tạo/cập nhật
     $('#nguoiTao').text(data.nguoiTao || '-');
     $('#ngayTao').text(data.ngayTao ? formatDate(data.ngayTao) : '-');
     $('#nguoiCapNhat').text(data.nguoiCapNhat || '-');
@@ -89,8 +90,8 @@ function updatePageTitle(data) {
     let htmlTitle = ``;
     if (data.tenCoSo) {
         htmlTitle = `<div class='mainTitle'>${data.tenCoSo}</div>`;
-        if (data.tenLoaiDichVu) {
-            htmlTitle += `<div class='subTitle'>(${data.tenLoaiDichVu})</div>`;
+        if (data.tenLoaiDichVuAnUong) {
+            htmlTitle += `<div class='subTitle'>(${data.tenLoaiDichVuAnUong})</div>`;
         }
     }
     $('#pageTitle').html(htmlTitle);
@@ -104,5 +105,19 @@ function formatDate(dateString) {
         return date.toLocaleDateString('vi-VN');
     } catch (error) {
         return dateString;
+    }
+}
+
+function formatTime(timeString) {
+    if (!timeString) return '-';
+    try {
+        // Nếu timeString có format "HH:mm:ss", chỉ lấy HH:mm
+        const timeParts = timeString.split(':');
+        if (timeParts.length >= 2) {
+            return `${timeParts[0]}:${timeParts[1]}`;
+        }
+        return timeString;
+    } catch (error) {
+        return timeString;
     }
 }
