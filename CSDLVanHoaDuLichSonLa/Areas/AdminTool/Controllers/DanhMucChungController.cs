@@ -91,7 +91,7 @@ namespace CSDLVanHoaDuLichSonLa.Areas.AdminTool.Controllers
             {
                 return View("Error");
             }
-            ViewBag.LoaiDanhMuc = -1;//đúng là 1
+            ViewBag.LoaiDanhMuc = 1;
             return View(vm);
         }
 
@@ -310,7 +310,7 @@ namespace CSDLVanHoaDuLichSonLa.Areas.AdminTool.Controllers
             {
                 return View("Error");
             }
-            ViewBag.LoaiDanhMuc = 1;
+            ViewBag.LoaiDanhMuc = 27;
             return View(vm);
         }
 

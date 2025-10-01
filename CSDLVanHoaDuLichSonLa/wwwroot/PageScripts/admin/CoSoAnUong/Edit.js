@@ -3,7 +3,7 @@ let translations = [];
 
 $(document).ready(function () {
     initDatePicker();
-    initDanhMucChung_NoAll(1, "#loaiHinh", "") // đúng là 27
+    initDanhMucChung_NoAll(27, "#loaiHinh", "") // đúng là 27
     initDiaDiem(); // Khởi tạo danh sách địa điểm
     initNgonNgu("#ngonNguDich")
     initSelect2();
