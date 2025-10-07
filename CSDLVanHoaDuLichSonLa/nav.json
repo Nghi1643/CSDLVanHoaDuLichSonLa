@@ -1102,9 +1102,9 @@
           },
           {
             "Id": 145,
-            "AreaName": "",
-            "ControllerName": "",
-            "ActionName": "",
+            "AreaName": "AdminTool",
+            "ControllerName": "ThongTinXucTien",
+            "ActionName": "Index",
             "Title": "Thông tin xúc tiến quảng  bá du lịch",
             "IsAuthorize": false,
             "Icon": "hgi-icon hgi-news",

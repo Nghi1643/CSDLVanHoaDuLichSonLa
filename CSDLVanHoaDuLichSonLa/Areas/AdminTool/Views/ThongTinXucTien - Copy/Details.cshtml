@@ -1,0 +1,147 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = "Chi tiết cơ sở ăn uống";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">Chi tiết cơ sở ăn uống</h2>
+    </div>
+
+    <div class="content-body">
+        <input type="hidden" id="coSoAnUongId" value="@ViewBag.CoSoAnUongId" />
+
+        <!-- Thông tin cơ bản -->
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Loại hình dịch vụ:</label>
+                    <span id="tenLoaiDichVuAnUong">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Địa điểm:</label>
+                    <span id="tenDiaDiem" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Sức chứa:</label>
+                    <span id="sucChua">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Giờ mở cửa:</label>
+                    <span id="gioMoCua" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Giờ đóng cửa:</label>
+                    <span id="gioDongCua" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Ngày nghỉ:</label>
+                    <span id="ngayNghiHangTuan">-</span>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Số điện thoại:</label>
+                    <span id="dienThoai" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Hộp thư:</label>
+                    <span id="hopThu" class="blue-text">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Website:</label>
+                    <span id="lienKet" class="blue-text">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Lượt đánh giá:</label>
+                    <span id="soLuotDanhGia">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Điểm đánh giá:</label>
+                    <span id="diemDanhGia" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Trạng thái:</label>
+                    <span id="trangThai" class="text-bold">-</span>
+                </div>
+            </div>
+
+            <!-- Tính năng dịch vụ -->
+            <div class="col-lg-12 col-md-12">
+                <h5 class="section-title">Tính năng dịch vụ</h5>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group form-info">
+                            <label>Tiệc gia đình:</label>
+                            <span id="tiecGiaDinh" class="badge">-</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group form-info">
+                            <label>Tiệc đông người:</label>
+                            <span id="tiecDongNguoi" class="badge">-</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group form-info">
+                            <label>Có phòng riêng:</label>
+                            <span id="coPhongRieng" class="badge">-</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group form-info">
+                            <label>Khu vui chơi trẻ em:</label>
+                            <span id="coVuiChoiTreEm" class="badge">-</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="form-group form-info">
+                            <label>Chuẩn du lịch:</label>
+                            <span id="chuanDuLich" class="badge">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin chi tiết -->
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group form-info">
+                    <label>Tên cơ sở:</label>
+                    <span id="tenCoSo" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Người đại diện:</label>
+                    <span id="nguoiDaiDien">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Địa chỉ:</label>
+                    <span id="diaChi">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Mô tả:</label>
+                    <span id="moTa">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin người tạo/cập nhật -->
+        <div class="sub-text">
+            <ul class="list-updater">
+                <li>Người tạo: <span id="nguoiTao">-</span></li>
+                <li>Ngày tạo: <span id="ngayTao">-</span></li>
+                <li>Người cập nhật: <span id="nguoiCapNhat">-</span></li>
+                <li>Ngày cập nhật: <span id="ngayCapNhat">-</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const coSoAnUongId = '@ViewBag.CoSoAnUongId';
+    </script>
+    <script src="~/PageScripts/admin/CoSoAnUong/Details.js" asp-append-version="true"></script>
+}

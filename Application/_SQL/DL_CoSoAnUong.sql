@@ -27,9 +27,13 @@ CREATE OR ALTER PROCEDURE spu_DL_CoSoAnUong_Get
 	@CoSoAnUongID uniqueidentifier
 		AS
 			BEGIN
-				SELECT au.*, au_nd.TenCoSo, au_nd.MoTa, au_nd.DiaChi, au_nd.NguoiDaiDien, dd.TenDiaDiem, dcm_nd.Ten as tenLoaiDichVuAnUong
+				SELECT
+				au.*, 
+				au_nd.TenCoSo, au_nd.MoTa, au_nd.DiaChi, au_nd.NguoiDaiDien, 
+				dd.TenDiaDiem, 
+				dcm_nd.Ten as tenLoaiDichVuAnUong
 				FROM DL_CoSoAnUong AS au
-				INNER JOIN DL_CoSoAnUong_NoiDung AS au_nd ON au.CoSoAnUongID = au_nd.CoSoAnUongID AND au_nd.MaNgonNgu = @MaNgonNgu
+				JOIN DL_CoSoAnUong_NoiDung AS au_nd ON au.CoSoAnUongID = au_nd.CoSoAnUongID AND au_nd.MaNgonNgu = @MaNgonNgu
 				LEFT JOIN DM_DiaDiem_NoiDung AS dd ON au.DiaDiemID  = dd.DiaDiemID AND dd.MaNgonNgu = @MaNgonNgu
 				LEFT JOIN DM_DanhMucChung_NoiDung AS dcm_nd ON au.LoaiDichVuAnUongID = dcm_nd.DanhMucID AND dcm_nd.MaNgonNgu = @MaNgonNgu
 				WHERE au.CoSoAnUongID = @CoSoAnUongID

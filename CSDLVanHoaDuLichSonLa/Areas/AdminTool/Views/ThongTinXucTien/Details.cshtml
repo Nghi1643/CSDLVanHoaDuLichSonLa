@@ -1,0 +1,84 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">@ViewBag.Title</h2>
+    </div>
+
+    <div class="content-body">
+        <input type="hidden" id="xucTienID" value="@ViewBag.XucTienID" />
+
+        <!-- Thông tin cơ bản -->
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Lĩnh vực:</label>
+                    <span id="tenLinhVuc" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Tổ chức:</label>
+                    <span id="tenToChuc" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Đối tượng:</label>
+                    <span id="tenDoiTuong">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Hình thức xúc tiến:</label>
+                    <span id="tenHinhThuc">-</span>
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Phương thức truyền thông:</label>
+                    <span id="tenTruyenThong">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Ngày bắt đầu:</label>
+                    <span id="ngayBatDau" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Ngày kết thúc:</label>
+                    <span id="ngayKetThuc" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Trạng thái:</label>
+                    <span id="tenTrangThai" class="badge">-</span>
+                </div>
+            </div>
+
+            <!-- Thông tin chi tiết -->
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group form-info">
+                    <label>Tiêu đề:</label>
+                    <span id="tieuDe" class="text-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Mô tả:</label>
+                    <span id="moTa">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin người tạo/cập nhật -->
+        @* <div class="sub-text">
+            <ul class="list-updater">
+                <li>Người tạo: <span id="nguoiTao">-</span></li>
+                <li>Ngày tạo: <span id="ngayTao">-</span></li>
+                <li>Người cập nhật: <span id="nguoiCapNhat">-</span></li>
+                <li>Ngày cập nhật: <span id="ngayCapNhat">-</span></li>
+            </ul>
+        </div> *@
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const xucTienID = '@ViewBag.XucTienID';
+    </script>
+    <script src="~/PageScripts/admin/ThongTinXucTien/Details.js" asp-append-version="true"></script>
+}

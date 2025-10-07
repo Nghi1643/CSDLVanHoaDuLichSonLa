@@ -1,23 +1,23 @@
-const baseUrl = getRootLink();
+﻿const baseUrl = getRootLink();
 
 $(document).ready(function () {
     initDatePicker();
-    initDanhMucChung(22, "#loai-hinh-search", "")
-    initDanhMucChung(34, "#co-quan-chu-quan-search", "")
+    initDanhMucChung(4, "#hinh-thuc-xuc-tien-search", "")// HinhThucID
+    initDanhMucChung(5, "#phuong-thuc-truyen-thong-search", "")// TruyenThongID
+    initDanhMucChung(6, "#trang-thai-search", "TrangThaiID")// TrangThaiID
     initNgonNgu("#ngon-ngu-search")
     initSelect2();
     initTable();
+    console.log("ready");
 
     $('#tim-kiem').on('click', async function () {
         initTable()
     });
 
-
     $('#tat-ca').on('click', async function () {
         $('#tu-khoa-search').val("");
-        $('#co-quan-chu-quan-search').val("").trigger('change');
-        $('#loai-hinh-search').val("-1").trigger('change');
-        $('#pham-vi-hoat-dong-search').val("").trigger('change');
+        $('#hinh-thuc-xuc-tien-search').val("").trigger('change');
+        $('#phuong-thuc-truyen-thong-search').val("").trigger('change');
         $('#trang-thai-search').val("-1").trigger('change');
         $('#ngon-ngu-search').val("vi").trigger('change');
         initTable()
@@ -32,20 +32,19 @@ $(document).ready(function () {
 
     $("#formDelete").on("submit", function (e) {
         e.preventDefault();
-        
+
         const submitBtn = $(this).find('button[type="submit"]');
         if (submitBtn.prop('disabled')) {
             return;
         }
-        
+
         submitBtn.prop('disabled', true);
         const originalText = submitBtn.text();
         submitBtn.text('Đang xóa...');
-        
+
         try {
             dataDelete();
         } catch (error) {
-            console.error('Lỗi khi xử lý form:', error);
         } finally {
             setTimeout(() => {
                 submitBtn.prop('disabled', false);
@@ -56,22 +55,20 @@ $(document).ready(function () {
 });
 
 function initTable() {
+    console.log("gọi api");
     const tableApi = {
-        url: `${baseUrl}/api/ToChucApi/DanhSach`,
+        url: `${baseUrl}/api/ThongTinXucTienApi/DanhSach`,
         type: "POST",
         data: function (d) {
-            var coQuanChuQuanID = $('#co-quan-chu-quan-search').val()
-            var loaiHinhID = $('#loai-hinh-search').val()
-            var phamViHoatDongID = $('#pham-vi-hoat-dong-search').val()
+            var hinhThucID = $('#hinh-thuc-xuc-tien-search').val()
+            var truyenThongID = $('#phuong-thuc-truyen-thong-search').val()
             var maNgonNgu = $('#ngon-ngu-search').val()
-            var suDung = $('#trang-thai-search').val()
+            var trangThaiID = $('#trang-thai-search').val()
             return JSON.stringify({
-                loaiToChucID: 97, // ID cho cơ quan báo chí
                 tuKhoa: $('#tu-khoa-search').val() || null,
-                coQuanChuQuanID: coQuanChuQuanID == "-1" ? null : coQuanChuQuanID,
-                loaiHinhID: loaiHinhID == "-1" ? null : Number(loaiHinhID),
-                phamViHoatDongID: phamViHoatDongID == "-1" ? null : phamViHoatDongID,
-                trangThaiID: suDung == "-1" ? null : Number(suDung),
+                hinhThucID: hinhThucID == "-1" ? null : hinhThucID,
+                truyenThongID: truyenThongID == "-1" ? null : truyenThongID,
+                trangThaiID: trangThaiID == "-1" ? null : trangThaiID,
                 maNgonNgu: maNgonNgu == "-1" ? null : maNgonNgu
             });
         },
@@ -80,10 +77,14 @@ function initTable() {
             if (data && data.isSuccess && data.value.length > 0) {
                 data.value.forEach((item, index) => {
                     item.stt = index + 1;
-                    // Format ngày thành lập
-                    if (item.ngayThanhLap) {
-                        const date = new Date(item.ngayThanhLap);
-                        item.ngayThanhLapFormatted = date.toLocaleDateString('vi-VN');
+
+                    if (item.ngayBatDau) {
+                        const date = new Date(item.ngayBatDau);
+                        item.ngayBatDauFormatted = date.toLocaleDateString('vi-VN');
+                    }
+                    if (item.ngayKetThuc) {
+                        const date = new Date(item.ngayKetThuc);
+                        item.ngayKetThucFormatted = date.toLocaleDateString('vi-VN');
                     }
                 });
                 return data.value;
@@ -91,55 +92,62 @@ function initTable() {
             return [];
         },
     };
-
+    //<div class="info-sub">${row.diaChi || ''}</div>
     const tableDefs = [
         {
-            targets: 1, // Cột tên cơ quan báo chí
+            targets: 1, // Cột Tên Tiêu đề
             render: function (data, type, row, meta) {
                 return `<div class="group-info">
                     <div class="info-main">
-                        <a href="${baseUrl}/AdminTool/BaoChi/Details?id=${row.toChucID}" class="text-primary text-decoration-none">
-                            ${row.tenToChuc || ''}
+                        <a href="${baseUrl}/AdminTool/ThongTinXucTien/Details?id=${row.xucTienID}" class="text-primary text-decoration-none">
+                            ${row.tieuDe || ''}
                         </a>
                     </div>
-                    <div class="info-sub">${row.maDinhDanh || ''}</div>
+                    
                 </div>`;
             }
         },
         {
-            targets: 5, // Cột số lượng cán bộ
+            targets: 2, // Cột Tên Tổ Chức
             render: function (data, type, row, meta) {
-                return row.soLuongCanBo || 0;
+                return row.tenToChuc || '';
             }
         },
         {
-            targets: 6, // Cột Ấn phẩm
+            targets: 3, // Cột Thời gian 
             render: function (data, type, row, meta) {
                 return `<div class="group-info">
                     <div class="info-main">
-                        <a href="${baseUrl}/AdminTool/BaoChi/AnPhamKenhPhatSong?id=${row.toChucID}" class="text-primary text-decoration-none">
-                            ${row.soLuongAnPham || 0}
-                        </a>
+                        ${row.ngayBatDauFormatted ? "Từ: " + row.ngayBatDauFormatted + "<br/>" : ""}
+                        ${row.ngayKetThucFormatted ? "Đến: " + row.ngayKetThucFormatted : ""}
                     </div>
+                    
                 </div>`;
             }
         },
+        //<span style="font-size: 18px;">&#9733;</span>
         {
-            targets: 7, // Cột trạng thái
+            targets: 4, // Cột Chiến lược
             render: function (data, type, row, meta) {
-                if (row.trangThaiID == 1) {
-                    return `<span class="TrangThai green-text">Duyệt</span>`;
-                } else {
-                    return `<span class="TrangThai red-text">Chưa duyệt</span>`;
-                }
+                return `<div class="group-info">
+                            <span>${row.tenHinhThuc+'</br>' ?? ""}</span>
+                            <span>${row.tenTruyenThong + '</br>' ?? ""}</span>
+                            <span>${row.tenDoiTuong + '</br>' ?? ""}</span>
+                        </div>`;
             }
         },
         {
-            targets: 8, // Cột chức năng
+            targets: 5, // Cột trạng thái
+            render: function (data, type, row, meta) {
+                return row.tenTrangThai;
+            }
+        },
+        {
+            targets: 6, // Cột chức năng
             render: function (data, type, row, meta) {
                 let html = "";
                 if (permitedEdit) {
-                    html += `<a href="${baseUrl}/AdminTool/BaoChi/Edit?id=${row.toChucID}" data-toggle="tooltip" title="Chỉnh sửa" class="text-yellow me-2">
+                    html += `<a href="${baseUrl}/AdminTool/ThongTinXucTien/Edit?id=${row.xucTienID}" data-toggle="tooltip" title="Chỉnh sửa" class="text-yellow me-2">
                                 <i class="hgi-icon hgi-edit"></i>
                             </a>`;
                 }
@@ -158,14 +166,12 @@ function initTable() {
 
     const tableCols = [
         { "data": "stt", "width": "40px", "class": "left-align" },
-        { "data": "tenToChuc", "class": "left-align name-text" },
-        { "data": "coQuanChuQuan", "width": "15%", "class": "left-align" },
-        { "data": "loaiHinh", "width": "10%", "class": "left-align" },
-        { "data": "phamViHoatDong", "width": "10%", "class": "left-align" },
-        { "data": "soLuongCanBo", "width": "7%", "class": "left-align" },
-        { "data": "soLuongAnPham", "width": "10%", "class": "left-align name-text" },
-        { "data": "trangThaiID", "width": "8%", "class": "left-align" },
-        { "data": "", "width": "8%", "class": "center-align group-icon-action" }
+        { "data": "tenCoSo", "class": "left-align name-text" },
+        { "data": "loaiDichVu", "width": "15%", "class": "left-align" },
+        { "data": "thoiGianHoatDong", "width": "15%", "class": "left-align" },
+        { "data": "hangSao", "width": "15%", "class": "left-align" },
+        { "data": "trangThai", "width": "8%", "class": "left-align" },
+        { "data": "", "width": "10%", "class": "center-align group-icon-action" }
     ];
 
     if (!permitedEdit && !permitedDelete) {
@@ -180,8 +186,8 @@ function initTable() {
         var id = $(this).attr("ID").match(/\d+/)[0];
         var data = $('#dataGrid').DataTable().row(id).data();
 
-        $('#idDelete').val(data.toChucID);
-        $('#nameDelete').text(`${data.tenToChuc}`);
+        $('#idDelete').val(data.xucTienID);
+        $('#nameDelete').text(`${data.tieuDe}`);
 
         $('#modalDelete').modal('show');
     });
@@ -190,7 +196,7 @@ function initTable() {
 function dataDelete() {
     let id = $('#idDelete').val();
     $.ajax({
-        url: `${baseUrl}/api/ToChucApi/Xoa/${id}`,
+        url: `${baseUrl}/api/ThongTinXucTienApi/Xoa/${id}`,
         type: 'DELETE',
         contentType: 'application/json',
         success: function (data) {

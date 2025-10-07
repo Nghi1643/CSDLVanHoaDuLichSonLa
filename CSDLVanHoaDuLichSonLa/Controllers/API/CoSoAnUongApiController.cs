@@ -76,16 +76,16 @@ namespace CSDLVanHoaDuLichSonLa.Controllers.API
             }
         }
         [HttpGet]
-        [Route("ChiTiet/{tacPhamID}")]
-        public async Task<IActionResult> ChiTiet(Guid tacPhamID)
+        [Route("ChiTiet/{id}")]
+        public async Task<IActionResult> ChiTiet(Guid id)
         {
             try
             {
-                if (tacPhamID == Guid.Empty)
+                if (id == Guid.Empty)
                 {
                     return BadRequest("Dữ liệu không hợp lệ");
                 }
-                var result = await Mediator.Send(new Application.CoSoKinhDoanhDichVuDuLich.CoSoAnUong.ChiTiet.Query { CoSoAnUongID = tacPhamID });
+                var result = await Mediator.Send(new Application.CoSoKinhDoanhDichVuDuLich.CoSoAnUong.ChiTiet.Query { CoSoAnUongID = id });
                 return Ok(result);
             }
             catch (Exception ex)

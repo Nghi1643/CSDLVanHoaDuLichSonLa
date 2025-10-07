@@ -1,0 +1,131 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = ViewBag.IsEdit ? $"Chỉnh sửa thông tin xúc tiến" : "Thêm mới thông tin xúc tiến";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">@(ViewBag.IsEdit ? "Chỉnh sửa thông tin xúc tiến" : "Thêm mới thông tin xúc tiến")</h2>
+    </div>
+
+    <div class="content-body">
+        <form id="formXucTien">
+            <input type="hidden" id="xucTienID" value="@ViewBag.XucTienID" />
+            <!-- Thông tin cơ bản -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="linhVuc">Lĩnh vực <span class="text-danger">*</span></label>
+                        <select class="form-control" id="linhVuc">
+                            <option value="">Chọn lĩnh vực</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="toChuc">Tổ chức</label>
+                        <select class="form-control" id="toChuc">
+                            <option value="">Chọn tổ chức</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="doiTuong">Đối tượng <span class="text-danger">*</span></label>
+                        <select class="form-control" id="doiTuong">
+                            <option value="">Chọn đối tượng</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="hinhThuc">Hình Thức xúc tiến <span class="text-danger">*</span></label>
+                        <select class="form-control" id="hinhThuc">
+                            <option value="">Chọn hình thức xúc tiến</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="truyenThong">Phương thức truyền thông <span class="text-danger">*</span></label>
+                        <select class="form-control" id="truyenThong">
+                            <option value="">Chọn Phương thức truyền thông</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="trangThai">Trạng thái <span class="text-danger">*</span></label>
+                        <select class="form-control" id="trangThai">
+                            <option value="">Chọn trạng thái</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="ngaybatdau">Ngày bắt đầu <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" id="ngayBatDau" placeholder="Chọn ngày bắt đầu" />
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="ngayKetThuc">Ngày kết thúc</label>
+                        <input type="date" class="form-control" id="ngayKetThuc" maxlength="100" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phần đa ngữ -->
+            <div class="DaNgu">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="ngonNguDich">Ngôn ngữ dịch</label>
+                            <select class="form-control" id="ngonNguDich">
+                                <option value="">Chọn ngôn ngữ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="tieuDe">Tiêu đề <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="tieuDe" maxlength="255" placeholder="Tiêu đề thông tin xúc tiến quảng bá du lịch" />
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="moTa">Mô tả</label>
+                            <textarea class="form-control" id="moTa" rows="5" maxlength="1000" placeholder="Nhập mô tả về thông tin xúc tiến quảng bá du lịch"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút hành động -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="group-button flex-end">
+                            <a href="@Url.Action("Index", "ThongTinXucTien")" class="btn btn-outline-primary">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-primary">
+                                @(ViewBag.IsEdit ? "Cập nhật" : "Lưu")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const isEdit = @Html.Raw(ViewBag.IsEdit ? "true" : "false");
+        const permitedEdit = @Model.PermitedEdit;
+        const permitedDelete = @Model.PermitedDelete;
+        const xucTienID = '@ViewBag.XucTienID';
+    </script>
+    <script src="~/PageScripts/admin/ThongTinXucTien/Edit.js" asp-append-version="true"></script>
+}
