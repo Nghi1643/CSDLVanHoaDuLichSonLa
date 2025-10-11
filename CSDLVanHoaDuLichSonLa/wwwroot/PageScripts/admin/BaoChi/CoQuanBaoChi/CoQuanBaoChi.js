@@ -1,78 +1,93 @@
 const baseUrl = getRootLink();
 
 $(document).ready(function () {
-    initDatePicker();
-    initDanhMucChung(22, "#loai-hinh-search", "")
-    initDanhMucChung(34, "#co-quan-chu-quan-search", "")
-    initNgonNgu("#ngon-ngu-search")
-    initSelect2();
-    initTable();
-
-    $('#tim-kiem').on('click', async function () {
-        initTable()
-    });
-
-
-    $('#tat-ca').on('click', async function () {
-        $('#tu-khoa-search').val("");
-        $('#co-quan-chu-quan-search').val("").trigger('change');
-        $('#loai-hinh-search').val("-1").trigger('change');
-        $('#pham-vi-hoat-dong-search').val("").trigger('change');
-        $('#trang-thai-search').val("-1").trigger('change');
-        $('#ngon-ngu-search').val("vi").trigger('change');
-        initTable()
-    });
-
-    document.getElementById("tu-khoa-search").addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            initTable()
-        }
-    });
-
-    $("#formDelete").on("submit", function (e) {
-        e.preventDefault();
-        
-        const submitBtn = $(this).find('button[type="submit"]');
-        if (submitBtn.prop('disabled')) {
-            return;
-        }
-        
-        submitBtn.prop('disabled', true);
-        const originalText = submitBtn.text();
-        submitBtn.text('Đang xóa...');
-        
-        try {
-            dataDelete();
-        } catch (error) {
-            console.error('Lỗi khi xử lý form:', error);
-        } finally {
-            setTimeout(() => {
-                submitBtn.prop('disabled', false);
-                submitBtn.text(originalText);
-            }, 1000);
-        }
-    });
+    if (coQuanId) {
+        loadCoQuanData(coQuanId);
+        initAnPhamTable(coQuanId);
+    }
 });
 
-function initTable() {
+function loadCoQuanData(id) {
+    let data = JSON.stringify({
+        loaiToChucID: 97, // cơ quan báo chí
+        toChucID: id
+    })
+
+    getDataWithApi('POST', '/api/ToChucApi/DanhSach', data).then(data => {
+        console.log(data)
+        if (data && data.isSuccess && data.value) {
+            displayCoQuanInfo(data.value[0]);
+            updatePageTitle(data.value[0]);
+        } else {
+            showNotification(0, 'Không tìm thấy thông tin cơ quan báo chí');
+        }
+    })
+}
+
+function displayCoQuanInfo(data) {
+    // Hiển thị thông tin cơ bản
+    $('#maCoQuan').text(data.maDinhDanh || '-');
+    $('#loaiHinh').text(data.loaiHinh || '-');
+    $('#coQuanChuQuan').text(data.coQuanChuQuan || '-');
+    $('#phamViHoatDong').text(data.phamViHoatDong || '-');
+    $('#soDienThoai').text(data.dienThoai || '-');
+    $('#hopThu').text(data.hopThu || '-');
+    $('#quyMo').text(data.quyMo || '-');
+
+    // Hiển thị website với link nếu có
+    if (data.website) {
+        $('#website').html(`<a href="${data.website}" target="_blank" class="text-primary">${data.website}</a>`);
+    } else {
+        $('#website').text('-');
+    }
+
+    $('#soGiayPhep').text(data.soGiayPhepHoatDong || '-');
+    $('#thuTu').text(data.thuTu || '-');
+
+    // Hiển thị ngày thành lập
+    if (data.ngayThanhLap) {
+        const date = new Date(data.ngayThanhLap);
+        $('#ngayThanhLap').text(date.toLocaleDateString('vi-VN'));
+    } else {
+        $('#ngayThanhLap').text('-');
+    }
+
+    // Hiển thị trạng thái
+    if (data.trangThaiID == 1) {
+        $('#trangThai').html('<span class="TrangThai green-text">Duyệt</span>');
+    } else {
+        $('#trangThai').html('<span class="TrangThai red-text">Chưa duyệt</span>');
+    }
+
+    // Hiển thị thông tin đa ngữ
+    $('#ngonNguDich').text(data.ngonNguName || '-');
+    $('#tenCoQuanDich').text(data.tenToChuc || '-');
+    $('#diaChiDich').text(data.diaChi || '-');
+    $('#gioiThieuDich').text(data.gioiThieu || '-');
+    $('#ghiChuDich').text(data.ghiChu || '-');
+}
+
+function updatePageTitle(data) {
+    let title = `Thông tin ${data.tenToChuc}`;
+    let htmlTitle = ``;
+    if (data.tenToChuc) {
+        htmlTitle = `<div class='mainTitle'>${data.tenToChuc}</div>`;
+        if (data.maDinhDanh) {
+            htmlTitle += `<div class='subTitle'>(${data.maDinhDanh})</div>`;
+        }
+    }
+    $('#pageTitle').html(htmlTitle);
+    document.title = title;
+}
+
+function initAnPhamTable(coQuanBaoChiID) {
     const tableApi = {
-        url: `${baseUrl}/api/ToChucApi/DanhSach`,
+        url: `${baseUrl}/api/BaoChiAnPhamApi/DanhSach`,
         type: "POST",
         data: function (d) {
-            var coQuanChuQuanID = $('#co-quan-chu-quan-search').val()
-            var loaiHinhID = $('#loai-hinh-search').val()
-            var phamViHoatDongID = $('#pham-vi-hoat-dong-search').val()
-            var maNgonNgu = $('#ngon-ngu-search').val()
-            var suDung = $('#trang-thai-search').val()
             return JSON.stringify({
-                loaiToChucID: 97, // ID cho cơ quan báo chí
-                tuKhoa: $('#tu-khoa-search').val() || null,
-                coQuanChuQuanID: coQuanChuQuanID == "-1" ? null : coQuanChuQuanID,
-                loaiHinhID: loaiHinhID == "-1" ? null : Number(loaiHinhID),
-                phamViHoatDongID: phamViHoatDongID == "-1" ? null : phamViHoatDongID,
-                trangThaiID: suDung == "-1" ? null : Number(suDung),
-                maNgonNgu: maNgonNgu == "-1" ? null : maNgonNgu
+                toChucID: coQuanBaoChiID,
+                maNgonNgu: 'vi'
             });
         },
         contentType: 'application/json; charset=utf-8',
@@ -80,11 +95,6 @@ function initTable() {
             if (data && data.isSuccess && data.value.length > 0) {
                 data.value.forEach((item, index) => {
                     item.stt = index + 1;
-                    // Format ngày thành lập
-                    if (item.ngayThanhLap) {
-                        const date = new Date(item.ngayThanhLap);
-                        item.ngayThanhLapFormatted = date.toLocaleDateString('vi-VN');
-                    }
                 });
                 return data.value;
             }
@@ -94,116 +104,32 @@ function initTable() {
 
     const tableDefs = [
         {
-            targets: 1, // Cột tên cơ quan báo chí
+            targets: 1,
             render: function (data, type, row, meta) {
-                return `<div class="group-info">
-                    <div class="info-main">
-                        <a href="${baseUrl}/AdminTool/BaoChi/Details?id=${row.toChucID}" class="text-primary text-decoration-none">
-                            ${row.tenToChuc || ''}
-                        </a>
-                    </div>
-                    <div class="info-sub">${row.maDinhDanh || ''}</div>
-                </div>`;
+                return `<span class="detail-command-btn" id=n-"${meta.row}">${data}</span>`;
             }
         },
         {
-            targets: 5, // Cột số lượng cán bộ
+            targets: 5,
             render: function (data, type, row, meta) {
-                return row.soLuongCanBo || 0;
-            }
-        },
-        {
-            targets: 6, // Cột Ấn phẩm
-            render: function (data, type, row, meta) {
-                return `<div class="group-info">
-                    <div class="info-main">
-                        <a href="${baseUrl}/AdminTool/BaoChi/AnPhamKenhPhatSong?id=${row.toChucID}" class="text-primary text-decoration-none">
-                            ${row.soLuongAnPham || 0}
-                        </a>
-                    </div>
-                </div>`;
-            }
-        },
-        {
-            targets: 7, // Cột trạng thái
-            render: function (data, type, row, meta) {
-                if (row.trangThaiID == 1) {
-                    return `<span class="TrangThai green-text">Duyệt</span>`;
-                } else {
-                    return `<span class="TrangThai red-text">Chưa duyệt</span>`;
+                if (row.trangThai) {
+                    return `<span class="TrangThai green-text">Đã phát hành</span>`;
                 }
-            }
-        },
-        {
-            targets: 8, // Cột chức năng
-            render: function (data, type, row, meta) {
-                let html = "";
-                if (permitedEdit) {
-                    html += `<a href="${baseUrl}/AdminTool/BaoChi/Edit?id=${row.toChucID}" data-toggle="tooltip" title="Chỉnh sửa" class="text-yellow me-2">
-                                <i class="hgi-icon hgi-edit"></i>
-                            </a>`;
+                else {
+                    return `<span class="TrangThai yellow-text">Chưa phát hành</span>`;
                 }
-                if (permitedDelete) {
-                    html += `<i data-toggle="tooltip" title="Xóa" class="delete-command-btn text-red cursor-pointer" id="delete-${meta.row}">
-                                <i class="hgi-icon hgi-delete"></i>
-                            </i>`;
-                }
-                if (!permitedEdit && !permitedDelete) {
-                    html = `<span class="text-muted">Chỉ xem</span>`;
-                }
-                return html;
             }
         }
     ];
 
     const tableCols = [
-        { "data": "stt", "width": "40px", "class": "left-align" },
-        { "data": "tenToChuc", "class": "left-align name-text" },
-        { "data": "coQuanChuQuan", "width": "15%", "class": "left-align" },
-        { "data": "loaiHinh", "width": "10%", "class": "left-align" },
-        { "data": "phamViHoatDong", "width": "10%", "class": "left-align" },
-        { "data": "soLuongCanBo", "width": "7%", "class": "left-align" },
-        { "data": "soLuongAnPham", "width": "10%", "class": "left-align name-text" },
-        { "data": "trangThaiID", "width": "8%", "class": "left-align" },
-        { "data": "", "width": "8%", "class": "center-align group-icon-action" }
+        { "data": "stt", "width": "40px", "class": "center-align" },
+        { "data": "tenAnPham", "width": "", "class": "left-align name-text" },
+        { "data": "tenTanSuat", "width": "15%", "class": "left-align" },
+        { "data": "tenLinhVucChuyenSau", "width": "15%", "class": "left-align" },
+        { "data": "soLuong", "width": "150px", "class": "center-align" },
+        { "data": "trangThai", "width": "180px", "class": "left-align" },
     ];
 
-    if (!permitedEdit && !permitedDelete) {
-        tableCols.pop();
-        tableDefs.pop();
-    }
-
-    initDataTableConfigNoSearch('dataGrid', tableApi, tableDefs, tableCols);
-
-    // Event handler cho nút xóa
-    $('#dataGrid tbody').on('click', '.delete-command-btn', function () {
-        var id = $(this).attr("ID").match(/\d+/)[0];
-        var data = $('#dataGrid').DataTable().row(id).data();
-
-        $('#idDelete').val(data.toChucID);
-        $('#nameDelete').text(`${data.tenToChuc}`);
-
-        $('#modalDelete').modal('show');
-    });
-}
-
-function dataDelete() {
-    let id = $('#idDelete').val();
-    $.ajax({
-        url: `${baseUrl}/api/ToChucApi/Xoa/${id}`,
-        type: 'DELETE',
-        contentType: 'application/json',
-        success: function (data) {
-            if (data && data.isSuccess && data.value) {
-                showNotification(1, 'Xoá thành công')
-                $('#modalDelete').modal('hide');
-                $('#dataGrid').DataTable().ajax.reload();
-            } else {
-                showNotification(0, data.error)
-            }
-        },
-        error: function (err) {
-            showNotification(0, 'Có lỗi xảy ra, vui lòng thử lại sau')
-        }
-    })
+    initDataTableConfigNoSearch('tableAnPham', tableApi, tableDefs, tableCols);
 }

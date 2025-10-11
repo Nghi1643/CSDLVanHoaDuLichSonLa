@@ -678,9 +678,9 @@
               },
               {
                 "Id": 130,
-                "AreaName": "",
-                "ControllerName": "",
-                "ActionName": "",
+                "AreaName": "AdminTool",
+                "ControllerName": "DaoTaoBoiDuong",
+                "ActionName": "Index",
                 "Title": "Tập huấn, bồi dưỡng",
                 "IsAuthorize": false,
                 "Icon": "",

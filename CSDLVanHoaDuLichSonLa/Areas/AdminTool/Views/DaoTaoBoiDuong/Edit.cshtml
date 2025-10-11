@@ -1,0 +1,115 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = ViewBag.IsEdit ? $"Chỉnh sửa đào tạo bồi dưỡng" : "Thêm mới đào tạo bồi dưỡng";
+}
+
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">@(ViewBag.IsEdit ? "Chỉnh sửa đào tạo bồi dưỡng" : "Thêm mới đào tạo bồi dưỡng")</h2>
+    </div>
+
+    <div class="content-body">
+        <form id="formDaoTao">
+            <input type="hidden" id="daoTaoID" value="@ViewBag.DaoTaoID" />
+            <!-- Thông tin cơ bản -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="linhVuc">Lĩnh vực đào tạo <span class="text-danger">*</span></label>
+                        <select class="form-control" id="linhVuc">
+                            <option value="">Chọn lĩnh vực</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="toChuc">Đơn vị tổ chức</label>
+                        <select class="form-control" id="toChuc">
+                            <option value="">Chọn đơn vị tổ chức</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="diaDiem">Địa điểm tổ chức <span class="text-danger">*</span></label>
+                        <select class="form-control" id="diaDiem">
+                            <option value="">Chọn địa điểm</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="trangThai">Trạng thái <span class="text-danger">*</span></label>
+                        <select class="form-control" id="trangThai">
+                            <option value="">Chọn trạng thái</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="batDau">Ngày bắt đầu <span class="text-danger">*</span></label>
+                        <input type="datetime-local" class="form-control" id="batDau" placeholder="Chọn ngày bắt đầu" />
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label for="ketThuc">Ngày kết thúc <span class="text-danger">*</span></label>
+                        <input type="datetime-local" class="form-control" id="ketThuc" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phần đa ngữ -->
+            <div class="DaNgu">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="ngonNguDich">Ngôn ngữ dịch</label>
+                            <select class="form-control" id="ngonNguDich">
+                                <option value="">Chọn ngôn ngữ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="noiDungDaoTao">Nội dung đào tạo <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="noiDungDaoTao" rows="4" maxlength="1000" placeholder="Nhập nội dung đào tạo"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="donVi">Đơn vị</label>
+                            <input type="text" class="form-control" id="donVi" maxlength="255" placeholder="Nhập đơn vị" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút hành động -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="group-button flex-end">
+                            <a href="@Url.Action("Index", "DaoTaoBoiDuong")" class="btn btn-outline-primary">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-primary">
+                                @(ViewBag.IsEdit ? "Cập nhật" : "Lưu")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const isEdit = @Html.Raw(ViewBag.IsEdit ? "true" : "false");
+        const permitedEdit = @Model.PermitedEdit;
+        const permitedDelete = @Model.PermitedDelete;
+        const daoTaoID = '@ViewBag.DaoTaoID';
+    </script>
+    <script src="~/PageScripts/admin/DaoTaoBoiDuong/Edit.js" asp-append-version="true"></script>
+}

@@ -1,11 +1,9 @@
 ﻿@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
-@{
-    ViewBag.Title = "Quản lý cơ sở ăn uống";
-}
+
 
 <div class="box_content">
     <div class="TieuDe">
-        <h2>Quản lý cơ sở ăn uống</h2>
+        <h2>@ViewBag.Title</h2>
     </div>
     <div class="content-body">
         <div class="group-filter" style="margin-bottom:10px;">
@@ -18,8 +16,24 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>Loại hình dịch vụ</label>
-                        <select class="form-control" id="loai-dich-vu-an-uong-search">
+                        <label>Lĩnh vực đào tạo</label>
+                        <select class="form-control" id="linh-vuc-search">
+                            <option value="-1">Tất cả</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Đơn vị tổ chức</label>
+                        <select class="form-control" id="to-chuc-search">
+                            <option value="-1">Tất cả</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Địa điểm tổ chức</label>
+                        <select class="form-control" id="dia-diem-to-chuc-search">
                             <option value="-1">Tất cả</option>
                         </select>
                     </div>
@@ -27,10 +41,8 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Trạng thái</label>
-                        <select class="form-control" id="trang-thai-search" data-placeholder="Chọn trạng thái">
+                        <select class="form-control" id="trang-thai-search">
                             <option value="-1">Tất cả</option>
-                            <option value="1">Duyệt</option>
-                            <option value="0">Chưa duyệt</option>
                         </select>
                     </div>
                 </div>
@@ -42,9 +54,9 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
-                        @* <label>&nbsp;</label> *@
+                        <label>&nbsp;</label>
                         <div class="group-button flex-end">
                             <button type="button" class="btn btn-primary" id="tim-kiem">Lọc</button>
                             <button type="button" class="btn btn-outline-primary" id="tat-ca">Tất cả</button>
@@ -57,17 +69,17 @@
             <div class="group-corner-button">
                 @if (Model.PermitedCreate == 1)
                 {
-                    <a href="@Url.Action("Add", "CoSoAnUong")" class="btn btn-success">Thêm mới</a>
+                    <a href="@Url.Action("Add", "DaoTaoBoiDuong")" class="btn btn-success">Thêm mới</a>
                 }
             </div>
             <table class="table row-border" id="dataGrid" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Tên cơ sở</th>
-                        <th>Loại dịch vụ</th>
-                        <th>Thời gian hoạt động</th>
-                        <th>Điểm đánh giá</th>
+                        <th>Nội dung đào tạo</th>
+                        <th>Đơn vị tổ chức</th>
+                        <th>Thời gian</th>
+                        <th>Địa điểm</th>
                         <th>Trạng thái</th>
                         @if (Model.PermitedEdit > 0 || Model.PermitedDelete > 0)
                         {
@@ -88,5 +100,5 @@
         const permitedEdit = @Model.PermitedEdit;
         const permitedDelete = @Model.PermitedDelete;
     </script>
-    <script src="~/PageScripts/admin/CoSoAnUong/CoSoAnUong.js" asp-append-version="true"></script>
+    <script src="~/PageScripts/admin/DaoTaoBoiDuong/DaoTaoBoiDuong.js" asp-append-version="true"></script>
 }

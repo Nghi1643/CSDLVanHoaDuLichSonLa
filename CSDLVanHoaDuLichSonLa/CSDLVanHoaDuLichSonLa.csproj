@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\AdminTool\Views\ThongTinXucTien - Copy\" />
     <Folder Include="wwwroot\PageScripts\app\" />
   </ItemGroup>
 

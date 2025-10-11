@@ -1,65 +1,57 @@
 @model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
 
-
 <div class="box_content">
     <div class="TieuDe">
         <h2 id="pageTitle">@ViewBag.Title</h2>
     </div>
 
     <div class="content-body">
-        <input type="hidden" id="xucTienID" value="@ViewBag.XucTienID" />
+        <input type="hidden" id="daoTaoID" value="@ViewBag.DaoTaoID" />
 
         <!-- Thông tin cơ bản -->
         <div class="row">
             <!-- Cột trái -->
             <div class="col-lg-6 col-md-6">
                 <div class="form-group form-info">
-                    <label>Lĩnh vực:</label>
-                    <span id="tenLinhVuc" class="text-bold">-</span>
+                    <label>Lĩnh vực đào tạo:</label>
+                    <span id="linhVuc" class="text-bold">-</span>
                 </div>
                 <div class="form-group form-info">
-                    <label>Tổ chức:</label>
-                    <span id="tenToChuc" class="text-bold">-</span>
+                    <label>Đơn vị tổ chức:</label>
+                    <span id="toChuc" class="text-bold">-</span>
                 </div>
                 <div class="form-group form-info">
-                    <label>Đối tượng:</label>
-                    <span id="tenDoiTuong">-</span>
+                    <label>Địa điểm tổ chức:</label>
+                    <span id="diaDiem" class="text-bold">-</span>
                 </div>
-                <div class="form-group form-info">
-                    <label>Hình thức xúc tiến:</label>
-                    <span id="tenHinhThuc">-</span>
-                </div>
+                
             </div>
 
             <!-- Cột phải -->
             <div class="col-lg-6 col-md-6">
                 <div class="form-group form-info">
-                    <label>Phương thức truyền thông:</label>
-                    <span id="tenTruyenThong">-</span>
+                    <label>Thời gian bắt đầu:</label>
+                    <span id="batDau" class="text-bold">-</span>
                 </div>
                 <div class="form-group form-info">
-                    <label>Ngày bắt đầu:</label>
-                    <span id="ngayBatDau" class="text-bold">-</span>
-                </div>
-                <div class="form-group form-info">
-                    <label>Ngày kết thúc:</label>
-                    <span id="ngayKetThuc" class="text-bold">-</span>
+                    <label>Thời gian kết thúc:</label>
+                    <span id="ketThuc" class="text-bold">-</span>
                 </div>
                 <div class="form-group form-info">
                     <label>Trạng thái:</label>
-                    <span id="tenTrangThai" class="text-bold">-</span>
+                    <span id="trangThai" class="text-bold">-</span>
                 </div>
             </div>
 
             <!-- Thông tin chi tiết -->
             <div class="col-lg-12 col-md-12">
                 <div class="form-group form-info">
-                    <label>Tiêu đề:</label>
-                    <span id="tieuDe" class="text-bold">-</span>
+                    <label>Nội dung đào tạo:</label>
+                    <span id="noiDungDaoTao" class="text-bold">-</span>
                 </div>
                 <div class="form-group form-info">
-                    <label>Mô tả:</label>
-                    <span id="moTa">-</span>
+                    <label>Đơn vị:</label>
+                    <span id="donVi">-</span>
                 </div>
             </div>
         </div>
@@ -78,7 +70,7 @@
 
 @section Scripts {
     <script>
-        const xucTienID = '@ViewBag.XucTienID';
+        const daoTaoID = '@ViewBag.DaoTaoID';
     </script>
-    <script src="~/PageScripts/admin/ThongTinXucTien/Details.js" asp-append-version="true"></script>
+    <script src="~/PageScripts/admin/DaoTaoBoiDuong/Details.js" asp-append-version="true"></script>
 }
