@@ -1,0 +1,226 @@
+@model CSDLVanHoaDuLichSonLa.Models.ViewPermissionViewModel
+@{
+    ViewBag.Title = "Chi tiết tour du lịch";
+}
+@section Css {
+    <style>
+        .activities-list {
+            max-width: 100%;
+        }
+
+        .activity-item {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+        }
+
+        .activity-number {
+            color: #007bff;
+            font-weight: bold;
+            min-width: 20px;
+        }
+
+        .activity-text {
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .activity-time {
+            color: #28a745;
+            font-weight: 500;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        /* ✅ CSS cho thời gian */
+        .time-info {
+            text-align: center;
+        }
+
+        .total-time {
+            font-weight: bold;
+            color: #28a745;
+            font-size: 1.1em;
+        }
+
+        .time-count {
+            font-size: 0.8em;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+
+        /* ✅ Responsive cho table */
+        @@media (max-width: 768px) {
+            .activity-item
+
+        {
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .activity-number {
+            min-width: auto;
+        }
+
+        }
+    </style>
+}
+<div class="box_content">
+    <div class="TieuDe">
+        <h2 id="pageTitle">Chi tiết tour du lịch</h2>
+    </div>
+
+    <div class="content-body">
+        <input type="hidden" id="tourId" value="@ViewBag.TourID" />
+
+        <!-- Thông tin cơ bản -->
+        <div class="row">
+            <div class="col-lg col-md-12">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group form-info">
+                            <label>Tên tour:</label>
+                            <span id="tenTour" class="text-bold">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Mã định danh:</label>
+                            <span id="maDinhDanh">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Thời gian tour:</label>
+                            <span id="thoiGian">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Tổ chức:</label>
+                            <span id="tenToChuc">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Thể loại tour:</label>
+                            <span id="tenTheLoai">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Loại hình:</label>
+                            <span id="tenLoaiHinh">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Phân khúc:</label>
+                            <span id="tenPhanKhuc">-</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="form-group form-info">
+                            <label>Điểm đi:</label>
+                            <span id="tenDiemDi">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Điểm đến:</label>
+                            <span id="tenDiemDen">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Ngày khởi hành:</label>
+                            <span id="ngayKhoiHanh">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Ngày kết thúc:</label>
+                            <span id="ngayKetThuc">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Phương tiện:</label>
+                            <span id="tenPhuongTien">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Ngôn ngữ hướng dẫn:</label>
+                            <span id="tenNgonNgu">-</span>
+                        </div>
+                        <div class="form-group form-info">
+                            <label>Trạng thái:</label>
+                            <span id="trangThai" class="badge">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin khách hàng và giá -->
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Số khách tối thiểu:</label>
+                    <span id="soKhachToiThieu">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Số khách tối đa:</label>
+                    <span id="soKhachToiDa">-</span>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Giá tour:</label>
+                    <span id="giaTour" class="text-success font-weight-bold">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Giá/người(tour ghép):</label>
+                    <span id="giaNguoi" class="text-success font-weight-bold">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Đánh giá -->
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group form-info">
+                    <label>Số lượt đánh giá:</label>
+                    <span id="soLuotDanhGia">-</span>
+                </div>
+                <div class="form-group form-info">
+                    <label>Điểm đánh giá:</label>
+                    <span id="diemDanhGia" class="text-warning">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mô tả chi tiết -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group form-info">
+                    <label>Mô tả tour:</label>
+                    <div id="moTa" class="content-text">-</div>
+                </div>
+                <div class="form-group form-info">
+                    <label>Trải nghiệm du khách:</label>
+                    <div id="traiNghiem" class="content-text">-</div>
+                </div>
+                <div class="form-group form-info">
+                    <label>Gợi ý và khuyến cáo:</label>
+                    <div id="goiY" class="content-text">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bảng lộ trình -->
+        <div class="New_Table table-responsive">
+            <div class="group-corner-button with-title">
+                <h4>Lộ trình tour du lịch</h4>
+            </div>
+            <table class="table row-border" id="dataGridLoTrinh" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Thứ tự</th>
+                        <th>Địa điểm</th>
+                        <th>Hoạt động</th>
+                        <th>Thời gian</th>
+                        <th>Thời điểm đến</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const tourId = '@ViewBag.TourID';
+    </script>
+    <script src="~/PageScripts/admin/TourDuLich/Details.js" asp-append-version="true"></script>
+}

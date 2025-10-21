@@ -956,9 +956,9 @@
               },
               {
                 "Id": 149,
-                "AreaName": "",
-                "ControllerName": "",
-                "ActionName": "",
+                "AreaName": "AdminTool",
+                "ControllerName": "TourDuLich",
+                "ActionName": "Index",
                 "Title": "Tour du lịch",
                 "IsAuthorize": false,
                 "Icon": "",

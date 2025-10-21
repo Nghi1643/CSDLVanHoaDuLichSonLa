@@ -194,8 +194,6 @@ function dataEdit() {
 }
 
 function loadDaoTaoBoiDuongData(id) {
-    console.log('Loading đào tạo bồi dưỡng data:', id);
-
     getDataWithApi('GET', `/api/DaoTaoBoiDuongApi/ChiTiet/${id}`).then(data => {
       
         if (data && data.isSuccess && data.value) {
